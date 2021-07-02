@@ -4,7 +4,7 @@ import json
 
 class Database:
 
-    def __init__(self, host,port, auth_plugin):
+    def __init__(self, host, port, auth_plugin):
         self.host = host
         self.port = port
         self.auth_plugin = auth_plugin
@@ -18,7 +18,7 @@ class Database:
     def getAuthPlugin(self):
         return self.auth_plugin
 
-    def establishConnection(self,user):
+    def establishConnection(self, user):
 
         if user is None:
             return
@@ -26,7 +26,8 @@ class Database:
         self.user_name = self.user_data['user_name']
         self.user_password = self.user_data['user_password']
         try:
-            self.con = connect(host=self.getHost(),user=self.user_name,passwd=self.user_password,port=self.getPort(),auth_plugin=self.getAuthPlugin())
+            self.con = connect(host=self.getHost(), user=self.user_name, passwd=self.user_password, port=self.getPort(),
+                               auth_plugin=self.getAuthPlugin())
             print("SUcess ")
         except Error as e:
             print("Failed to connect")
@@ -34,9 +35,10 @@ class Database:
     def fetchCompData(self):
         self.cursor = self.con.cursor()
         self.cursor.execute('use business_model')
-        self.cursor.execute('select *from company')
+        self.cursor.execute("""select JSON_OBJECT(
+        'comp_name',compName) from company;
+        """)
         return self.cursor.fetchall()
-
 
     # def addCompany(self,company):
     #     query = """
@@ -44,4 +46,3 @@ class Database:
     #     values(company.getName(),company.getCity(),company.getCountry(),company.getRevenue(),company.getYear_founded())
     #     """
     #     self.cursor.execute(query)
-

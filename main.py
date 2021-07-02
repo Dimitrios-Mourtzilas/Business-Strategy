@@ -8,13 +8,21 @@ from Model.Company import *
 
 from Model.User import *
 from Model.Database import *
-def main():
+import csv
 
+def main():
     user_name = input("Give user_name")
     user_password = input("Give password")
     user = User(user_name, user_password)
-    database = Database("localhost",3306,"mysql_native_password")
+    database = Database("localhost", 3306, "mysql_native_password")
     database.establishConnection(user)
+    csv_file = open("file.csv","w")
+    writer = csv.writer(csv_file)
+    company = Company()
+    comp_data = database.fetchCompData()
+
+
+
 
 if __name__ == "__main__":
     main()
