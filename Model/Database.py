@@ -1,6 +1,6 @@
 from mysql.connector import connect, Error
 import json
-
+import csv
 
 class Database:
 
@@ -33,7 +33,6 @@ class Database:
             print("Failed to connect")
 
     def fetchCompData(self):
-        self.cursor = self.con.cursor()
         self.cursor.execute('use business_model')
         self.cursor.execute("""select JSON_OBJECT(
         'comp_name',compName) from company;
@@ -46,3 +45,15 @@ class Database:
     #     values(company.getName(),company.getCity(),company.getCountry(),company.getRevenue(),company.getYear_founded())
     #     """
     #     self.cursor.execute(query)
+
+    def exportSpreadsheet(self):
+        self.header_list = ['Year','Company Name','City','Country','Revenue']
+        self.csv_file = open("company.csv","w")
+        self.writer = csv.writer(self.csv_file,header=self.header_list)
+        self.writer.writerow()
+
+    def fetchEmployee(self):
+        self.cursor = self.con.cursor()
+        self.cursor.execute("use business_model")
+        self.cursor.execute("select count(empId) from employee")
+        
