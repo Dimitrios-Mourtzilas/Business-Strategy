@@ -22,15 +22,13 @@ def findName(array,name):
             return names
     return None
 def main():
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+
     database = Database("localhost",3306,"mysql_native_password")
     user = User("root","root")
-    ui.connectToDB()
-    MainWindow.show()
-    sys.exit(app.exec_())
+    database.establishConnection(user)
+    company = Company()
+    database.hasUnpaidLoans("CodeByte")
+
 
 
 

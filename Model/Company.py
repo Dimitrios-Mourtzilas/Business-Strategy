@@ -36,8 +36,9 @@ class Company:
              'comp_country':self.getCountry(),
              'comp_revenue':self.getRevenue(),
              'year_founded':self.getYear_founded(),
-             'antiquity_of_fixed_equipment':self.getAofe()
              }
         )
+
+
 
     
