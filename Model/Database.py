@@ -4,9 +4,19 @@ import csv
 
 class Database:
 
-    def __init__(self, host, port, auth_plugin):
+
+    def __init__(self,host,port,auth_plugin):
+        self.host=host
+        self.port=port
+        self.auth_plugin=auth_plugin
+
+    def setHost(self,host="localhost"):
         self.host = host
+
+    def setPort(self,port=3306):
         self.port = port
+
+    def setAuthPlugin(self,auth_plugin="mysql_native_password"):
         self.auth_plugin = auth_plugin
 
     def getHost(self):
@@ -29,21 +39,7 @@ class Database:
                                auth_plugin=self.getAuthPlugin())
             print("SUcess ")
         except Error as e:
-            print("Failed to connect")
-
-    def fetchCompData(self):
-        self.cursor = self.con.cursor()
-        self.cursor.execute('use business_model')
-        self.cursor.execute("""select JSON_OBJECT(
-        'comp_name',compName) from company;
-        """)
-        return self.cursor.fetchall()
-
-
-    def exportSpreadsheet(self):
-        self.header_list = ['Year','Company Name','City','Country','Revenue']
-        self.csv_file = open("company.csv","w")
-        self.writer = csv.writer(self.csv_file,header=self.header_list)
+            print(e)
 
 
     def fetchAllEmployees(self):
@@ -51,19 +47,19 @@ class Database:
         return self.cursor.fetchall()
 
     def fetchAllCompanies(self):
-
-        self.cursor.execute("select *from companies")
+        self.cursor = self.con.cursor()
+        self.cursor.execute("use business_model")
+        self.cursor.execute("select *from company")
         return self.cursor.fetchall()
 
 
-    def hasUnpaidLoans(self,compName=""):
+    def fetchCompanyByKey(self,compKey=""):
         self.cursor = self.con.cursor()
         self.cursor.execute("use business_model")
-        self.cursor.execute("""
-        
-        select loan_repayed from loans
-        inner join company on company.compName = loans.compName;
-        """)
-        for i in self.cursor.fetchall():
+        self.cursor.execute("select *from company inner join financialReport on financialReport.compName = companu.compName where compName like %s", ('%' + 'CodeByte' + '%',))
+        return self.cursor.fetchall()
+
+
+
 
 
