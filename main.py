@@ -4,15 +4,9 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import sys
 
-from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication
 
-import Model.User
-import Model.Employee
-import Model.Database
-from Model.Company import *
-import xlsxwriter
-from GUI.LoginWindow import *
+from src.GUI.LoginWindow import *
 
 def main():
     app = QApplication(sys.argv)

@@ -1,8 +1,7 @@
 from mysql.connector import connect, Error
-import json
-import csv
 from Model import *
-import Model.User
+
+
 class Database:
 
     def __init__(self):

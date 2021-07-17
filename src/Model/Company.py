@@ -1,9 +1,3 @@
-
-import csv
-
-from Model import Product, Employee
-from Model.Database import *
-import xlsxwriter
 class Company:
 
     def __init__(self):
