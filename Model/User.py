@@ -1,24 +1,21 @@
 
-
-
 class User:
 
-    def __init__(self,user_name,password):
-        self.name = user_name
-        self.password = password
+    def __init__(self, user_name ,user_password ,**kwargs):
+        self.user_name = user_name
+        self.user_password = user_password
+        self.kwargs = kwargs
 
-    def getUsername(self):
-        return self.name
+    def getUserName(self):
+        return self.user_name
 
-    def getPassword(self):
-        return self.password
+    def getUserPassword(self):
+        return self.user_password
 
-    def getUserData(self):
-
+    def getToJson(self):
         return dict(
             {
-                'user_name':self.getUsername(),
-                'user_password':self.getPassword()
+                'user_name': self.getUserName(),
+                'user_password': self.getUserPassword()
             }
         )
-
