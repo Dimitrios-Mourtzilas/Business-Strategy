@@ -9,13 +9,12 @@ from PyQt5.QtWidgets import QApplication
 from src.GUI.LoginWindow import *
 
 def main():
-    app = QApplication(sys.argv)
-    window = LoginWindow()
-    window.setGUI()
-    window.runGUI()
+    app = QtWidgets.QApplication(sys.argv)
+    mainWindow = QtWidgets.QMainWindow()
+    ui = Ui_loginWindow()
+    ui.setupUi(mainWindow)
+    mainWindow.show()
     exit(app.exec())
-
-
 if __name__ == "__main__":
     main()
 
