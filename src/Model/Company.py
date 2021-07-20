@@ -38,9 +38,6 @@ class Company:
         return data_list[0]
 
 
-    def getProductData(self,product):
-        self.product_dict = product
-
 
 
 

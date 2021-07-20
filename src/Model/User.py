@@ -6,6 +6,12 @@ class User:
         self.user_password = user_password
         self.kwargs = kwargs
 
+    def setUserName(self,user_name):
+        self.user_name = user_name
+
+    def setUserPassword(self,user_password):
+        self.user_password = user_password
+
     def getUserName(self):
         return self.user_name
 
@@ -15,7 +21,7 @@ class User:
     def getToJson(self):
         return dict(
             {
-                'user_name': self.getUserName(),
-                'user_password': self.getUserPassword()
+                'userName': self.getUserName(),
+                'userPassword': self.getUserPassword()
             }
         )

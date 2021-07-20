@@ -1,17 +1,19 @@
 from mysql.connector import connect, Error
-from Model import *
 
 
 class Database:
 
     def __init__(self):
         pass
-    def establishConnection(self,user):
-        try:
-            self.con = connect(host="localhost",user=user.getUserName(),passwd=user.getUserPassword(),port=3306,auth_plugin="mysql_native_password")
-            print("SUces")
-        except Error as e:
-            print(e)
+
+    def establishConnection(self,**kwargs):
+            self.user_name = kwargs['user_name']
+            self.user_password =kwargs['user_password']
+            if self.user_name.__eq__("") or self.user_password.__eq__(""):
+                return
+            else:
+                return connect(host="localhost",user=self.user_name,passwd=self.user_password,port=3306,database='business_model',auth_plugin='mysql_native_password')
+
 
     def fetchAllEmployees(self):
         self.cursor.execute("select *from employee")

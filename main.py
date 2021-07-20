@@ -4,9 +4,14 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import sys
 
+from PyQt5.QtCore import QThread
 from PyQt5.QtWidgets import QApplication
 
 from src.GUI.LoginWindow import *
+from src.Model.Database import Database
+from src.Model.User import *
+from src.GUI.BadConnectionDialog import *
+
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
@@ -15,6 +20,7 @@ def main():
     ui.setupUi(mainWindow)
     mainWindow.show()
     exit(app.exec())
+
+
 if __name__ == "__main__":
     main()
-
