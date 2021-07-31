@@ -9,9 +9,11 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-from src.GUI.BadConnectionDialog import BadConnectionDialog
+from PyQt5.QtWidgets import QLabel
+from src.GUI.MainWindow import *
 from src.Model.Database import *
+from time import sleep
+
 # from BadConnectionDialog import *
 
 
@@ -19,6 +21,10 @@ class Ui_loginWindow(object):
 
     def __init__(self):
         self.database = Database()
+
+    _count = 0
+    _mainWindow = None
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
@@ -73,21 +79,24 @@ class Ui_loginWindow(object):
         self.pushButton.setText(_translate("MainWindow", "Log in"))
 
     def connectToDB(self):
-        self.database = Database()
         try:
-            self.con=self.database.establishConnection(user_name=self.lineEdit.text(),user_password=self.lineEdit_2.text())
+            self.database = Database(user_name=self.lineEdit.text(), user_password=self.lineEdit_2.text())
+            if not self.database.establishConnection():
+                raise Error
+            else:
+                self._mainWindow = MainWindow()
+                self._mainWindow.setupUi()
+                self._mainWindow.runUi()
+
+
+                return True
         except Error:
-            self.errorWindow()
+            if self.clicked(self._count):
+                self._count+=1
+                self.error_label = QLabel("Bad connection due to invalid credentials")
+                self.error_label.setStyleSheet("color:red")
+                self.verticalLayout.layout().addWidget(self.error_label)
+                self.error_label.destroy()
 
-        else:
-            print("Success")
-
-    def errorWindow(self):
-        self.error_dialog = QtWidgets.QDialog()
-        self.ui = BadConnectionDialog()
-        self.ui.setupBadConnectionUi()
-        self.ui.show()
-
-
-
-
+    def clicked(self, count):
+        return count == 0

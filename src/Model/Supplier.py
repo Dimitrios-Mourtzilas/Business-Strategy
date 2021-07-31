@@ -17,6 +17,19 @@ class Supplier:
     def setCountryCode(self,country_code):
         self.country_code = country_code
 
+    def getSupplierId(self):
+        return self.supplierId
+
+    def getSupplierName(self):
+        return self.supplierName
+
+    def getSupplierCity(self):
+        return self.supplierCity
+
+    def getCountryCode(self):
+        return self.country_code
+
+
     def getJsonData(self):
         return dict(
             {
