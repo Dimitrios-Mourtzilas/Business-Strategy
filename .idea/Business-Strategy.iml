@@ -5,7 +5,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+<<<<<<< HEAD
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+=======
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/Business-Strategy-testing/venv/lib/python3.9/site-packages/pandas/io/formats/templates" />
+      </list>
+    </option>
+>>>>>>> 08089cfe5ed1e33e14df171abba91f7d8ef46454
   </component>
 </module>

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="image-header">
+    <file>../../../Downloads/face-mask.png</file>
+  </qresource>
+</RCC>
