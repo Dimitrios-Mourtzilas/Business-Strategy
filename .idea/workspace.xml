@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f38ac6b9-4b8e-48d1-bcb5-9c79010a0e39" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Business-Strategy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Business-Strategy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LoginWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/LoginWindow.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainWndow.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Algorithm/DecisionTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DecisionTree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/LoginWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LoginWindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +174,8 @@
       <workItem from="1629783040328" duration="1454000" />
       <workItem from="1629864041474" duration="4807000" />
       <workItem from="1630349803324" duration="36000" />
-      <workItem from="1630741295249" duration="2122000" />
+      <workItem from="1630741295249" duration="2985000" />
+      <workItem from="1630744807626" duration="2000" />
     </task>
     <servers />
   </component>
