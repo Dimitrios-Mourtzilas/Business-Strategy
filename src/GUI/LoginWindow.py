@@ -10,7 +10,7 @@ import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QLabel
-from src.GUI.MainWindow import *
+# from src.GUI.MainWindow import *
 from src.Model.Database import *
 from time import sleep
 

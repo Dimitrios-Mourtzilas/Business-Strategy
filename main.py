@@ -6,7 +6,8 @@ import sys
 
 from PyQt5.QtCore import QThread
 from PyQt5.QtWidgets import QApplication, QMainWindow
-
+from src.GUI.MainWindow import *
+from src.Algorithm.DecisionTree import DecisionTree
 from src.GUI.FIleDialog import FileDialog
 from src.GUI.LoginWindow import *
 from src.Model.Database import Database
@@ -16,11 +17,11 @@ import pandas as pd
 
 
 def main():
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.setupUi()
-    window.runUi()
-    exit(app.exec())
+
+    window = QMainWindow()
+    main_window = MainWindow()
+    main_window.setupUi(window)
+
 
 
 if __name__ == "__main__":
