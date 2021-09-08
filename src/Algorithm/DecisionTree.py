@@ -10,44 +10,18 @@ import matplotlib.pyplot  as plt
 class DecisionTree:
 
 
-<<<<<<< HEAD
-    def __init__(self,):
-        pass
-||||||| c9902fa
-    def __init__(self,financialReport):
-        if financialReport is None:
-            return
-        else:
-            self.col = 0
-            self.finance = financialReport
-            for value in financialReport.getToJson():
-                self.X = pd.DataFrame(self.finance)
-                self.col+=1
 
-=======
     def __init__(self,financialReport):
         
         if financialReport is None:
             return
         else:
             self.report = financialReport
-    def trainData(self):
-        if self.report is None:
-            return
-        else:
-            self.data = pd.read_csv(self.report)
-            self.X = np.array(self.data.iloc[:,1:]).reshape(-1,1)
-            self.y = np.array(self.data.loc['Total worth']).reshape(-1,1)
-            self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.X,self.y)
-            self.dtr = DecisionTree()
-            self.dtr.fit(self.x_train,self.y_train)
-            self.y_pred = self.dtr.predict(self.y_test)
+
             
 
             
->>>>>>> 04a797b66ad0d914163c4df4a82c2366dd0e408d
 
-<<<<<<< HEAD
     def analyzeData(self):
 
         self.data = pd.read_csv('../company.csv')
@@ -68,11 +42,7 @@ class DecisionTree:
         plt.scatter(y_test,y_pred,color='green')
         plt.show()
 
-||||||| c9902fa
-    def analyzeData(self):
-        self.dtr = DecisionTreeRegressor()
-=======
->>>>>>> 04a797b66ad0d914163c4df4a82c2366dd0e408d
+
 
 
 

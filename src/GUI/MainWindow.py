@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
@@ -64,9 +63,6 @@ class MainWindow(object):
 
 
 
-||||||| c9902fa
-=======
-
 
 from PyQt5.QtWidgets import *
 
@@ -92,4 +88,3 @@ class MainWindow(QMainWindow):
     def openDialog(self):
         self.dialog= File()
         self.dialog.show()
->>>>>>> 04a797b66ad0d914163c4df4a82c2366dd0e408d
