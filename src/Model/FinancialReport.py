@@ -47,7 +47,7 @@ class FinancialReport:
 
     def getFixedCosts(self):
         return self.fixed_costs
-    def getToJson(self):
+    def getJson(self):
         return dict({
             'year':self.getYear(),
             'comp_revenue':self.getCompRevenue(),

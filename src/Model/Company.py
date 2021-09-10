@@ -43,7 +43,7 @@ class Company:
     def getYearFounded(self):
         return self.year_founded
 
-    def getJsonData(self):
+    def getJson(self):
         return dict({
             'compName':self.getCompName(),
             'compCity':self.getCompCity(),

@@ -39,7 +39,7 @@ class Database:
         if employee is None:
             return
         self.employee = employee
-        for values in self.employee.getEmpData():
+        for values in self.employee.getJson():
             self._cursor.execute("""
             insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
             values(%d,%s,%s,%d,%f,%s)""", (values['empId']), values['empName'], values['empSurname'], values['empAge'],
@@ -50,7 +50,7 @@ class Database:
         if company is None:
             return
         self.company = company
-        for values in self.company.getJsonData():
+        for values in self.company.getJson():
             self._cursor.execute(
                 """
                 insert into company(compName,compCity,compCountry,year_founded)
@@ -65,7 +65,7 @@ class Database:
             return
         else:
             self.financialReport = financialReport
-            for values in self.financialReport.getToJson():
+            for values in self.financialReport.getJson():
                 self._cursor.execute(
 
                 """

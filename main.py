@@ -10,9 +10,9 @@ from src.GUI.MainWindow import *
 from src.Algorithm.DecisionTree import DecisionTree
 from src.Algorithm.DecisionTree import DecisionTree
 
-
 from src.GUI.FIleDialog import FileDialog
 from src.GUI.LoginWindow import *
+from src.Model.Company import Company
 from src.Model.Database import Database
 from src.Model.User import *
 from src.GUI.MainWindow import *
@@ -21,25 +21,19 @@ import pandas as pd
 
 
 def main():
-
-    window = QMainWindow()
-    main_window = MainWindow()
-    main_window.setupUi(window)
-
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.setupUi()
-    window.runUi()
-    exit(app.exec())
-
-    file = open("company.csv", "r+")
-    dtr = DecisionTree(file)
-    dtr.analyzeData()
-    # app = QApplication(sys.argv)
-    # mainWindow = MainWindow()
-    # mainWindow.setupUi()
-    # mainWindow.runUi()
-    # exit(app.exec())
+    database = Database()
+    database.establishConnection()
+    try:
+        file = pd.read_csv('company.csv')
+        if file is None:
+            raise FileNotFoundError('File not found')
+        report = FinancialReport(file)
+        database = Database()
+        database.establishConnection()
+        database.saveFinancialReport(report)
+    except FileNotFoundError as e:
+        print(e)
+        exit(1)
 
 
 if __name__ == "__main__":

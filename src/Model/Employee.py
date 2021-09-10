@@ -34,7 +34,7 @@ class Employee:
             return
         self.empPhone=emp_phone
 
-    def getEmpData(self):
+    def getJson(self):
         return dict(
             {
                 'emp_id':self.emp_id,
