@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa664fa1-7ee0-4e1f-bcaf-0d2a476a7f1c" name="Changes" comment="" />
+    <list default="true" id="2299b7e8-49ea-4367-87ff-86609991f695" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +12,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1y209rvcUFeDeDWxg9d7R6SoKWR" />
+  <component name="ProjectId" id="1y2H8iT0RzXqeGICa0aUiiUWLeK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -24,13 +26,13 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="aa664fa1-7ee0-4e1f-bcaf-0d2a476a7f1c" name="Changes" comment="" />
-      <created>1631434233390</created>
+      <changelist id="2299b7e8-49ea-4367-87ff-86609991f695" name="Changes" comment="" />
+      <created>1631442612803</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1631434233390</updated>
-      <workItem from="1631434237851" duration="269000" />
-      <workItem from="1631437917468" duration="601000" />
+      <updated>1631442612803</updated>
+      <workItem from="1631442614975" duration="227000" />
+      <workItem from="1631442880920" duration="72000" />
     </task>
     <servers />
   </component>
