@@ -6,69 +6,53 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>801</width>
+    <width>981</width>
     <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QFrame" name="horizontalFrame">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>80</x>
      <y>30</y>
-     <width>160</width>
-     <height>511</height>
+     <width>811</width>
+     <height>80</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QLabel" name="label">
+      <property name="styleSheet">
+       <string notr="true">
+image: url(:/image-header/Downloads/icons8-user-30.png);
+
+QLabel hover user_menu{
+background-color:red
+
+
+}</string>
+      </property>
       <property name="text">
-       <string>Business Strategy</string>
+       <string/>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
       <property name="text">
-       <string>Decision tree</string>
+       <string>PushButton</string>
       </property>
      </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_2">
       <property name="text">
-       <string>About</string>
+       <string>PushButton</string>
       </property>
      </widget>
-    </item>
-    <item>
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_3">
@@ -77,46 +61,47 @@
       </property>
      </widget>
     </item>
-    <item>
-     <spacer name="horizontalSpacer_3">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
    </layout>
   </widget>
-  <widget class="QFrame" name="frame">
+  <widget class="QFrame" name="user_menu">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>130</y>
-     <width>441</width>
+     <x>100</x>
+     <y>110</y>
+     <width>160</width>
      <height>291</height>
     </rect>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
+   <property name="styleSheet">
+    <string notr="true">QFrame {
+opacity:0px;
+}
+
+</string>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-  </widget>
-  <widget class="QDateTimeEdit" name="dateTimeEdit">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>10</y>
-     <width>194</width>
-     <height>26</height>
-    </rect>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="account_button">
+      <property name="text">
+       <string>Account</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="settings_button">
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="log_out_button">
+      <property name="text">
+       <string>Log out</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>

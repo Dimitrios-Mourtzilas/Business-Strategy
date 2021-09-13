@@ -9,82 +9,83 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from images import *
 
-
-class MainWindow(object):
+class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(801, 591)
-        self.verticalLayoutWidget = QtWidgets.QWidget(Form)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(20, 30, 160, 511))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        Form.resize(981, 591)
+        self.horizontalFrame = QtWidgets.QFrame(Form)
+        self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
+        self.horizontalFrame.setObjectName("horizontalFrame")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.label = QtWidgets.QLabel(self.horizontalFrame)
+        self.label.setStyleSheet("\n"
+"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
+"\n"
+"QLabel hover user_menu{\n"
+"background-color:red\n"
+"\n"
+"\n"
+"}")
+        self.label.setText("")
         self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.label)
+        self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
         self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem)
-        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
         self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout.addWidget(self.pushButton_2)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem1)
-        self.pushButton_3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.pushButton_3 = QtWidgets.QPushButton(self.horizontalFrame)
         self.pushButton_3.setObjectName("pushButton_3")
-        self.verticalLayout.addWidget(self.pushButton_3)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout.addItem(spacerItem2)
-        self.frame = QtWidgets.QFrame(Form)
-        self.frame.setGeometry(QtCore.QRect(280, 130, 441, 291))
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.dateTimeEdit = QtWidgets.QDateTimeEdit(Form)
-        self.dateTimeEdit.setGeometry(QtCore.QRect(600, 10, 194, 26))
-        self.dateTimeEdit.setObjectName("dateTimeEdit")
+        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.user_menu = QtWidgets.QFrame(Form)
+        self.user_menu.setGeometry(QtCore.QRect(100, 110, 160, 291))
+        self.user_menu.setStyleSheet("QFrame {\n"
+"opacity:0px;\n"
+"}\n"
+"\n"
+"")
+        self.user_menu.setObjectName("user_menu")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.user_menu)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.account_button = QtWidgets.QPushButton(self.user_menu)
+        self.account_button.setObjectName("account_button")
+        self.verticalLayout.addWidget(self.account_button)
+        self.settings_button = QtWidgets.QPushButton(self.user_menu)
+        self.settings_button.setObjectName("settings_button")
+        self.verticalLayout.addWidget(self.settings_button)
+        self.log_out_button = QtWidgets.QPushButton(self.user_menu)
+        self.log_out_button.setObjectName("log_out_button")
+        self.verticalLayout.addWidget(self.log_out_button)
+        self.log_out_button.clicked.connect(self.closeMainWindow)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+    def closeMainWindow(self,Form):
+        Form.close()
+
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Business Strategy"))
-        self.pushButton.setText(_translate("Form", "Decision tree"))
-        self.pushButton_2.setText(_translate("Form", "About"))
+        self.pushButton.setText(_translate("Form", "PushButton"))
+        self.pushButton_2.setText(_translate("Form", "PushButton"))
         self.pushButton_3.setText(_translate("Form", "PushButton"))
+        self.account_button.setText(_translate("Form", "Account"))
+        self.settings_button.setText(_translate("Form", "Settings"))
+        self.log_out_button.setText(_translate("Form", "Log out"))
 
 
 
-
-
-
-from PyQt5.QtWidgets import *
-
-import src.GUI.FIleDialog as File
-class MainWindow(QMainWindow):
-
-    def __init__(self):
-        super().__init__()
-    
-    def setupUi(self):
-        self.setWindowTitle("Main window")
-        self.setGeometry(200,100,100,200)
-        self.label = QLabel("Label")
-        self.button = QPushButton("Open dialog")
-        self.button.clicked.connect(self.openDialog)
-        self.layout().addWidget(self.button)
-        self.layout().addWidget(self.label)
-            
-    
-    def runUi(self):
-        self.show()
-
-    def openDialog(self):
-        self.dialog= File()
-        self.dialog.show()
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

@@ -9,8 +9,7 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QLabel
-# from src.GUI.MainWindow import *
+from PyQt5.QtWidgets import QLabel, QMainWindow
 from src.Model.Database import *
 from time import sleep
 
@@ -23,12 +22,13 @@ class Ui_loginWindow(object):
         self.database = Database()
 
     _count = 0
-    _mainWindow = None
+    _LoginWindow = None
+    _ui_Form = None
 
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+    def setupUi(self, LoginWindow):
+        LoginWindow.setObjectName("LoginWindow")
+        LoginWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(LoginWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(250, 90, 261, 211))
@@ -59,37 +59,31 @@ class Ui_loginWindow(object):
         self.pushButton.setText("Login Window")
         self.pushButton.clicked.connect(self.connectToDB)
         self.verticalLayout.addWidget(self.pushButton)
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        LoginWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(LoginWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
         self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        LoginWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(LoginWindow)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        LoginWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(LoginWindow)
+        QtCore.QMetaObject.connectSlotsByName(LoginWindow)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, LoginWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "user name"))
-        self.label.setText(_translate("MainWindow", "user password"))
-        self.pushButton.setText(_translate("MainWindow", "Log in"))
+        LoginWindow.setWindowTitle(_translate("LoginWindow", "LoginWindow"))
+        self.label_2.setText(_translate("LoginWindow", "user name"))
+        self.label.setText(_translate("LoginWindow", "user password"))
+        self.pushButton.setText(_translate("LoginWindow", "Log in"))
 
     def connectToDB(self):
         try:
             self.database = Database(user_name=self.lineEdit.text(), user_password=self.lineEdit_2.text())
             if not self.database.establishConnection():
                 raise Error
-            else:
-                self._mainWindow = MainWindow()
-                self._mainWindow.setupUi()
-                self._mainWindow.runUi()
 
-
-                return True
         except Error:
             if self.clicked(self._count):
                 self._count+=1
@@ -100,3 +94,6 @@ class Ui_loginWindow(object):
 
     def clicked(self, count):
         return count == 0
+
+    def runUi(self,LoginWindow):
+        LoginWindow.show()
