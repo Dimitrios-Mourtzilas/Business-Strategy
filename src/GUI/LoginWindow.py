@@ -80,7 +80,7 @@ class Ui_loginWindow(object):
 
     def connectToDB(self):
         try:
-            self.database = Database(user_name=self.lineEdit.text(), user_password=self.lineEdit_2.text())
+            self.database = Database()
             if not self.database.establishConnection():
                 raise Error
 

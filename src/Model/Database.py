@@ -7,7 +7,6 @@ class Database:
         pass
 
     def establishConnection(self):
-        self.auth_plugin = "mysql_native_password"
         self._con = sqlite3.connect('business_model.db')
         self._cursor = self._con.cursor()
         return self._con
@@ -34,7 +33,7 @@ class Database:
         for values in self.employee.getJson():
             self._cursor.execute("""
             insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
-            values(?,?,?,?,?,?)""", values['empId'],values['empName'])
+            values(?,?,?,?,?,?)""", (values['empId'],values['empName'],values['empSurname'],values['empAge'],values['empSalary']))
         self._con.commit()
 
     def saveCompany(self, company):
@@ -59,6 +58,7 @@ class Database:
                 self._cursor.execute(
                     """
                     insert into financialreport(
-                    year,compRevenue,productSales,fixed_costs,
-                    ) values(?,?,?,?,?)
-                    """,(values['reportId'],values[]))
+                    reportId,starting_period,ending_period,companyId,turn_over,fixed_costs,net_assets
+                    ) values(?,?,?,?,?,?,?)
+                    """,(values['reportId'],values['starting_period'],values['ending_period'],values['companyId'],values['turn_over'],values['fixed_costs'],values['net_assets']))
+            self._con.commit()
