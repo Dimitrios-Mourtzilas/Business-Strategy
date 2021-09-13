@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.35, for osx10.15 (x86_64)
 --
 -- Host: localhost    Database: business_model
 -- ------------------------------------------------------
--- Server version	8.0.26-0ubuntu0.20.04.2
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,14 +21,14 @@
 
 DROP TABLE IF EXISTS `client`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `client` (
   `clientId` int NOT NULL AUTO_INCREMENT,
   `clientName` varchar(20) NOT NULL,
   `clientCity` varchar(15) NOT NULL,
   `countryCode` char(4) NOT NULL,
   PRIMARY KEY (`clientId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,13 +46,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `company` (
-  `compName` varchar(20) NOT NULL,
-  `compCity` varchar(20) NOT NULL,
-  `compCountry` varchar(20) NOT NULL,
-  `year_founded` char(4) NOT NULL,
-  `empId` int NOT NULL
+  `company_id` int NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(20) NOT NULL,
+  `company_city` varchar(20) NOT NULL,
+  `country_code` varchar(20) NOT NULL,
+  `year_founded` char(4) DEFAULT 'N/A',
+  `empId` int NOT NULL,
+  PRIMARY KEY (`company_id`),
+  KEY `empId` (`empId`),
+  CONSTRAINT `company_ibfk_1` FOREIGN KEY (`empId`) REFERENCES `employee` (`empId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,12 +75,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `compliantSupplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `compliantSupplier` (
   `supplierId` int NOT NULL,
   KEY `supplierId` (`supplierId`),
   CONSTRAINT `compliantSupplier_ibfk_1` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +99,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
   `empId` int NOT NULL AUTO_INCREMENT,
   `empName` varchar(20) NOT NULL,
@@ -111,7 +115,7 @@ CREATE TABLE `employee` (
   CONSTRAINT `employee_chk_3` CHECK ((`empAge` >= 19)),
   CONSTRAINT `employee_chk_4` CHECK ((`empSalary` >= 0.0)),
   CONSTRAINT `employee_chk_5` CHECK ((`empEmail` <> _utf8mb4''))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,16 +133,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `financialReport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `financialReport` (
-  `compRevenue` float DEFAULT '0',
-  `productSales` int DEFAULT '0',
-  `fixed_costs` float DEFAULT '0',
-  `year` char(4) NOT NULL,
-  `growthRate` smallint NOT NULL,
-  PRIMARY KEY (`year`),
-  CONSTRAINT `financialReport_chk_1` CHECK ((`productSales` >= 0)),
-  CONSTRAINT `financialReport_chk_2` CHECK ((`fixed_costs` >= 0.0))
+  `report_id` int NOT NULL,
+  `starting_period` date NOT NULL,
+  `ending_period` date NOT NULL,
+  `company_id` int NOT NULL,
+  `company_revenue` float NOT NULL,
+  `turn_over` float NOT NULL,
+  `fixed_costs` float NOT NULL,
+  `net_assets` float NOT NULL,
+  PRIMARY KEY (`report_id`),
+  KEY `company_id` (`company_id`),
+  CONSTRAINT `financialreport_ibfk_1` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,12 +164,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `nonCompliantSupplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `nonCompliantSupplier` (
   `supplierId` int NOT NULL,
   KEY `supplierId` (`supplierId`),
   CONSTRAINT `nonCompliantSupplier_ibfk_1` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +188,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `product` (
   `productId` int NOT NULL AUTO_INCREMENT,
   `productDesc` varchar(20) NOT NULL,
@@ -191,7 +198,7 @@ CREATE TABLE `product` (
   CONSTRAINT `product_chk_1` CHECK ((`productDesc` <> _utf8mb4'')),
   CONSTRAINT `product_chk_2` CHECK ((`productPrice` >= 0.0)),
   CONSTRAINT `product_chk_3` CHECK ((`productSales` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,14 +216,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `supplier` (
   `supplierId` int NOT NULL,
   `supplierName` varchar(20) NOT NULL,
   `supplierCity` varchar(20) NOT NULL,
   `countryCode` char(4) NOT NULL,
   PRIMARY KEY (`supplierId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-09-04 10:33:19
+-- Dump completed on 2021-09-13  8:43:25

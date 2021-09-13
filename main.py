@@ -28,9 +28,12 @@ def main():
         if file is None:
             raise FileNotFoundError('File not found')
         report = FinancialReport(file)
-        database = Database()
-        database.establishConnection()
-        database.saveFinancialReport(report)
+        # database = Database()
+        # database.establishConnection()
+        # database.saveFinancialReport(report)
+        #
+        dtr = DecisionTree(report)
+        dtr.analyzeData()
     except FileNotFoundError as e:
         print(e)
         exit(1)

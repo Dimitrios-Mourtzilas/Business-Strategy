@@ -1,4 +1,4 @@
-
+import json
 
 import pandas as pd
 
@@ -7,53 +7,46 @@ class FinancialReport:
     _file = None
     _growthRate = 0
     def __init__(self,file):
-        if file is None or not file.__contains__(".xlsx"):
+        if file is None or not file.__contains__(".xlsx") or not file.__contains__('.csv'):
             return
         else:
-            self._file = pd.read_excel(file)
+            if file.__contains__('.csv'):
+                self._file = pd.read_csv(file)
+            else:
+                self._file = pd.read_excel(file)
 
-    def setYear(self):
-        self.year = self._file['Year']
-
-    def setCompRevenue(self):
-        self.comp_revenue = self._file['Company Revenue']
 
     def setTimePeriod(self):
-        self.time_period = self._file['Time Period']
+        self.starting = self._file['Starting date']
+        self.ending = self._file['Ending date']
+
+    def setReportId(self):
+        self.reportId = self._file['Report id']
+
+    def setCompanyId(self):
+        self.companyId = self._file['Company id']
+
+    def setCompanyRevenue(self):
+        self.company_revenue = self._file['Company revenue']
+
+    def setTurnOver(self):
+        self.turnover = self._file['Turn over']
 
     def setFixedCosts(self):
-        self.fixed_costs = self._file['Fixed Costs']
+        self.fixed_costs = self._file['Fixed costs']
 
-    def setProductSales(self):
-        self.product_sales = self._file['Product Sales']
+    def setNetAssets(self):
+        self.netAssets = self._file['Net assets']
 
-    def setGrowthRate(self):
-        self.growthRate= self._file['Growth Rate']
-
-    def getYear(self):
-        return self.year
-
-    def getCompRevenue(self):
-        return self.comp_revenue
-
-    def getProductsSales(self):
-        return self.product_sales
-
-    def getGrowth(self):
-        return self.growthRate
-
-    def getTimePeriod(self):
-        return self.time_period
-
-    def getFixedCosts(self):
-        return self.fixed_costs
-    def getJson(self):
-        return dict({
-            'year':self.getYear(),
-            'comp_revenue':self.getCompRevenue(),
-            'product_sales':self.getProductsSales(),
-            'time_period':self.getTimePeriod(),
-            'fixed_costs':self.getFixedCosts(),
-            'growth_rate':self.getGrowth()
-        })
-
+    def getToJson(self):
+        return json.dumps(
+            {'report_id':self.reportId,
+             'starting_period':self.starting,
+             'ending_period':self.ending,
+             'company_id':self.companyId,
+             'company_revenue':self.company_revenue,
+             'turnover':self.turnover,
+             'fixed_costs':self.fixed_costs,
+             'net_assets':self.netAssets
+             }
+        )
