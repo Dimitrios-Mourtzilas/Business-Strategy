@@ -6,14 +6,13 @@ class FinancialReport:
 
     _file = None
     _growthRate = 0
-    def __init__(self,file):
-        if file is None or not file.__contains__(".xlsx") or not file.__contains__('.csv'):
+    def __init__(self):
+        pass
+
+    def setFile(self,file):
+        if file is None or not file.__contains__(".xlsx"):
             return
-        else:
-            if file.__contains__('.csv'):
-                self._file = pd.read_csv(file)
-            else:
-                self._file = pd.read_excel(file)
+        self._file = pd.read_excel(file)
 
 
     def setTimePeriod(self):

@@ -5,7 +5,6 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 
-
 class DecisionTree:
 
 
@@ -21,9 +20,9 @@ class DecisionTree:
 
             
 
-    def analyzeData(self):
+    def analyzeData(self,file):
 
-        self.data = pd.read_csv('../company.csv')
+        self.data = pd.read_excel(file)
         self.d = pd.DataFrame(self.data)
         self.X = np.array(self.d.iloc[: ,1:2]).reshape(-1 ,1)
         self.y = np.array(self.d.iloc[: ,len(self.d.columns ) -1]).reshape(-1 ,1).reshape(-1 ,1)
