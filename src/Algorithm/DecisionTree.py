@@ -8,21 +8,20 @@ from sklearn.tree import DecisionTreeRegressor
 class DecisionTree:
 
 
+    _report = None
+    def __init__(self):
+        pass
 
-    def __init__(self ,financialReport):
-        
-        if financialReport is None:
+    def setReport(self,report):
+
+        if report is None:
             return
-        else:
-            self.report = financialReport
+        self._report = report
 
-            
 
-            
+    def analyzeData(self):
 
-    def analyzeData(self,file):
-
-        self.data = pd.read_excel(file)
+        self.data = pd.read_excel(self._report.getFile())
         self.d = pd.DataFrame(self.data)
         self.X = np.array(self.d.iloc[: ,1:2]).reshape(-1 ,1)
         self.y = np.array(self.d.iloc[: ,len(self.d.columns ) -1]).reshape(-1 ,1).reshape(-1 ,1)

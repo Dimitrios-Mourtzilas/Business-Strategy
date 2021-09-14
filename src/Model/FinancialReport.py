@@ -49,3 +49,5 @@ class FinancialReport:
              'net_assets':self.netAssets
              }
         )
+    def getFile(self):
+        return self._file
