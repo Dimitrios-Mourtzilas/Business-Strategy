@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b4c3c4a-a0ef-4cd0-a34a-03b31f679fd1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_model.db" beforeDir="false" afterPath="$PROJECT_DIR$/business_model.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/LoginWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LoginWindow.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/FinancialReport.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/FinancialReport.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +115,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Business_Strategy$main.coverage" NAME="main Coverage Results" MODIFIED="1631472904494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Business_Strategy$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1631472998714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/GUI" />
+    <SUITE FILE_PATH="coverage/Business_Strategy$main.coverage" NAME="main Coverage Results" MODIFIED="1631472904494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
