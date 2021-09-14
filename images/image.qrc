@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="image-header">
+    <file>../../../Downloads/icons8-user-30.png</file>
+  </qresource>
+</RCC>
