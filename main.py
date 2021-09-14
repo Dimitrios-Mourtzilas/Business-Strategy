@@ -20,9 +20,9 @@ import pandas as pd
 
 def main():
 
-    LoginWindow = QMainWindow()
-    login_window = Ui_loginWindow()
-    login_window.setupUi(LoginWindow)
+    dtr = DecisionTree("company.xlsx")
+    dtr.analyzeData()
+
 
 
 if __name__ == "__main__":

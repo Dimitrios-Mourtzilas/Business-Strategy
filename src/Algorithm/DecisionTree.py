@@ -24,10 +24,10 @@ class DecisionTree:
 
     def analyzeData(self):
 
-        self.data = pd.read_csv('../company.csv')
+        self.data = pd.read_csv(self.report)
         self.d = pd.DataFrame(self.data)
-        self.X = np.array(self.d.iloc[:,1:2]).reshape(-1,1)
-        self.y = np.array(self.d.iloc[:,len(self.d.columns)-1]).reshape(-1,1).reshape(-1,1)
+        self.X = np.array(self.d.iloc[:,3:len(self.d.columns)-1]).reshape(-1,1)
+        self.y = np.array(self.d.iloc[:,len(self.d.columns)-1]).reshape(-1,1)
         print(self.X)
         print(self.X.shape)
         print('\n')

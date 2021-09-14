@@ -4,9 +4,8 @@
     <list default="true" id="2b4c3c4a-a0ef-4cd0-a34a-03b31f679fd1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_model.db" beforeDir="false" afterPath="$PROJECT_DIR$/business_model.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/LoginWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/LoginWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/FinancialReport.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/FinancialReport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Algorithm/DecisionTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Algorithm/DecisionTree.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,15 +33,19 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dimit\PycharmProjects\Business-Strategy" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dimit\PycharmProjects\Business-Strategy\images" />
       <recent name="C:\Users\dimit\PycharmProjects\Business-Strategy\src\GUI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.MainWindow">
+  <component name="RunManager" selected="Python.main">
     <configuration name="MainWindow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Business-Strategy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,8 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.MainWindow" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.MainWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -110,6 +113,8 @@
       <workItem from="1631550259599" duration="3284000" />
       <workItem from="1631563226650" duration="1372000" />
       <workItem from="1631564639132" duration="692000" />
+      <workItem from="1631648265165" duration="597000" />
+      <workItem from="1631650646815" duration="1894000" />
     </task>
     <servers />
   </component>
@@ -117,7 +122,8 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Business_Strategy$main.coverage" NAME="main Coverage Results" MODIFIED="1631472904494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Business_Strategy$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1631472998714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/GUI" />
+    <SUITE FILE_PATH="coverage/Business_Strategy$LoginWindow.coverage" NAME="LoginWindow Coverage Results" MODIFIED="1631643230363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Business_Strategy$main.coverage" NAME="main Coverage Results" MODIFIED="1631653329538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Business_Strategy$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1631653157045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/GUI" />
   </component>
 </project>
