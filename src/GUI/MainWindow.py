@@ -9,7 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from images import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -81,16 +80,3 @@ class Ui_Form(object):
 
     def runUi(self,Form):
         Form.show()
-
-
-<<<<<<< HEAD
-=======
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
->>>>>>> 0a498c90ce04960b190e496a48f24c392da2a2ce

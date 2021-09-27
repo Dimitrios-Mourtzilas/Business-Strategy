@@ -9,13 +9,10 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-<<<<<<< HEAD
 from PyQt5.QtWidgets import QLabel
 # from src.GUI.MainWindow import *
 from src.GUI.MainWindow import MainWindow
-=======
-from PyQt5.QtWidgets import QLabel, QMainWindow
->>>>>>> 0a498c90ce04960b190e496a48f24c392da2a2ce
+
 from src.Model.Database import *
 from time import sleep
 from src.Model.User import *
