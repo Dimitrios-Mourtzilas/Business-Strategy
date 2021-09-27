@@ -1,16 +1,11 @@
 import sqlite3
 from src.Model.User import *
-class Database:
 
+class Database:
     _con = None
     _cursor = None
-    def __init__(self, user):
-        if not isinstance(user,User):
-            return
-        self.user = user
-
-
-
+    def __init__(self):
+        pass
 
 
     def establishConnection(self):
@@ -23,6 +18,8 @@ class Database:
         if not self.user_name.__eq__(self.data['user_name']) or not  self.user_password.__eq__(self.data['user_password']):
             return False
 
+
+
     def fetchAllEmployees(self):
         self._cursor.execute("select *from employee")
         return self._cursor.fetchall()
@@ -33,7 +30,7 @@ class Database:
 
     def fetchCompanyByKey(self, compKey=""):
         self._cursor.execute(
-            "select *from company inner join financialReport on financialReport.compName = companu.compName where compName like %s",
+            "select *from company inner join financialReport on financialReport.compName = companu.compName where compName like ?",
             ('%' + compKey + '%',))
         return self._cursor.fetchall()
 
@@ -46,6 +43,7 @@ class Database:
             insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
             values(?,?,?,?,?,?,?)""", (values['empId']), values['empName'], values['empSurname'], values['empAge'],
                                 values['empSalary'], values['empEmail'],values('empPhone'))
+
         self._con.commit()
 
     def saveCompany(self, company):
@@ -61,15 +59,13 @@ class Database:
                 , (values['compName'], values['compCity'], values['compCountry'], values['year_founded']))
         self._con.commit()
 
-
-    def saveFinancialReport(self,financialReport):
+    def saveFinancialReport(self, financialReport):
         if financialReport is None:
             return
         else:
             self.financialReport = financialReport
             for values in self.financialReport.getJson():
                 self._cursor.execute(
-
                 """
                 insert into financialReport(reportId,company_id,starting_date,ending_date,product_sales,turn_over,fixed_costs,net_assets)
                 values(?,?,?,?,?,?,?,?)
@@ -77,4 +73,5 @@ class Database:
                 ,values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets'])
             self._con.commit()
         
+
 

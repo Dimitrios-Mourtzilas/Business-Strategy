@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< HEAD
     <data-source source="LOCAL" name="business_model@localhost" uuid="d5c93055-d19c-4397-9b97-1e5edb27a195">
       <driver-ref>mysql.8</driver-ref>
+=======
+    <data-source source="LOCAL" name="business_model" uuid="7f8d83ca-0fa1-4331-b53f-686017d48acf">
+      <driver-ref>sqlite.xerial</driver-ref>
+>>>>>>> 0a498c90ce04960b190e496a48f24c392da2a2ce
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/business_model</jdbc-url>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\dimit\PycharmProjects\Business-Strategy\business_model.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
+<<<<<<< HEAD
     </data-source>
     <data-source source="LOCAL" name="business_model" uuid="ad061942-bf26-4865-9b61-d5364ac03eb9">
       <driver-ref>sqlite.xerial</driver-ref>
@@ -14,6 +20,8 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/business_model.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
+=======
+>>>>>>> 0a498c90ce04960b190e496a48f24c392da2a2ce
     </data-source>
   </component>
 </project>

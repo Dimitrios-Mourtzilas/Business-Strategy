@@ -17,9 +17,17 @@ class DecisionTree:
         self._report = report
 
     def analyzeData(self):
+<<<<<<< HEAD
         self.d = pd.DataFrame(self._report)
         self.X = np.array(self.d.iloc[:, 1: 2]).reshape(-1,1)
         self.y = np.array(self.d.iloc[:,3:4]).reshape(-1, 1)
+=======
+
+        self.data = pd.read_csv(self.report)
+        self.d = pd.DataFrame(self.data)
+        self.X = np.array(self.d.iloc[:,3:len(self.d.columns)-1]).reshape(-1,1)
+        self.y = np.array(self.d.iloc[:,len(self.d.columns)-1]).reshape(-1,1)
+>>>>>>> 0a498c90ce04960b190e496a48f24c392da2a2ce
         print(self.X)
         print(self.X.shape)
         print('\n')

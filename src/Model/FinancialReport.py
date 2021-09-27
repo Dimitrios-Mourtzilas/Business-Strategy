@@ -1,7 +1,6 @@
 import json
 
 import pandas as pd
-
 class FinancialReport:
 
     _file = None
@@ -15,9 +14,11 @@ class FinancialReport:
 
 
 
+
     def setTimePeriod(self):
         self.starting = self._file['Starting date']
         self.ending = self._file['Ending date']
+
 
     def setReportId(self):
         self.reportId = self._file['Report id']
@@ -54,3 +55,4 @@ class FinancialReport:
         )
     def getFile(self):
         return self._file
+
