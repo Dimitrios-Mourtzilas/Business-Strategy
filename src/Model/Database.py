@@ -1,25 +1,27 @@
-from mysql.connector import connect, Error
-
-
+import sqlite3
+from src.Model.User import *
 class Database:
 
     _con = None
     _cursor = None
-    def __init__(self, **kwargs):
-
-        if "user_name" in kwargs and "user_password" in kwargs:
-            self.user_name = kwargs["user_name"]
-            self.user_password = kwargs["user_password"]
-        else:
+    def __init__(self, user):
+        if not isinstance(user,User):
             return
+        self.user = user
+
+
 
 
 
     def establishConnection(self):
-        self._con = connect(host="localhost",user=self.user_name,passwd=self.user_password,port=3306,auth_plugin="mysql_native_password")
+        self._con = sqlite3.connect('business_model.db')
         self._cursor = self._con.cursor()
-        self._cursor.execute("use business_model")
-        return self._con
+        self.data = self.user.getJson()
+        self.user_data = self._cursor.execute('select *from user').fetchone()
+        self.user_name = self.user_data[1]
+        self.user_password = self.user_data[2]
+        if not self.user_name.__eq__(self.data['user_name']) or not  self.user_password.__eq__(self.data['user_password']):
+            return False
 
     def fetchAllEmployees(self):
         self._cursor.execute("select *from employee")
@@ -42,8 +44,8 @@ class Database:
         for values in self.employee.getJson():
             self._cursor.execute("""
             insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
-            values(%d,%s,%s,%d,%f,%s)""", (values['empId']), values['empName'], values['empSurname'], values['empAge'],
-                                values['empSalary'], values('empPhone'))
+            values(?,?,?,?,?,?,?)""", (values['empId']), values['empName'], values['empSurname'], values['empAge'],
+                                values['empSalary'], values['empEmail'],values('empPhone'))
         self._con.commit()
 
     def saveCompany(self, company):
@@ -54,7 +56,7 @@ class Database:
             self._cursor.execute(
                 """
                 insert into company(compName,compCity,compCountry,year_founded)
-                values(%s,%s,%s,%s)
+                values(?,?,?,?)
                 """
                 , (values['compName'], values['compCity'], values['compCountry'], values['year_founded']))
         self._con.commit()
@@ -69,10 +71,10 @@ class Database:
                 self._cursor.execute(
 
                 """
-                insert into financialReport(compRevenue,time_period,productSales,fixed_costs,year)
-                values(%f,%s,%f,%f,%s)
+                insert into financialReport(reportId,company_id,starting_date,ending_date,product_sales,turn_over,fixed_costs,net_assets)
+                values(?,?,?,?,?,?,?,?)
                 """
-                ,values['comp_revenue'],values['time_period'],values['product_sales'],values['fixed_costs'],values['year'])
+                ,values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets'])
             self._con.commit()
-
+        
 

@@ -1,9 +1,8 @@
-
+import json
 class User:
 
-    def __init__(self, user_name ,user_password ,**kwargs):
-        self.user_name = user_name
-        self.user_password = user_password
+
+    def __init__(self,**kwargs):
         self.kwargs = kwargs
 
     def setUserName(self,user_name):
@@ -12,16 +11,8 @@ class User:
     def setUserPassword(self,user_password):
         self.user_password = user_password
 
-    def getUserName(self):
-        return self.user_name
-
-    def getUserPassword(self):
-        return self.user_password
-
-    def getToJson(self):
-        return dict(
-            {
-                'userName': self.getUserName(),
-                'userPassword': self.getUserPassword()
-            }
-        )
+    def getJson(self):
+        return json.dumps({
+            'user_name':self.user_name,
+            'user_password':self.user_password
+        })

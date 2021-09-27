@@ -5,7 +5,6 @@ import pandas as pd
 class FinancialReport:
 
     _file = None
-    _growthRate = 0
     def __init__(self):
         pass
 
@@ -13,6 +12,7 @@ class FinancialReport:
         if file is None or not file.__contains__(".xlsx"):
             return
         self._file = pd.read_excel(file)
+
 
 
     def setTimePeriod(self):
@@ -31,6 +31,9 @@ class FinancialReport:
     def setTurnOver(self):
         self.turnover = self._file['Turn over']
 
+    def setProductSales(self):
+        self.p_sales = self._file['Product sales']
+
     def setFixedCosts(self):
         self.fixed_costs = self._file['Fixed costs']
 
@@ -40,9 +43,9 @@ class FinancialReport:
     def getToJson(self):
         return json.dumps(
             {'report_id':self.reportId,
+             'company_id':self.companyId,
              'starting_period':self.starting,
              'ending_period':self.ending,
-             'company_id':self.companyId,
              'company_revenue':self.company_revenue,
              'turnover':self.turnover,
              'fixed_costs':self.fixed_costs,
