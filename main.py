@@ -13,7 +13,6 @@ from src.GUI.LoginWindow import *
 from src.Model.Company import Company
 from src.Model.Database import Database
 from src.Model.User import *
-# from src.GUI.MainWindow import *
 from src.Model.FinancialReport import *
 import pandas as pd
 
