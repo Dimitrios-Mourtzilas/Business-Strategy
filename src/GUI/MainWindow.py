@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Form(object):
+class MainWindow(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(981, 591)
@@ -20,15 +20,11 @@ class Ui_Form(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self.horizontalFrame)
-        self.label.setStyleSheet("\n"
-"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
-"\n"
-"QLabel hover user_menu{\n"
-"background-color:red\n"
-"\n"
-"\n"
-"}")
-        self.label.setText("")
+        self.image_label = QtWidgets.QLabel(self.horizontalFrame)
+        self.user_image = QtGui.QPixmap('user-favicon.png')
+        self.image_label.setPixmap(self.user_image)
+        self.user_image.scaledToWidth(64)
+        self.user_image.scaledToHeight(64)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
@@ -80,3 +76,12 @@ class Ui_Form(object):
 
     def runUi(self,Form):
         Form.show()
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    ui_window = QtWidgets.QMainWindow()
+    mainWindow = MainWindow()
+    mainWindow.setupUi(ui_window)
+    mainWindow.runUi(ui_window)
+    exit(app.exec())

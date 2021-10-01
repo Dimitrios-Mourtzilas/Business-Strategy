@@ -90,14 +90,14 @@ class Ui_loginWindow(QMainWindow):
             self.user = User()
             self.user.setUserName(self.lineEdit.text())
             self.user.setUserPassword(self.lineEdit_2.text())
-            self.database = Database(self.user)
-            if not self.database.establishConnection():
+            self.database = Database()
+            if not self.database.establishConnection(self.user):
                 raise Error
             else:
                 self.window = QMainWindow()
-                self._mainWindow = MainWindow()
-                self._mainWindow.setupUi(self.window)
-                self._mainWindow.runUi(self.window)
+                self.mainWindow = MainWindow()
+                self.mainWindow.setupUi(self.window)
+                self.mainWindow.runUi(self.window)
 
 
         except Error:
@@ -106,7 +106,8 @@ class Ui_loginWindow(QMainWindow):
                 self.error_label = QLabel("Bad connection due to invalid credentials")
                 self.error_label.setStyleSheet("color:red")
                 self.verticalLayout.layout().addWidget(self.error_label)
-                self.error_label.destroy()
+                  
+  
 
     def clicked(self, count):
         return count == 0

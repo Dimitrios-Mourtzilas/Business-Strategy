@@ -5,20 +5,18 @@ class Database:
     _con = None
     _cursor = None
     def __init__(self):
-        pass
-
-
-    def establishConnection(self):
-        self._con = sqlite3.connect('business_model.db')
+        self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
-        self.data = self.user.getJson()
-        self.user_data = self._cursor.execute('select *from user').fetchone()
-        self.user_name = self.user_data[1]
-        self.user_password = self.user_data[2]
-        if not self.user_name.__eq__(self.data['user_name']) or not  self.user_password.__eq__(self.data['user_password']):
-            return False
-
-
+        
+    def establishConnection(self,user):
+        if not isinstance(user,User):
+            return
+        self.user = user
+        self.userName = self.user.getUserName()
+        self.userPassword = self.user.getUserPassword()
+        self.user_data = self._cursor.execute('select user_name, user_password from user').fetchall()
+        if self.userName.__eq__(self.user_data[0][1]):
+            print("Sucess")
 
     def fetchAllEmployees(self):
         self._cursor.execute("select *from employee")
@@ -30,7 +28,7 @@ class Database:
 
     def fetchCompanyByKey(self, compKey=""):
         self._cursor.execute(
-            "select *from company inner join financialReport on financialReport.compName = companu.compName where compName like ?",
+            "select *from company inner join financialReport on financialReport.compName = company.compName where compName like ?",
             ('%' + compKey + '%',))
         return self._cursor.fetchall()
 
@@ -72,6 +70,10 @@ class Database:
                 """
                 ,values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets'])
             self._con.commit()
+    
+    def fetchAllUsers(self):
+        self._cursor.execute('select *from user')
+        return self._cursor.fetchall()
         
 
 
