@@ -9,22 +9,35 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMainWindow
+from GUI.LoginWindow import Ui_loginWindow
+class MainWindow(QMainWindow):
 
-class MainWindow(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(981, 591)
-        self.horizontalFrame = QtWidgets.QFrame(Form)
+    def __init__(self):
+        super(MainWindow, self).__init__()
+
+
+    def setupUi(self):
+        self.setObjectName("Form")
+        self.resize(981, 591)
+        self.horizontalFrame = QtWidgets.QFrame(self)
         self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self.horizontalFrame)
-        self.image_label = QtWidgets.QLabel(self.horizontalFrame)
-        self.user_image = QtGui.QPixmap('user-favicon.png')
-        self.image_label.setPixmap(self.user_image)
-        self.user_image.scaledToWidth(64)
-        self.user_image.scaledToHeight(64)
+        self.label.setStyleSheet("\n"
+"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
+"\n"
+"QLabel hover user_menu{\n"
+"background-color:red\n"
+"\n"
+"\n"
+"}")
+        self.label.setText("")
+        self.user_image = QtGui.QPixmap('favicon-user.jpg')
+        self.label.setPixmap(self.user_image)
+        self.label.resize(self.user_image.width(), self.user_image.height())
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
         self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
@@ -36,7 +49,7 @@ class MainWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.horizontalFrame)
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
-        self.user_menu = QtWidgets.QFrame(Form)
+        self.user_menu = QtWidgets.QFrame(self)
         self.user_menu.setGeometry(QtCore.QRect(100, 110, 160, 291))
         self.user_menu.setStyleSheet("QFrame {\n"
 "opacity:0px;\n"
@@ -55,18 +68,21 @@ class MainWindow(object):
         self.log_out_button = QtWidgets.QPushButton(self.user_menu)
         self.log_out_button.setObjectName("log_out_button")
         self.verticalLayout.addWidget(self.log_out_button)
-        self.log_out_button.clicked.connect(self.closeMainWindow)
+        self.log_out_button.clicked.connect(self.closeWindow)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-    def closeMainWindow(self,Form):
-        Form.close()
+    def closeWindow(self):
+        self.login = Ui_loginWindow()
+        self.login.setupUi()
+        self.login.runUi()
+        self.close()
 
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.pushButton.setText(_translate("Form", "PushButton"))
         self.pushButton_2.setText(_translate("Form", "PushButton"))
         self.pushButton_3.setText(_translate("Form", "PushButton"))
@@ -74,14 +90,11 @@ class MainWindow(object):
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
 
-    def runUi(self,Form):
-        Form.show()
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    ui_window = QtWidgets.QMainWindow()
-    mainWindow = MainWindow()
-    mainWindow.setupUi(ui_window)
-    mainWindow.runUi(ui_window)
-    exit(app.exec())
+    windows = MainWindow()
+    windows.setupUi()
+    windows.show()
+    sys.exit(app.exec_())

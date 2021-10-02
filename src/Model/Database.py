@@ -10,13 +10,14 @@ class Database:
         
     def establishConnection(self,user):
         if not isinstance(user,User):
-            return
+            return False
         self.user = user
         self.userName = self.user.getUserName()
         self.userPassword = self.user.getUserPassword()
         self.user_data = self._cursor.execute('select user_name, user_password from user').fetchall()
         if self.userName.__eq__(self.user_data[0][1]):
-            print("Sucess")
+            return True
+        return False
 
     def fetchAllEmployees(self):
         self._cursor.execute("select *from employee")

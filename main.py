@@ -23,9 +23,9 @@ def main():
 
     
     app = QApplication(sys.argv)
-    loginWindow = Ui_loginWindow()
-    loginWindow.setupUi()
-    loginWindow.runUi()
+    login_window = Ui_loginWindow()
+    login_window.setupUi()
+    login_window.show()
     exit(app.exec())
 
 
