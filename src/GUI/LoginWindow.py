@@ -10,8 +10,8 @@ import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QLabel
-from GUI.MainWindow import *
-from Model.Database import *
+from src.GUI.MainWindow import *
+from src.Model.Database import *
 from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
@@ -87,11 +87,11 @@ class Ui_loginWindow(QMainWindow):
             self.database = Database()
             if not self.database.establishConnection(self.user):
                 raise Error
-            else:
-                self.mainWindow = MainWindow()
-                self.mainWindow.setupUi()
-                self.mainWindow.runUi()
-                self.close()
+
+            self.mainWindow = MainWindow()
+            self.mainWindow.setupUi()
+            self.mainWindow.runUi()
+            self.close()
 
 
         except Error:

@@ -9,14 +9,13 @@ class Database:
         self._cursor = self._con.cursor()
         
     def establishConnection(self,user):
-        if not isinstance(user,User):
-            return False
         self.user = user
         self.userName = self.user.getUserName()
         self.userPassword = self.user.getUserPassword()
-        self.user_data = self._cursor.execute('select user_name, user_password from user').fetchall()
-        if self.userName.__eq__(self.user_data[0][1]):
-            return True
+        self.user_data = self._cursor.execute("select user_name, user_password from user").fetchall()
+        for values in self.user_data:
+            if self.userName.__eq__(values[0]) and self.userPassword.__eq__(values[1]):
+                return True
         return False
 
     def fetchAllEmployees(self):
@@ -40,8 +39,8 @@ class Database:
         for values in self.employee.getJson():
             self._cursor.execute("""
             insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
-            values(?,?,?,?,?,?,?)""", (values['empId']), values['empName'], values['empSurname'], values['empAge'],
-                                values['empSalary'], values['empEmail'],values('empPhone'))
+            values(?,?,?,?,?,?,?)""", (values['empId'], values['empName'], values['empSurname'], values['empAge'],
+                                values['empSalary'], values['empEmail'],values('empPhone')))
 
         self._con.commit()
 
@@ -69,7 +68,7 @@ class Database:
                 insert into financialReport(reportId,company_id,starting_date,ending_date,product_sales,turn_over,fixed_costs,net_assets)
                 values(?,?,?,?,?,?,?,?)
                 """
-                ,values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets'])
+                ,(values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets']))
             self._con.commit()
     
     def fetchAllUsers(self):

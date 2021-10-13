@@ -10,12 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow
-from GUI.LoginWindow import Ui_loginWindow
+from src.GUI.LoginWindow import *
+
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-
 
     def setupUi(self):
         self.setObjectName("Form")
@@ -27,13 +28,13 @@ class MainWindow(QMainWindow):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtWidgets.QLabel(self.horizontalFrame)
         self.label.setStyleSheet("\n"
-"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
-"\n"
-"QLabel hover user_menu{\n"
-"background-color:red\n"
-"\n"
-"\n"
-"}")
+                                 "image: url(:/image-header/Downloads/icons8-user-30.png);\n"
+                                 "\n"
+                                 "QLabel hover user_menu{\n"
+                                 "background-color:red\n"
+                                 "\n"
+                                 "\n"
+                                 "}")
         self.label.setText("")
         self.user_image = QtGui.QPixmap('favicon-user.jpg')
         self.label.setPixmap(self.user_image)
@@ -52,10 +53,10 @@ class MainWindow(QMainWindow):
         self.user_menu = QtWidgets.QFrame(self)
         self.user_menu.setGeometry(QtCore.QRect(100, 110, 160, 291))
         self.user_menu.setStyleSheet("QFrame {\n"
-"opacity:0px;\n"
-"}\n"
-"\n"
-"")
+                                     "opacity:0px;\n"
+                                     "}\n"
+                                     "\n"
+                                     "")
         self.user_menu.setObjectName("user_menu")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.user_menu)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -79,7 +80,6 @@ class MainWindow(QMainWindow):
         self.login.runUi()
         self.close()
 
-
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
@@ -90,11 +90,12 @@ class MainWindow(QMainWindow):
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    windows = MainWindow()
-    windows.setupUi()
-    windows.show()
-    sys.exit(app.exec_())
+#
+# if __name__ == "__main__":
+#     import sys
+#
+#     app = QtWidgets.QApplication(sys.argv)
+#     windows = MainWindow()
+#     windows.setupUi()
+#     windows.show()
+#     sys.exit(app.exec_())
