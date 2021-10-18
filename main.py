@@ -19,16 +19,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-def main():
 
-    
+
+def main():
     app = QApplication(sys.argv)
     login_window = Ui_loginWindow()
     login_window.setupUi()
     login_window.show()
     exit(app.exec())
-
-
 
 
 if __name__ == "__main__":
