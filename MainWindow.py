@@ -11,15 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(QMainWindow):
-    
-    def __init__(self):
-        super().__init__()
-    
-    def setupUi(self):
-        self.setObjectName("Form")
-        self.resize(981, 591)
-        self.horizontalFrame = QtWidgets.QFrame()
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(981, 591)
+        self.horizontalFrame = QtWidgets.QFrame(Form)
         self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
@@ -51,7 +47,7 @@ class Ui_Form(QMainWindow):
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
-        self.user_menu = QtWidgets.QFrame()
+        self.user_menu = QtWidgets.QFrame(Form)
         self.user_menu.setGeometry(QtCore.QRect(80, 110, 160, 361))
         self.user_menu.setStyleSheet("QFrame {\n"
 "opacity:0px;\n"
@@ -70,7 +66,7 @@ class Ui_Form(QMainWindow):
         self.log_out_button = QtWidgets.QPushButton(self.user_menu)
         self.log_out_button.setObjectName("log_out_button")
         self.verticalLayout.addWidget(self.log_out_button)
-        self.FileFrame = QtWidgets.QFrame()
+        self.FileFrame = QtWidgets.QFrame(Form)
         self.FileFrame.setGeometry(QtCore.QRect(280, 110, 621, 351))
         self.FileFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.FileFrame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -88,11 +84,11 @@ class Ui_Form(QMainWindow):
         self.horizontalLayout_2.addWidget(self.fileOpenButton)
 
         self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName()
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self):
+    def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Form"))
         self.home_button.setText(_translate("Form", "Home"))
         self.file_button.setText(_translate("Form", "FIles"))
         self.data_analysis_button.setText(_translate("Form", "Data analysis"))
