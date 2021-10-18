@@ -2,8 +2,8 @@ import json
 class User:
 
 
-    def __init__(self,**kwargs):
-        self.kwargs = kwargs
+    def __init__(self):
+        pass
 
     def setUserName(self,user_name):
         self.user_name = user_name

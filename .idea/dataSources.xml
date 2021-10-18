@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< HEAD
     <data-source source="LOCAL" name="business_model" uuid="97d3b047-b8a8-4f41-9d6e-7aae038b1f9d">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/business_model.db</jdbc-url>
+=======
+    <data-source source="LOCAL" name="business_model" uuid="7c2274c8-e4a8-4d8a-9b85-1dca8fc84008">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\dimit\PycharmProjects\Business-Strategy\business_model.db</jdbc-url>
+>>>>>>> 38d0af6d7850c4683e94ad97c12ea6437a0a6d8c
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>

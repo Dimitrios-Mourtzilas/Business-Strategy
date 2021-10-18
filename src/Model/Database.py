@@ -11,6 +11,7 @@ class Database:
     def __init__(self):
         self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
+<<<<<<< HEAD
 
     def establishConnection(self, user):
         if not isinstance(user, User):
@@ -20,6 +21,17 @@ class Database:
         self.user_data = self._cursor.execute('select user_name, user_password from user').fetchall()
         if self.userName.__eq__(self.user_data[0][1]):
             return True
+=======
+        
+    def establishConnection(self,user):
+        self.user = user
+        self.userName = self.user.getUserName()
+        self.userPassword = self.user.getUserPassword()
+        self.user_data = self._cursor.execute("select user_name, user_password from user").fetchall()
+        for values in self.user_data:
+            if self.userName.__eq__(values[0]) and self.userPassword.__eq__(values[1]):
+                return True
+>>>>>>> 38d0af6d7850c4683e94ad97c12ea6437a0a6d8c
         return False
 
     def fetchAllEmployees(self):
@@ -33,9 +45,15 @@ class Database:
         self.employee = employee
         for values in self.employee.getJson():
             self._cursor.execute("""
+<<<<<<< HEAD
             insert into employee(empId,empName,empSurname,empAge,empSalary,empEmail,empPhone)
             values(?,?,?,?,?,?,?)""", (values['empId'], values['empName'], values['empSurname'], values['empAge'],
                                      values['empSalary'], values['empEmail'], values('empPhone')))
+=======
+            insert into employee(empId,empName,empSurname,empAge,empSalary,empPhone)
+            values(?,?,?,?,?,?,?)""", (values['empId'], values['empName'], values['empSurname'], values['empAge'],
+                                values['empSalary'], values['empEmail'],values('empPhone')))
+>>>>>>> 38d0af6d7850c4683e94ad97c12ea6437a0a6d8c
 
         self._con.commit()
 
@@ -78,8 +96,15 @@ class Database:
                 insert into financialReport(reportId,starting_period,ending_period,companyId,turn_over,fixed_costs,net_assets)
                 values(?,?,?,?,?,?,?)
                 """
+<<<<<<< HEAD
                     , (values['report_id'], values['starting_period'], values['ending_period'],values['companyId'],
                     values['product_sales'], values['turnover'], values['fixed_costs'], values['net_assets']))
+=======
+                insert into financialReport(reportId,company_id,starting_date,ending_date,product_sales,turn_over,fixed_costs,net_assets)
+                values(?,?,?,?,?,?,?,?)
+                """
+                ,(values['report_id'],values['company_id'],values['starting_period'],values['ending_period'],values['product_sales'],values['turnover'],values['fixed_costs'],values['net_assets']))
+>>>>>>> 38d0af6d7850c4683e94ad97c12ea6437a0a6d8c
             self._con.commit()
 
     def fetchAllUsers(self):
