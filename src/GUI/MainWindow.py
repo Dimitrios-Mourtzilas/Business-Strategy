@@ -11,28 +11,24 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-
-class Ui_Form(QtWidgets.QMainWindow):
-    
-
-    def setupUi(self):
-        self.setObjectName("Form")
-        self.resize(981, 591)
-        self.horizontalFrame = QtWidgets.QFrame()
+class Ui_Form(object):
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(914, 591)
+        self.horizontalFrame = QtWidgets.QFrame(Form)
         self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.user_icon = QtWidgets.QLabel(self.horizontalFrame)
         self.user_icon.setStyleSheet("\n"
-        "image: url(:/image-header/Downloads/icons8-user-30.png);\n"
-        "\n"
-        "QLabel hover user_menu{\n"
-        "background-color:red\n"
-        "\n"
-        "\n"
-        "}")
-
+"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
+"\n"
+"QLabel hover user_menu{\n"
+"background-color:red\n"
+"\n"
+"\n"
+"}")
         self.user_icon.setText("")
         self.user_icon.setObjectName("user_icon")
         self.horizontalLayout.addWidget(self.user_icon)
@@ -51,13 +47,13 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
-        self.user_menu = QtWidgets.QFrame()
+        self.user_menu = QtWidgets.QFrame(Form)
         self.user_menu.setGeometry(QtCore.QRect(80, 110, 160, 361))
         self.user_menu.setStyleSheet("QFrame {\n"
-        "opacity:0px;\n"
-        "}\n"
-        "\n"
-        "")
+"opacity:0px;\n"
+"}\n"
+"\n"
+"")
         self.user_menu.setObjectName("user_menu")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.user_menu)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -70,7 +66,7 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.log_out_button = QtWidgets.QPushButton(self.user_menu)
         self.log_out_button.setObjectName("log_out_button")
         self.verticalLayout.addWidget(self.log_out_button)
-        self.widget = QtWidgets.QWidget()
+        self.widget = QtWidgets.QWidget(Form)
         self.widget.setGeometry(QtCore.QRect(240, 110, 651, 361))
         self.widget.setObjectName("widget")
         self.home_frame = QtWidgets.QFrame(self.widget)
@@ -91,18 +87,17 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.lineEdit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setDisabled(True)
         self.horizontalLayout_2.addWidget(self.lineEdit)
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton)
 
-        self.retranslateUi()
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self):
+    def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Form"))
         self.home_button.setText(_translate("Form", "Home"))
         self.file_button.setText(_translate("Form", "FIles"))
         self.data_analysis_button.setText(_translate("Form", "Data analysis"))
@@ -112,16 +107,13 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
         self.pushButton.setText(_translate("Form", "..."))
-    
-    def runUi(self):
-        self.show()
 
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Form = QtWidgets.QWidget()
-#     ui = Ui_Form()
-#     ui.setupUi(Form)
-#     Form.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
