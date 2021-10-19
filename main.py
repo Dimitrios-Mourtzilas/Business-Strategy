@@ -20,6 +20,7 @@
 # from sklearn.metrics import accuracy_score
 # import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import QApplication
+import sys
 
 from src.GUI.LoginWindow import Ui_loginWindow
 

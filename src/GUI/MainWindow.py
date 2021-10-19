@@ -100,9 +100,9 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.home_button.setText(_translate("Form", "Home"))
         self.file_button.setText(_translate("Form", "FIles"))
         self.data_analysis_button.setText(_translate("Form", "Data analysis"))
@@ -112,6 +112,9 @@ class Ui_Form(QtWidgets.QMainWindow):
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
         self.pushButton.setText(_translate("Form", "..."))
+    
+    def runUi(self):
+        self.show()
 
 
 # if __name__ == "__main__":

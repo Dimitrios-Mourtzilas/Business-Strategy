@@ -16,17 +16,12 @@ from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
-# from BadConnectionDialog import *
-
 
 class Ui_loginWindow(QMainWindow):
 
     _count = 0
     _LoginWindow = None
     _ui_Form = None
-
-    def __init__(self, parent=None):
-        super(Ui_loginWindow, self).__init__(parent)
 
     def setupUi(self):
         self.setObjectName("MainWindow")
@@ -79,6 +74,8 @@ class Ui_loginWindow(QMainWindow):
         self.label_2.setText(_translate("MainWindow", "user name"))
         self.label.setText(_translate("MainWindow", "user password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
+
+  
 
     def connectToDB(self):
         try:
