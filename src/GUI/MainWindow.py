@@ -11,11 +11,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(981, 591)
-        self.horizontalFrame = QtWidgets.QFrame(Form)
+
+class Ui_Form(QtWidgets.QMainWindow):
+    
+
+    def setupUi(self):
+        self.setObjectName("Form")
+        self.resize(981, 591)
+        self.horizontalFrame = QtWidgets.QFrame()
         self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
@@ -29,6 +32,7 @@ class Ui_Form(object):
         "\n"
         "\n"
         "}")
+
         self.user_icon.setText("")
         self.user_icon.setObjectName("user_icon")
         self.horizontalLayout.addWidget(self.user_icon)
@@ -47,7 +51,7 @@ class Ui_Form(object):
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
-        self.user_menu = QtWidgets.QFrame(Form)
+        self.user_menu = QtWidgets.QFrame()
         self.user_menu.setGeometry(QtCore.QRect(80, 110, 160, 361))
         self.user_menu.setStyleSheet("QFrame {\n"
         "opacity:0px;\n"
@@ -66,7 +70,7 @@ class Ui_Form(object):
         self.log_out_button = QtWidgets.QPushButton(self.user_menu)
         self.log_out_button.setObjectName("log_out_button")
         self.verticalLayout.addWidget(self.log_out_button)
-        self.widget = QtWidgets.QWidget(Form)
+        self.widget = QtWidgets.QWidget()
         self.widget.setGeometry(QtCore.QRect(240, 110, 651, 361))
         self.widget.setObjectName("widget")
         self.home_frame = QtWidgets.QFrame(self.widget)
@@ -93,8 +97,8 @@ class Ui_Form(object):
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
