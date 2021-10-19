@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-<<<<<<< HEAD
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (Business-Strategy)" jdkType="Python SDK" />
-=======
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.9" jdkType="Python SDK" />
->>>>>>> 38d0af6d7850c4683e94ad97c12ea6437a0a6d8c
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
