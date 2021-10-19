@@ -9,54 +9,53 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow
-from src.GUI.LoginWindow import *
 
 
-class MainWindow(QMainWindow):
-
-    def __init__(self):
-        super(MainWindow, self).__init__()
+class Ui_Form(QtWidgets.QMainWindow):
+    
 
     def setupUi(self):
         self.setObjectName("Form")
         self.resize(981, 591)
-        self.horizontalFrame = QtWidgets.QFrame(self)
+        self.horizontalFrame = QtWidgets.QFrame()
         self.horizontalFrame.setGeometry(QtCore.QRect(80, 30, 811, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.label = QtWidgets.QLabel(self.horizontalFrame)
-        self.label.setStyleSheet("\n"
-                                 "image: url(:/image-header/Downloads/icons8-user-30.png);\n"
-                                 "\n"
-                                 "QLabel hover user_menu{\n"
-                                 "background-color:red\n"
-                                 "\n"
-                                 "\n"
-                                 "}")
-        self.label.setText("")
-        self.user_image = QtGui.QPixmap('favicon-user.jpg')
-        self.label.setPixmap(self.user_image)
-        self.label.resize(self.user_image.width(), self.user_image.height())
-        self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
-        self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.pushButton_3 = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
-        self.user_menu = QtWidgets.QFrame(self)
-        self.user_menu.setGeometry(QtCore.QRect(100, 110, 160, 291))
+        self.user_icon = QtWidgets.QLabel(self.horizontalFrame)
+        self.user_icon.setStyleSheet("\n"
+"image: url(:/image-header/Downloads/icons8-user-30.png);\n"
+"\n"
+"QLabel hover user_menu{\n"
+"background-color:red\n"
+"\n"
+"\n"
+"}")
+        self.user_icon.setText("")
+        self.user_icon.setObjectName("user_icon")
+        self.horizontalLayout.addWidget(self.user_icon)
+        self.home_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.home_button.setObjectName("home_button")
+        self.horizontalLayout.addWidget(self.home_button)
+        self.file_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.file_button.setObjectName("file_button")
+        self.horizontalLayout.addWidget(self.file_button)
+        self.data_analysis_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.data_analysis_button.setObjectName("data_analysis_button")
+        self.horizontalLayout.addWidget(self.data_analysis_button)
+        self.data_vis_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.data_vis_button.setObjectName("data_vis_button")
+        self.horizontalLayout.addWidget(self.data_vis_button)
+        self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.about_button.setObjectName("about_button")
+        self.horizontalLayout.addWidget(self.about_button)
+        self.user_menu = QtWidgets.QFrame()
+        self.user_menu.setGeometry(QtCore.QRect(80, 110, 160, 361))
         self.user_menu.setStyleSheet("QFrame {\n"
-                                     "opacity:0px;\n"
-                                     "}\n"
-                                     "\n"
-                                     "")
+"opacity:0px;\n"
+"}\n"
+"\n"
+"")
         self.user_menu.setObjectName("user_menu")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.user_menu)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -69,33 +68,38 @@ class MainWindow(QMainWindow):
         self.log_out_button = QtWidgets.QPushButton(self.user_menu)
         self.log_out_button.setObjectName("log_out_button")
         self.verticalLayout.addWidget(self.log_out_button)
-        self.log_out_button.clicked.connect(self.closeWindow)
+        self.FileFrame = QtWidgets.QFrame()
+        self.FileFrame.setGeometry(QtCore.QRect(280, 110, 621, 351))
+        self.FileFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.FileFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.FileFrame.setObjectName("FileFrame")
+        self.fileButtonsFrame = QtWidgets.QFrame(self.FileFrame)
+        self.fileButtonsFrame.setGeometry(QtCore.QRect(100, 300, 431, 41))
+        self.fileButtonsFrame.setObjectName("fileButtonsFrame")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.fileButtonsFrame)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.filePathEdit = QtWidgets.QLineEdit(self.fileButtonsFrame)
+        self.filePathEdit.setObjectName("filePathEdit")
+        self.horizontalLayout_2.addWidget(self.filePathEdit)
+        self.fileOpenButton = QtWidgets.QPushButton(self.fileButtonsFrame)
+        self.fileOpenButton.setObjectName("fileOpenButton")
+        self.horizontalLayout_2.addWidget(self.fileOpenButton)
 
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def closeWindow(self):
-        self.login = Ui_loginWindow()
-        self.login.setupUi()
-        self.login.runUi()
-        self.close()
-
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "PushButton"))
-        self.pushButton_2.setText(_translate("Form", "PushButton"))
-        self.pushButton_3.setText(_translate("Form", "PushButton"))
+        self.home_button.setText(_translate("Form", "Home"))
+        self.file_button.setText(_translate("Form", "FIles"))
+        self.data_analysis_button.setText(_translate("Form", "Data analysis"))
+        self.data_vis_button.setText(_translate("Form", "Data visualization"))
+        self.about_button.setText(_translate("Form", "About"))
         self.account_button.setText(_translate("Form", "Account"))
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
-
-#
-# if __name__ == "__main__":
-#     import sys
-#
-#     app = QtWidgets.QApplication(sys.argv)
-#     windows = MainWindow()
-#     windows.setupUi()
-#     windows.show()
-#     sys.exit(app.exec_())
+        self.fileOpenButton.setText(_translate("Form", "..."))
+    
+    def runUi(self):
+        self.show()

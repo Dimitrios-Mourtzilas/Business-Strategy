@@ -20,7 +20,6 @@ import sys
 # from sklearn.tree import DecisionTreeRegressor
 # from sklearn.metrics import accuracy_score
 # import matplotlib.pyplot as plt
-import os
 
 from PyQt5.QtWidgets import QApplication
 
