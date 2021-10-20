@@ -10,23 +10,21 @@ import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QLabel
-from src.GUI.MainWindow import Ui_Form
+from MainWindow import Ui_Form
 from src.Model.Database import *
 from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
-# from BadConnectionDialog import *
 
 
-class Ui_loginWindow(QMainWindow):
+class LoginWindow(QMainWindow):
 
     _count = 0
     _LoginWindow = None
-    _ui_Form = None
 
     def __init__(self, parent=None):
-        super(Ui_loginWindow, self).__init__(parent)
+        super(LoginWindow, self).__init__(parent)
 
     def setupUi(self):
         self.setObjectName("MainWindow")
@@ -89,9 +87,10 @@ class Ui_loginWindow(QMainWindow):
             if not self.database.establishConnection(self.user):
                 raise Error
 
+            self.window = QMainWindow()
             self.mainWindow = Ui_Form()
-            self.mainWindow.setupUi()
-            self.mainWindow.runUi()
+            self.mainWindow.setupUi(self.window)
+            self.mainWindow.runUi(self.window)
             self.close()
 
 
