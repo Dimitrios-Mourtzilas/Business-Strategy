@@ -1,9 +1,10 @@
 
-
 class Supplier:
 
     def __init__(self):
         pass
+
+    _commodity = None
 
     def setSupplierId(self,supplierId):
         self.supplierId = supplierId
@@ -29,14 +30,34 @@ class Supplier:
     def getCountryCode(self):
         return self.country_code
 
+    def setCommodity(self,commodity):
+        if not isinstance(commodity, Commodity):
+            return
+        self._commodity = commodity
+    
+    def getSupplierPhoneNumber(self):
+        return self.phone
+    
+    def getSupplierEmail(self):
+        return self.email
+    
+    def getCommodity(self):
+        return self._commodity
+    
+    def setSupplierEmail(self,email=""):
+        self.email = email
+    
+    def setSupplierPhoneNumber(self,phone):
+        self.phone = phone
 
     def getJsonData(self):
-        return dict(
-            {
-                'supplier_id':self.supplierId,
-                'supplier_name':self.supplierName,
-                'supplier_city':self.supplierCity,
-                'country_code':self.country_code
+        return {
+                'supplier_id':self.getSupplierId(),
+                'supplier_name':self.getSupplierName(),
+                'supplier_city':self.getSupplierCity(),
+                'country_code':self.getCountryCode(),
+                'supplierPhoneNumber':self.getSupplierPhoneNumber(),
+                'supplierEmail':self.getSupplierEmail(),
+                'commodity':self.getCommodity()
             }
-        )
 
