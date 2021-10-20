@@ -18,6 +18,7 @@ from src.GUI.LoginWindow import *
 # import matplotlib.pyplot as plt
 import sys
 from PyQt5.QtWidgets import QApplication
+import sys
 
 def main():
 

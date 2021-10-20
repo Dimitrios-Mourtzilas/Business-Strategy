@@ -16,16 +16,22 @@ from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2c5153ea0a41e0753cae6e547105c0cdd8f1f55
 
 class LoginWindow(QMainWindow):
 
     _count = 0
     _LoginWindow = None
 
+<<<<<<< HEAD
     def __init__(self, parent=None):
         super(LoginWindow, self).__init__(parent)
 
+=======
+>>>>>>> f2c5153ea0a41e0753cae6e547105c0cdd8f1f55
     def setupUi(self):
         self.setObjectName("MainWindow")
         self.resize(800, 600)
@@ -77,6 +83,8 @@ class LoginWindow(QMainWindow):
         self.label_2.setText(_translate("MainWindow", "user name"))
         self.label.setText(_translate("MainWindow", "user password"))
         self.pushButton.setText(_translate("MainWindow", "Log in"))
+
+  
 
     def connectToDB(self):
         try:

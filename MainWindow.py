@@ -27,6 +27,9 @@ class Ui_Form(object):
         self.user_label.setPixmap(self.user_icon)
         self.user_label.setObjectName("user_label")
         self.horizontalLayout.addWidget(self.user_label)
+        self.user_icon.setText("")
+        self.user_icon.setObjectName("user_icon")
+        self.horizontalLayout.addWidget(self.user_icon)
         self.home_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.home_button.setObjectName("home_button")
         self.horizontalLayout.addWidget(self.home_button)
@@ -119,11 +122,11 @@ class Ui_Form(object):
     def runUi(self,Form):
         Form.show()
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Form = QtWidgets.QWidget()
-#     ui = Ui_Form()
-#     ui.setupUi(Form)
-#     Form.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
