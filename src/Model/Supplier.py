@@ -31,10 +31,13 @@ class Supplier:
         return self.country_code
 
     def setCommodity(self,commodity):
-        if not isinstance(commodity, Commodity):
-            return
-        self._commodity = commodity
-    
+        try:
+            if not isinstance(commodity, Commodity):
+                raise Exception('object is not instance of Commodity')
+            self._commodity = commodity
+        except Exception as e:
+            print(e)
+                    
     def getSupplierPhoneNumber(self):
         return self.phone
     
