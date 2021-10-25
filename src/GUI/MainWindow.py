@@ -27,8 +27,6 @@ class Ui_Form(object):
         self.user_label.setPixmap(self.user_icon)
         self.user_label.setObjectName("user_label")
         self.horizontalLayout.addWidget(self.user_label)
-        self.user_icon.setText("")
-        self.user_icon.setObjectName("user_icon")
         self.horizontalLayout.addWidget(self.user_icon)
         self.home_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.home_button.setObjectName("home_button")
@@ -87,6 +85,7 @@ class Ui_Form(object):
         self.files_frame.setObjectName("files_frame")
 
 
+
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.files_frame)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(150, 310, 371, 41))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -99,6 +98,12 @@ class Ui_Form(object):
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton)
+        if self.home_button.clicked:
+            self.gotoHomeFrame()
+
+        elif self.file_button.clicked:
+            self.gotoFileFrame()
+        
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -118,6 +123,13 @@ class Ui_Form(object):
     
     def openFrame(self,parentFrame=None):
         parentFrame.show()
+
+
+    def gotoFileFrame(self):
+        self.files_frame.show()
+    
+    def gotoHomeFrame(self):
+        self.home_frame.show()
     
     def runUi(self,Form):
         Form.show()

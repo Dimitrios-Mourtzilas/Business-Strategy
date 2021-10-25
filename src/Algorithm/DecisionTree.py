@@ -5,18 +5,21 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import accuracy_score
 
+
+
+from src.Model.FinancialReport import *
 class DecisionTree:
     _report = None
 
-    def __init__(self):
+    def __init__(self,**kwargs):
         pass
 
-    def setReport(self, report):
-        if report is None:
+    def setReport(self,report):
+        if not isinstance(report,FinancialReport):
             return
         self._report = report
 
-    def analyzeData(self):
+    def trainData(self):
         self.d = pd.DataFrame(self._report)
         self.X = np.array(self.d.iloc[:, 1: 2]).reshape(-1,1)
         self.y = np.array(self.d.iloc[:,3:4]).reshape(-1, 1)
