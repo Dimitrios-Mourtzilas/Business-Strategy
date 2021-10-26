@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
-
+from src.GUI.DataAnalysisWindow import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -27,7 +27,6 @@ class Ui_Form(object):
         self.user_label.setPixmap(self.user_icon)
         self.user_label.setObjectName("user_label")
         self.horizontalLayout.addWidget(self.user_label)
-        self.horizontalLayout.addWidget(self.user_icon)
         self.home_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.home_button.setObjectName("home_button")
         self.horizontalLayout.addWidget(self.home_button)
@@ -68,24 +67,19 @@ class Ui_Form(object):
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setGeometry(QtCore.QRect(240, 110, 651, 361))
         self.widget.setObjectName("widget")
-
-
         self.home_frame = QtWidgets.QFrame(self.widget)
         self.home_frame.setGeometry(QtCore.QRect(0, 0, 651, 361))
         self.home_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.home_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.home_frame.setObjectName("home_frame")
-        self.home_button.clicked.connect(self.openFrame(self.home_frame))
-
-
+        self.home_button.clicked.connect(self.gotoHomeFrame)
         self.files_frame = QtWidgets.QFrame(self.home_frame)
         self.files_frame.setGeometry(QtCore.QRect(0, 0, 651, 361))
         self.files_frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.files_frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.files_frame.setObjectName("files_frame")
-
-
-
+        self.file_button.clicked.connect(self.gotoFileFrame)
+        self.data_analysis_button.clicked.connect(self.gotoDataAnalysisFrame)
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.files_frame)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(150, 310, 371, 41))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -98,13 +92,6 @@ class Ui_Form(object):
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton)
-        if self.home_button.clicked:
-            self.gotoHomeFrame()
-
-        elif self.file_button.clicked:
-            self.gotoFileFrame()
-        
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -121,9 +108,7 @@ class Ui_Form(object):
         self.log_out_button.setText(_translate("Form", "Log out"))
         self.pushButton.setText(_translate("Form", "..."))
     
-    def openFrame(self,parentFrame=None):
-        parentFrame.show()
-
+   
 
     def gotoFileFrame(self):
         self.files_frame.show()
@@ -131,14 +116,20 @@ class Ui_Form(object):
     def gotoHomeFrame(self):
         self.home_frame.show()
     
+    def gotoDataAnalysisFrame(self):
+        self.form = QtWidgets.QWidget()
+        self.dataAnalysisWindow = DataAnalysisForm()
+        self.dataAnalysisWindow.setupUi(self.form)
+        self.dataAnalysisWindow.runUi(self.dataAnalysisWindow)
+    
     def runUi(self,Form):
         Form.show()
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Form = QtWidgets.QWidget()
-#     ui = Ui_Form()
-#     ui.setupUi(Form)
-#     Form.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

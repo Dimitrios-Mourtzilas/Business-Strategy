@@ -9,11 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from QtWidgets import QMainWindow
 
-class Ui_Form(QMainWindow):
+class Ui_Form(object):
 
     _dialog  = None
+    _rcount =0 
+    _ccount =0 
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -58,10 +59,15 @@ class Ui_Form(QMainWindow):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         self.pushButton_2.clicked.connect(self.closeWindow)
-        self.pushButton.clicked.connect(self.writeElementToTable)
-    
-    def writeElementToTable(self):
-        self.file_t 
+
+
+    """
+    Here lies the code for storing the attributes of the 
+    file inside the table
+    """
+
+
+
 
     def closeWindow(self,Form):
         Form.close()
