@@ -9,9 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from QtWidgets import QMainWindow
 
-
-class Ui_Form(object):
+class Ui_Form(QMainWindow):
 
     _dialog  = None
 
@@ -57,12 +57,20 @@ class Ui_Form(object):
         self.openFileButton.clicked.connect(self.openFile)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        self.pushButton_2.clicked.connect(self.closeWindow)
+        self.pushButton.clicked.connect(self.writeElementToTable)
+    
+    def writeElementToTable(self):
+        self.file_t 
+
+    def closeWindow(self,Form):
+        Form.close()
+            
     
     def openFile(self):
         self._dialog = QtWidgets.QFileDialog()
-        self._dialog.setWindowTitle("File selection")
-        
-        self._dialog.show()
+        self.file_name = QtWidgets.QFileDialog.getOpenFileName(self._dialog,"Open file")
+        self.lineEdit.setText(self.file_name[0])
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
