@@ -87,7 +87,7 @@ class LoginWindow(QMainWindow):
             self.database = Database()
             if not self.database.establishConnection(self.user):
                 raise Error
-
+            
             self.window = QMainWindow()
             self.mainWindow = Ui_Form()
             self.mainWindow.setupUi(self.window)

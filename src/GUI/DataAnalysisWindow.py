@@ -11,11 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.Dialog import *
 
-class DataAnalysisForm(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(789, 536)
-        self.frame = QtWidgets.QFrame(Form)
+class DataAnalysisForm(QWidget):
+
+    def __init__(self):
+        super().__init__()
+
+    def setupUi(self):
+        self.setObjectName("Form")
+        self.resize(789, 536)
+        self.frame = QtWidgets.QFrame()
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -40,16 +44,16 @@ class DataAnalysisForm(object):
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(0)
         self.tableWidget.setRowCount(0)
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
         self.start_analysis_button.clicked.connect(self.checkForNone)
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        self.setWindowTitle(_translate("Form", "Form"))
         self.start_analysis_button.setText(_translate("Form", "Start analysis"))
     
-    def runUi(self,Form):
-        Form.show()
+    def runUi(self):
+        self.show()
     
     def checkForNone(self):
         if self.tableWidget.columnCount() == 0:
