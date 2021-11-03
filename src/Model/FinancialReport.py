@@ -1,5 +1,3 @@
-import json
-
 import pandas as pd
 class FinancialReport:
 
@@ -41,8 +39,8 @@ class FinancialReport:
     def setNetAssets(self):
         self.netAssets = self._file['Net assets']
 
-    def getToJson(self):
-        return json.dumps(
+    def getJson(self):
+        return dict(
             {'report_id':self.reportId,
              'company_id':self.companyId,
              'starting_period':self.starting,

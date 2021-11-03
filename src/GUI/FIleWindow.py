@@ -24,38 +24,51 @@ class Ui_Form(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.frame)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(180, 80, 551, 31))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
+
         self.lineEdit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
         self.lineEdit.setObjectName("lineEdit")
+
         self.horizontalLayout.addWidget(self.lineEdit)
+
         self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton.setObjectName("pushButton")
+
         self.horizontalLayout.addWidget(self.pushButton)
+
         self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.pushButton_2.setObjectName("pushButton_2")
+
         self.horizontalLayout.addWidget(self.pushButton_2)
+
         self.file_table = QtWidgets.QTableWidget(self.frame)
         self.file_table.setGeometry(QtCore.QRect(290, 130, 311, 441))
         self.file_table.setObjectName("tableWidget")
         self.file_table.setColumnCount(3)
         self.file_table.setRowCount(0)
+
         item = QtWidgets.QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         self.file_table.setHorizontalHeaderItem(2, item)
+
         self.lineEdit.setEnabled(False)
+
         self.pushButton.setStyleSheet('color:green')
         self.pushButton_2.setStyleSheet('color:red')
+        
         self.openFileButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
         self.openFileButton.setText("Open file")
         self.openFileButton.clicked.connect(self.openFile)
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
         self.pushButton_2.clicked.connect(self.closeWindow)
@@ -65,9 +78,6 @@ class Ui_Form(object):
     Here lies the code for storing the attributes of the 
     file inside the table
     """
-
-
-
 
     def closeWindow(self,Form):
         Form.close()

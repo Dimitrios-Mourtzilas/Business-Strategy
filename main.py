@@ -19,14 +19,17 @@ from src.GUI.LoginWindow import *
 import sys
 from PyQt5.QtWidgets import QApplication
 import sys
-
+from src.Algorithm.DecisionTree import *
 def main():
-
-    app = QApplication(sys.argv)
-    loginWindow = LoginWindow()
-    loginWindow.setupUi()
-    loginWindow.runUi()
-    exit(app.exec())
+    report = 'company_financial_statement.xlsx'
+    dec = DecisionTree()
+    dec.setReport(report)
+    print(dec.trainData())
+    # app = QApplication(sys.argv)
+    # loginWindow = LoginWindow()
+    # loginWindow.setupUi()
+    # loginWindow.runUi()
+    # exit(app.exec())
 
 if __name__ == "__main__":
     main()

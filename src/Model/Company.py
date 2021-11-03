@@ -5,7 +5,6 @@ class Company:
 
     _employee = None
     _product = None
-    _product_list =[]
     def setCompName(self,compName):
         self.compName = compName
 
@@ -15,12 +14,6 @@ class Company:
     def setProduct(self,product):
         self._product=product
 
-    def setProducts(self,products):
-        if not isinstance(products,list):
-            return "list excepted"
-        else:
-            for value in products:
-                self._product_list.append(value)
 
     def getProducts(self):
         return self._product_list
