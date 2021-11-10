@@ -9,13 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QFileDialog,QDialog
+from src.GUI.DialogWindow import *
 class Ui_Form(object):
-
-    _dialog  = None
-    _rcount =0 
-    _ccount =0 
-
+    
+    _row = 0
+    _col = 0
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(949, 691)
@@ -24,80 +23,82 @@ class Ui_Form(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-
-        self.horizontalLayoutWidget = QtWidgets.QWidget(self.frame)
-        self.horizontalLayoutWidget.setGeometry(QtCore.QRect(180, 80, 551, 31))
-        self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-
-        self.lineEdit = QtWidgets.QLineEdit(self.horizontalLayoutWidget)
+        self.verticalFrame = QtWidgets.QFrame(self.frame)
+        self.verticalFrame.setGeometry(QtCore.QRect(320, 280, 271, 149))
+        self.verticalFrame.setObjectName("verticalFrame")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.lineEdit = QtWidgets.QLineEdit(self.verticalFrame)
         self.lineEdit.setObjectName("lineEdit")
-
-        self.horizontalLayout.addWidget(self.lineEdit)
-
-        self.pushButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton.setObjectName("pushButton")
-
-        self.horizontalLayout.addWidget(self.pushButton)
-
-        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.pushButton_2.setObjectName("pushButton_2")
-
-        self.horizontalLayout.addWidget(self.pushButton_2)
-
-        self.file_table = QtWidgets.QTableWidget(self.frame)
-        self.file_table.setGeometry(QtCore.QRect(290, 130, 311, 441))
-        self.file_table.setObjectName("tableWidget")
-        self.file_table.setColumnCount(3)
-        self.file_table.setRowCount(0)
-
-        item = QtWidgets.QTableWidgetItem()
-        self.file_table.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.file_table.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.file_table.setHorizontalHeaderItem(2, item)
-
         self.lineEdit.setEnabled(False)
-
-        self.pushButton.setStyleSheet('color:green')
-        self.pushButton_2.setStyleSheet('color:red')
-        
-        self.openFileButton = QtWidgets.QPushButton(self.horizontalLayoutWidget)
-        self.openFileButton.setText("Open file")
-        self.openFileButton.clicked.connect(self.openFile)
+        self.verticalLayout.addWidget(self.lineEdit)
+        self.pushButton_3 = QtWidgets.QPushButton(self.verticalFrame)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.verticalLayout.addWidget(self.pushButton_3)
+        self.horizontalFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.horizontalFrame.setObjectName("horizontalFrame")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout.addWidget(self.pushButton)
+        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.verticalLayout.addWidget(self.horizontalFrame)
+        self.horizontalFrame1 = QtWidgets.QFrame(self.frame)
+        self.horizontalFrame1.setGeometry(QtCore.QRect(300, 110, 321, 131))
+        self.horizontalFrame1.setObjectName("horizontalFrame1")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalFrame1)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.tableWidget = QtWidgets.QTableWidget(self.horizontalFrame1)
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.horizontalLayout_2.addWidget(self.tableWidget)
+        self.pushButton_3.clicked.connect(self.putTableItem)
+        self.pushButton_2.clicked.connect(self.openDialog)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        self.pushButton_2.clicked.connect(self.closeWindow)
-
-
-    """
-    Here lies the code for storing the attributes of the 
-    file inside the table
-    """
-
-    def closeWindow(self,Form):
-        Form.close()
-            
     
-    def openFile(self):
-        self._dialog = QtWidgets.QFileDialog()
-        self.file_name = QtWidgets.QFileDialog.getOpenFileName(self._dialog,"Open file")
-        self.lineEdit.setText(self.file_name[0])
+    def openFileDialog(self):
+        self.fileName = QFileDialog().getOpenFileName(None,"Open file")
+        self.lineEdit.setText(self.fileName[0])
+        self.lineEdit.setToolTip("This content cannot be edited")
+        return self.fileName
+    
+    def openDialog(self):
+        self.dialog = Ui_Dialog()
+        self.dialog.setupUi(windowTitle="Wanring message",labelText="File will be erased. Are you sure you want to proceed ?")
+        
+    
+    def putTableItem(self):
+        self.fileContent = self.openFileDialog()
+        while self._col <2:
+            self.tableWidget.setItem(self._row,self._col,QtWidgets.QTableWidgetItem(self.fileContent[0]))
+            self._col+=1
+        self._row+=1
+    
+    
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
+        self.pushButton_3.setText(_translate("Form", "Open file"))
         self.pushButton.setText(_translate("Form", "Import file"))
         self.pushButton_2.setText(_translate("Form", "Cancel"))
-        item = self.file_table.horizontalHeaderItem(0)
+        item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Recent files"))
-        item = self.file_table.horizontalHeaderItem(1)
+        item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("Form", "Date uploaded"))
-        item = self.file_table.horizontalHeaderItem(2)
+        item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Size"))
 
 

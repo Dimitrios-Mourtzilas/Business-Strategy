@@ -2,7 +2,7 @@ import sqlite3
 
 from src.Model.Product import Product
 from src.Model.User import *
-
+from hashlib import md5
 
 class Database:
     _con = None
@@ -86,4 +86,5 @@ class Database:
     def fetchAllUsers(self):
         self._cursor.execute('select *from user')
         return self._cursor.fetchall()
+    
 

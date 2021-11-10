@@ -20,16 +20,28 @@ import sys
 from PyQt5.QtWidgets import QApplication
 import sys
 from src.Algorithm.DecisionTree import *
+from src.Model.Database import *
+from src.Model.User import *
+from src.Model.Company import *
+from src.Model.Employee import *
 def main():
-    report = 'company_financial_statement.xlsx'
-    dec = DecisionTree()
-    dec.setReport(report)
-    print(dec.trainData())
-    # app = QApplication(sys.argv)
-    # loginWindow = LoginWindow()
-    # loginWindow.setupUi()
-    # loginWindow.runUi()
-    # exit(app.exec())
+
+    user = User()
+    user.setUserName("root")
+    user.setUserPassword("root")
+    database =Database()
+    if not database.establishConnection(user):
+        exit(1)
+    employee = Employee()
+    employee.setEmpId(2806)
+    employee.setEmpName("Dimtirios")
+    employee.setEmpSurname("Mourtzilas")
+    employee.setEmpSalary(1900)
+    employee.setEmpAge(22)
+    employee.setEmpEmail("some@gmail.com")
+    employee.setEmpPhone("6975123265")
+    database.saveEmployee(employee)
+
 
 if __name__ == "__main__":
     main()

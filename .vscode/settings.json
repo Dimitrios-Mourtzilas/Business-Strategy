@@ -1,4 +1,11 @@
 {
-    "sqltools.connections": [],
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Project",
+            "database": "${workspaceFolder:Business-Strategy}/business_model.db"
+        }
+    ],
     "sqltools.useNodeRuntime": true
 }
