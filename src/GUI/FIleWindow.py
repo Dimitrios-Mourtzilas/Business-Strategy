@@ -9,12 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog,QDialog
-from src.GUI.DialogWindow import *
+import os,datetime,time
 class Ui_Form(object):
-    
-    _row = 0
-    _col = 0
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(949, 691)
@@ -23,83 +19,117 @@ class Ui_Form(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.verticalFrame = QtWidgets.QFrame(self.frame)
-        self.verticalFrame.setGeometry(QtCore.QRect(320, 280, 271, 149))
-        self.verticalFrame.setObjectName("verticalFrame")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame)
+        self.verticalFrame_3 = QtWidgets.QFrame(self.frame)
+        self.verticalFrame_3.setGeometry(QtCore.QRect(250, 50, 431, 149))
+        self.verticalFrame_3.setObjectName("verticalFrame_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame_3)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.lineEdit = QtWidgets.QLineEdit(self.verticalFrame)
-        self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit.setEnabled(False)
-        self.verticalLayout.addWidget(self.lineEdit)
-        self.pushButton_3 = QtWidgets.QPushButton(self.verticalFrame)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.verticalLayout.addWidget(self.pushButton_3)
-        self.horizontalFrame = QtWidgets.QFrame(self.verticalFrame)
+        self.file_name_label = QtWidgets.QLineEdit(self.verticalFrame_3)
+        self.file_name_label.setObjectName("file_name_label")
+        self.verticalLayout.addWidget(self.file_name_label)
+        self.open_file_button = QtWidgets.QPushButton(self.verticalFrame_3)
+        self.open_file_button.setObjectName("open_file_button")
+        self.verticalLayout.addWidget(self.open_file_button)
+        self.horizontalFrame = QtWidgets.QFrame(self.verticalFrame_3)
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.import_file_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.import_file_button.setObjectName("import_file_button")
+        self.horizontalLayout.addWidget(self.import_file_button)
+        self.cancel_button = QtWidgets.QPushButton(self.horizontalFrame)
+        self.cancel_button.setObjectName("cancel_button")
+        self.horizontalLayout.addWidget(self.cancel_button)
         self.verticalLayout.addWidget(self.horizontalFrame)
         self.horizontalFrame1 = QtWidgets.QFrame(self.frame)
-        self.horizontalFrame1.setGeometry(QtCore.QRect(300, 110, 321, 131))
+        self.horizontalFrame1.setGeometry(QtCore.QRect(150, 260, 601, 291))
+        self.horizontalFrame1.setStyleSheet("")
         self.horizontalFrame1.setObjectName("horizontalFrame1")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalFrame1)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.tableWidget = QtWidgets.QTableWidget(self.horizontalFrame1)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(3)
-        self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        self.horizontalLayout_2.addWidget(self.tableWidget)
-        self.pushButton_3.clicked.connect(self.putTableItem)
-        self.pushButton_2.clicked.connect(self.openDialog)
-
+        self.verticalFrame = QtWidgets.QFrame(self.horizontalFrame1)
+        self.verticalFrame.setStyleSheet("")
+        self.verticalFrame.setObjectName("verticalFrame")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalFrame)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.file_label = QtWidgets.QLabel(self.verticalFrame)
+        self.file_label.setStyleSheet("")
+        self.file_label.setObjectName("file_label")
+        self.verticalLayout_2.addWidget(self.file_label)
+        self.size_label = QtWidgets.QLabel(self.verticalFrame)
+        self.size_label.setObjectName("size_label")
+        self.verticalLayout_2.addWidget(self.size_label)
+        self.date_added_label = QtWidgets.QLabel(self.verticalFrame)
+        self.date_added_label.setObjectName("date_added_label")
+        self.verticalLayout_2.addWidget(self.date_added_label)
+        self.horizontalLayout_2.addWidget(self.verticalFrame)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.verticalFrame_2 = QtWidgets.QFrame(self.horizontalFrame1)
+        self.verticalFrame_2.setObjectName("verticalFrame_2")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalFrame_2)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.file_label_text = QtWidgets.QLabel(self.verticalFrame_2)
+        self.file_label_text.setText("")
+        self.file_label_text.setObjectName("file_label_text")
+        self.verticalLayout_3.addWidget(self.file_label_text)
+        self.size_label_text = QtWidgets.QLabel(self.verticalFrame_2)
+        self.size_label_text.setText("")
+        self.size_label_text.setObjectName("size_label_text")
+        self.verticalLayout_3.addWidget(self.size_label_text)
+        self.date_added_label_text = QtWidgets.QLabel(self.verticalFrame_2)
+        self.date_added_label_text.setText("")
+        self.date_added_label_text.setObjectName("date_added_label_text")
+        self.verticalLayout_3.addWidget(self.date_added_label_text)
+        self.horizontalLayout_2.addWidget(self.verticalFrame_2)
+        self.file_name_label.setEnabled(False)
+        self.open_file_button.clicked.connect(self.openFileDialog)
+        self.import_file_button.clicked.connect(self.addFileProps)
+        self.cancel_button.clicked.connect(self.removeFileProps)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
     
+    def removeFileProps(self):
+        if self.file_name_label.text().__eq__(""):
+            self.file_not_found_label= QtWidgets.QLabel(None,self.frame)
+            self.file_not_found_label.setText("No file is imported. Please select a file")
+            self.file_not_found_label.setStyleSheet('color:red')
+            self.file_not_found_label.move(self.file_name_label.width()-80, self.file_name_label.height()+13)
+            self.file_not_found_label.show()
+            """This place will include code for freezing screen for a while"""
+        else:
+                
+            self.file_name_label.setText("")
+            self.file_label_text.setText("")
+            self.size_label_text.setText("")
+            self.date_added_label_text.setText("")
+            self.success_label = QtWidgets.QLabel("File successfully removed",self.frame)
+            self.success_label.setStyleSheet('color:green')
+            self.success_label.move(self.file_name_label.width()-80, self.file_name_label.height()+13)
+            #Same issue, same code must be place with if statement above. Plus find a way to disappear text for a while
+            self.success_label.show()
+            
+
+    def addFileProps(self):
+        self.file_size = os.path.getsize(self.fileName[0])
+        self.file_label_text.setText(self.fileName[0])
+        self.size_label_text.setText(str(self.file_size))
+        self.date_added_label_text.setText(str(datetime.datetime.now()))
+
     def openFileDialog(self):
-        self.fileName = QFileDialog().getOpenFileName(None,"Open file")
-        self.lineEdit.setText(self.fileName[0])
-        self.lineEdit.setToolTip("This content cannot be edited")
-        return self.fileName
-    
-    def openDialog(self):
-        self.dialog = Ui_Dialog()
-        self.dialog.setupUi(windowTitle="Wanring message",labelText="File will be erased. Are you sure you want to proceed ?")
-        
-    
-    def putTableItem(self):
-        self.fileContent = self.openFileDialog()
-        while self._col <2:
-            self.tableWidget.setItem(self._row,self._col,QtWidgets.QTableWidgetItem(self.fileContent[0]))
-            self._col+=1
-        self._row+=1
-    
-    
+        self.fileName =QtWidgets.QFileDialog().getOpenFileName(None,"Open file")
+        self.file_name_label.setText(self.fileName[0])
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton_3.setText(_translate("Form", "Open file"))
-        self.pushButton.setText(_translate("Form", "Import file"))
-        self.pushButton_2.setText(_translate("Form", "Cancel"))
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Recent files"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Date uploaded"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Size"))
+        self.open_file_button.setText(_translate("Form", "Open file"))
+        self.import_file_button.setText(_translate("Form", "Import file"))
+        self.cancel_button.setText(_translate("Form", "Cancel"))
+        self.file_label.setText(_translate("Form", "FIle:"))
+        self.size_label.setText(_translate("Form", "Size:"))
+        self.date_added_label.setText(_translate("Form", "Date added:"))
 
 
 if __name__ == "__main__":
