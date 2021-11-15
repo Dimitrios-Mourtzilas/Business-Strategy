@@ -16,8 +16,8 @@
   <widget class="QFrame" name="user_menu">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>210</y>
+     <x>60</x>
+     <y>190</y>
      <width>160</width>
      <height>281</height>
     </rect>
@@ -195,25 +195,6 @@ background-color:red;
     <string notr="true">QLabel{
 	background-color: rgb(115, 210, 22);
 }</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="user_label">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>100</y>
-     <width>91</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
    </property>
    <property name="text">
     <string/>

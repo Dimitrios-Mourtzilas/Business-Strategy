@@ -40,6 +40,10 @@ class Database:
 
         self._con.commit()
 
+    def runRandomQuery(self,query=""):
+        self.query = query
+        self._cursor.execute(self.query)
+        
     def saveCompany(self, company):
         if company is None:
             return

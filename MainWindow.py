@@ -15,13 +15,11 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(914, 591)
+        Form.setFixedSize(Form.width(),Form.height())
         self.user_menu = QtWidgets.QFrame(Form)
         self.user_menu.setGeometry(QtCore.QRect(50, 210, 160, 281))
         self.user_menu.setStyleSheet("")
         self.user_menu.setObjectName("user_menu")
-        self.opacity = QtWidgets.QGraphicsOpacityEffect()
-        self.opacity.setOpacity(0)
-        self.user_menu.setGraphicsEffect(self.opacity)
         self.verticalLayout = QtWidgets.QVBoxLayout(self.user_menu)
         self.verticalLayout.setObjectName("verticalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -81,7 +79,8 @@ class Ui_Form(object):
         self.user_label.setStyleSheet("")
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
-
+        self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
+        
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -94,7 +93,7 @@ class Ui_Form(object):
         self.home_button.setText(_translate("Form", "Home"))
         self.file_analysis_button.setText(_translate("Form", "File analysis"))
         self.data_vis_button.setText(_translate("Form", "Data visualization"))
-        self.about_button.setText(_translate("Form", "Abput"))
+        self.about_button.setText(_translate("Form", "About"))
 
 
 if __name__ == "__main__":
