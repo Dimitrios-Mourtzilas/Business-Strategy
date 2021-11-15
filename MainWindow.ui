@@ -13,51 +13,146 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QFrame" name="horizontalFrame">
+  <widget class="QFrame" name="user_menu">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>30</y>
-     <width>811</width>
-     <height>80</height>
+     <x>50</x>
+     <y>210</y>
+     <width>160</width>
+     <height>281</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="user_icon">
-      <property name="styleSheet">
-       <string notr="true">
-image: url(:/image-header/Downloads/icons8-user-30.png);
-
-QLabel hover user_menu{
-background-color:red
-
-
-}</string>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="account_button">
       <property name="text">
-       <string/>
+       <string>Account</string>
       </property>
      </widget>
     </item>
     <item>
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="settings_button">
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="log_out_button">
+      <property name="text">
+       <string>Log out</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QFrame" name="horizontalFrame">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>100</y>
+     <width>491</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
      <widget class="QPushButton" name="home_button">
+      <property name="styleSheet">
+       <string notr="true">QPushButton:hover {
+background-color:red;
+}</string>
+      </property>
       <property name="text">
        <string>Home</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="file_button">
-      <property name="text">
-       <string>FIles</string>
+     <spacer name="horizontalSpacer_5">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-     </widget>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="data_analysis_button">
+     <spacer name="horizontalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="file_analysis_button">
       <property name="text">
-       <string>Data analysis</string>
+       <string>File analysis</string>
       </property>
      </widget>
     </item>
@@ -71,85 +166,58 @@ background-color:red
     <item>
      <widget class="QPushButton" name="about_button">
       <property name="text">
-       <string>About</string>
+       <string>Abput</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QFrame" name="user_menu">
+  <widget class="QTimeEdit" name="timeEdit">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>110</y>
-     <width>160</width>
-     <height>361</height>
+     <x>790</x>
+     <y>10</y>
+     <width>118</width>
+     <height>26</height>
     </rect>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QFrame {
-opacity:0px;
-}
-
-</string>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="account_button">
-      <property name="text">
-       <string>Account</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="settings_button">
-      <property name="text">
-       <string>Settings</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="log_out_button">
-      <property name="text">
-       <string>Log out</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
-  <widget class="QFrame" name="frame">
+  <widget class="QLabel" name="logo_label">
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>110</y>
-     <width>651</width>
+     <y>190</y>
+     <width>521</width>
      <height>291</height>
     </rect>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	background-color: rgb(115, 210, 22);
+}</string>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
+   <property name="text">
+    <string/>
    </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>18</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>History</string>
-    </property>
-   </widget>
+  </widget>
+  <widget class="QLabel" name="user_label">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>100</y>
+     <width>91</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>

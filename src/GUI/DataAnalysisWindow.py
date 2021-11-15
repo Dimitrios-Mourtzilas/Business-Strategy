@@ -9,9 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from src.GUI.Dialog import *
 
-class DataAnalysisForm(QWidget):
+class DataAnalysisForm(QtWidgets.QWidget):
 
     def __init__(self):
         super().__init__()

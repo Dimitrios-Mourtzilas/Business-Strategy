@@ -113,9 +113,14 @@ class Ui_Form(object):
     def addFileProps(self):
         self.file_size = os.path.getsize(self.fileName[0])
         self.file_label_text.setText(self.fileName[0])
-        self.size_label_text.setText(str(self.file_size))
+        magnitude = 0
+        while abs(self.file_size) >= 1000:
+            magnitude += 1
+            self.file_size /= 1000.0
+        self.size_label_text.setText(str('{}{}'.format('{:f}'.format(self.file_size).rstrip('0').rstrip('.'), ['', 'K', 'M', 'B', 'T'][magnitude])))
         self.date_added_label_text.setText(str(datetime.datetime.now()))
-
+    
+    
     def openFileDialog(self):
         self.fileName =QtWidgets.QFileDialog().getOpenFileName(None,"Open file")
         self.file_name_label.setText(self.fileName[0])
