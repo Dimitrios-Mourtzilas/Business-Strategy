@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from src.GUI.LoginWindow import *
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -80,6 +80,7 @@ class Ui_Form(object):
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
         self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
+        self.log_out_button.clicked.connect(self.logout)
         
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -95,12 +96,20 @@ class Ui_Form(object):
         self.data_vis_button.setText(_translate("Form", "Data visualization"))
         self.about_button.setText(_translate("Form", "About"))
 
+    def logout(self):
+        loginWindow = LoginWindow()
+        loginWindow.setupUi()
+        loginWindow.runUi()
+        Form.close()
+    
+    def runUi(self,Form):
+        Form.show()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Form = QtWidgets.QWidget()
+#     ui = Ui_Form()
+#     ui.setupUi(Form)
+#     Form.show()
+#     sys.exit(app.exec_())

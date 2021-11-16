@@ -40,10 +40,10 @@ class Database:
 
         self._con.commit()
 
-    def runRandomQuery(self,query=""):
+    def runRandomQuery(self,query):
         self.query = query
         self._cursor.execute(self.query)
-        
+
     def saveCompany(self, company):
         if company is None:
             return
@@ -87,8 +87,10 @@ class Database:
 
             self._con.commit()
 
-    def fetchAllUsers(self):
-        self._cursor.execute('select *from user')
-        return self._cursor.fetchall()
-    
+    def fetchUser(self):
+        return self._cursor.execute('select *form user ').fetchone()
 
+    # def fetchAllUsers(self):
+    #     self._cursor.execute('select *from user')
+    #     return self._cursor.fetchall()
+    

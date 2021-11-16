@@ -10,7 +10,7 @@ import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QLabel
-from src.GUI.MainWindow import Ui_Form
+from MainWindow import *
 from src.Model.Database import *
 from time import sleep
 from src.Model.User import *
@@ -101,7 +101,7 @@ class LoginWindow(QMainWindow):
                 self.error_label = QLabel("Bad connection due to invalid credentials")
                 self.error_label.setStyleSheet("color:red")
                 self.verticalLayout.layout().addWidget(self.error_label)
-                  
+
   
 
     def clicked(self, count):
