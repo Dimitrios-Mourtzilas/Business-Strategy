@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.Database import *
 from src.Model.User import *
 class SettingsWindow(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form,connection):
         Form.setObjectName("Form")
         Form.resize(729, 527)
         self.account_label = QtWidgets.QLabel(Form)
@@ -95,35 +95,34 @@ class SettingsWindow(object):
         self.horizontalLayout_4.addWidget(self.cancel_button)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem2)
-        self.delete_account_button.clicked.connect(self.deleteAccount)
+        self.callableDeleteAccount = lambda: self.deleteAccount(connection)
+        self.delete_account_button.clicked.connect(self.callableDeleteAccount)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
     
-    def printUserDetails(self,user):
-        self.display_name_text.setText(user.getUserName())
-        self.full_name_text.setText(user.getUserName())
-        self.phone_number_text.setText(user.getUserPhoneNumber())
-        self.email_address_text.setText(user.getUserEmailAddress())
+    # def printUserDetails(self):
+    #     self.display_name_text.setText(user.getUserName())
+    #     self.full_name_text.setText(user.getUserName())
+    #     self.phone_number_text.setText(user.getUserPhoneNumber())
+    #     self.email_address_text.setText(user.getUserEmailAddress())
 
     def runUi(self,Form):
         Form.show()
 
-    def deleteAccount(self):
-        self.flag = 0
-        try:
-            if not self.database.establishConnection(user):
-                raise Exception('Could not connect to database')
-                self.user_data = self.database.fetchUser()
-                self.query = 'delete from user where user_id = '.join(str(user_data[0]))
-                if not self.database.runRandomQuery(self.query):
-                    print("Query could not be executed")                
-                else:
-                    print("Sucess")
+    # def deleteAccount(self,connection):
+    #     self.flag = 0
+    #     try:
+    #         if not isinstance(connection,Database):
+    #             print("Error")
+    #             return
+    #         self.database = connection
+    #         self.query = 'delete from user'
+    #         if not self.database.runRandomQuery(self.query):
+    #             raise Exception('Query coukd not execute')              
+    #     except Exception as e:
+    #         print(e)
 
 
-        except Exception as e:
-            print(e)
-    
     def resetChanges(self):
         self.display_name_text.setText("")
         self.full_name_text.setText("")

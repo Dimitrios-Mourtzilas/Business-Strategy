@@ -16,7 +16,6 @@ from src.GUI.LoginWindow import *
 # from sklearn.tree import DecisionTreeRegressor
 # from sklearn.metrics import accuracy_score
 # import matplotlib.pyplot as plt
-import sys
 from PyQt5.QtWidgets import QApplication
 import sys
 from src.Algorithm.DecisionTree import *

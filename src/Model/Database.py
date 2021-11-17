@@ -1,4 +1,5 @@
 import sqlite3
+from src.Model.File import File
 
 from src.Model.Product import Product
 from src.Model.User import *
@@ -12,6 +13,7 @@ class Database:
         self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
 
+    
     def establishConnection(self,user):
         self.user = user
         self.userName = self.user.getUserName()
@@ -21,7 +23,10 @@ class Database:
             if self.userName.__eq__(values[0]) and self.userPassword.__eq__(values[1]):
                 return True
         return False
-
+    
+    def getConnection(self):
+        return self
+ 
     def fetchAllEmployees(self):
         self._cursor.execute("select *from employee")
         return self._cursor.fetchall()
@@ -86,11 +91,22 @@ class Database:
                     values['product_sales'], values['turnover'], values['fixed_costs'], values['net_assets']))
 
             self._con.commit()
+    
+    def saveFiles(self,file):
+        if not isinstance(file,File):
+            return
+        self.file = file
+        for values in self.file.getJson():
+            self._cursor.execute("insert into files"+
+            "(file_nane,file_path,file_size,file_added)"+
+            "values(?,?,?,?)",(values['file_name'],values['file_size'],values['file_path'],values['date_added']))
+        self._cursor.commit()
+    
+    def fetchAllFiles(self):
+        return self._cursor.execute("select *from files").fetchall()
+
 
     def fetchUser(self):
         return self._cursor.execute('select *form user ').fetchone()
 
-    # def fetchAllUsers(self):
-    #     self._cursor.execute('select *from user')
-    #     return self._cursor.fetchall()
     

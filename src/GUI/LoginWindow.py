@@ -106,7 +106,8 @@ class LoginWindow(QMainWindow):
             
             self.window = QMainWindow()
             self.mainWindow = Ui_Form()
-            self.mainWindow.setupUi(self.window)
+            self.connection = self.database.getConnection()
+            self.mainWindow.setupUi(self.window,self.connection)
             self.mainWindow.runUi(self.window)
             self.close()
 
