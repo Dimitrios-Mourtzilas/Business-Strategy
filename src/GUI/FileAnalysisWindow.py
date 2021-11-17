@@ -11,10 +11,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from datetime import date
+import time
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(789, 536)
+        Form.setFixedSize(761, 511)
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -92,6 +93,8 @@ class Ui_Form(object):
         self.date_added_text.setEnabled(False)
         self.cancel_button.clicked.connect(self.cancelFile)
         self.start_analysis_button.clicked.connect(self.fileAnalysis)
+        self.progressBar.setVisible(False)
+        
 
     def openFileDialog(self):
         self.fileDialog = QtWidgets.QFileDialog()
@@ -102,17 +105,54 @@ class Ui_Form(object):
 
     def cancelFile(self):
         if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
-            print("No file selected")
-            return
+            self.noFileSelectedWindow()
         else:
             self.file_name_text.setText("")
             self.file_size_text.setText("")
             self.date_added_text.setText("")
+
     
     def fileAnalysis(self):
-           if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
+        if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
             print("No file selected")
             return
+        else:
+            self.count =0 
+            while self.count <100:
+                    self.progressBar.show()
+                    self.progressBar.setValue(self.count+25)
+                    self.count+=25
+                    time.sleep(1)
+        if self.progressBar.value() == 100:
+                self.analysisCompletionWindow()
+            
+    
+    def noFileSelectedWindow(self):
+        self.file_error_window = QtWidgets.QDialog()
+        self.file_error_window.setWindowTitle("File error window")
+        self.file_error_label = QtWidgets.QLabel('No file was selected.')
+        self.standard_btns = QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel
+        self.btn_box = QtWidgets.QDialogButtonBox(self.standard_btns)
+        self.ver_layout = QtWidgets.QVBoxLayout()
+        self.file_error_window.setLayout(self.ver_layout)
+        self.btn_box.accepted.connect(self.file_error_window.accept)
+        self.file_error_window.layout().addWidget(self.btn_box)
+        self.file_error_window.layout().addWidget(self.file_error_label)
+        self.file_error_window.show()    
+
+        
+    def analysisCompletionWindow(self):
+        self.warning_window = QtWidgets.QWidget()
+        self.warning_label = QtWidgets.QLabel("Analysis successfully completed",None)
+        self.warning_window.move(self.verticalFrame.width(),self.verticalFrame.height())
+        self.verticallyout = QtWidgets.QVBoxLayout()
+        self.warning_label.setStyleSheet('color:green')
+        self.warning_window.setLayout(self.verticallyout)
+        self.warning_window.layout().addWidget(self.warning_label)
+        self.warning_label.setStyleSheet('color:red')
+        self.warning_window.setFixedSize(260, 100)
+        self.warning_window.show()
+        
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
