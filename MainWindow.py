@@ -10,7 +10,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.LoginWindow import *
-
+from src.GUI.SettingsWindow import *
+import time
+from FileAnalysisWindow import FileAnalysis
+from AboutWindow import *
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -80,11 +83,34 @@ class Ui_Form(object):
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
         self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
-        self.log_out_button.clicked.connect(self.logout)
-        
+        self.log_out_button.clicked.connect(Form.close)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        self.settings_button.clicked.connect(self.openSettings)
+        self.time_label = QtWidgets.QLabel()
+        self.time_label.setText("")
+        self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
+        self.about_button.clicked.connect(self.openAboutWindow)
+    
+    def openAboutWindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.about_window = AboutWindow()
+        self.about_window.setupUi(self.window)
+        self.about_window.runUi(self.window)
+        
+    def openFileAnalysisWindow(self):
+        self.window = QtWidgets.QMainWindow()
+        self.file_analysis_win = FileAnalysis()
+        self.file_analysis_win.setupUi(self.window)
+        self.file_analysis_win.runUi(self.window)
+    
+    def openSettings(self):
+        self.window = QtWidgets.QMainWindow()
+        self.settingsWindow = SettingsWindow()
+        self.settingsWindow.setupUi(self.window)
+        self.settingsWindow.runUi(self.window)
 
+        
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
@@ -95,21 +121,15 @@ class Ui_Form(object):
         self.file_analysis_button.setText(_translate("Form", "File analysis"))
         self.data_vis_button.setText(_translate("Form", "Data visualization"))
         self.about_button.setText(_translate("Form", "About"))
-
-    def logout(self):
-        loginWindow = LoginWindow()
-        loginWindow.setupUi()
-        loginWindow.runUi()
-        Form.close()
     
     def runUi(self,Form):
         Form.show()
 
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Form = QtWidgets.QWidget()
-#     ui = Ui_Form()
-#     ui.setupUi(Form)
-#     Form.show()
-#     sys.exit(app.exec_())
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

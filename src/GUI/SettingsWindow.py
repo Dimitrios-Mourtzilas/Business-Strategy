@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.Database import *
 from src.Model.User import *
-class Ui_Form(object):
+class SettingsWindow(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(729, 527)
@@ -105,6 +105,8 @@ class Ui_Form(object):
         self.phone_number_text.setText(user.getUserPhoneNumber())
         self.email_address_text.setText(user.getUserEmailAddress())
 
+    def runUi(self,Form):
+        Form.show()
 
     def deleteAccount(self):
         self.flag = 0
@@ -144,18 +146,18 @@ class Ui_Form(object):
         self.cancel_button.setText(_translate("Form", "Cancel"))
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    user = User()
-    user.setUserName('Dimitrios')
-    user.setUserPhoneNumber('12345678')
-    user.setUserEmailAddress('some@examples.com')
-    user.setUserPassword('root')
-    ui.setupUi(Form)
-    ui.printUserDetails(user)
-    Form.show()
-    sys.exit(app.exec_())
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Form = QtWidgets.QWidget()
+#     ui = Ui_Form()
+#     user = User()
+#     user.setUserName('Dimitrios')
+#     user.setUserPhoneNumber('12345678')
+#     user.setUserEmailAddress('some@examples.com')
+#     user.setUserPassword('root')
+#     ui.setupUi(Form)
+#     ui.printUserDetails(user)
+#     Form.show()
+#     sys.exit(app.exec_())

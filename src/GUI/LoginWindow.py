@@ -69,6 +69,22 @@ class LoginWindow(QMainWindow):
         self.setStatusBar(self.statusbar)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet('QLineEdit{'+
+        'border:1px groove black;'+
+        'border-radius:4px;'+
+        '}'+
+        ''+
+        'QPushButton:hover{'+
+        'background-color:black;'+
+        'color:white;}'+
+        ''+
+        'QLabel{'+
+        'font-family:verdana;'+
+        'font-size:15px;}'+
+        ''+
+        'QMainWindow{'+
+        'background-color: qlineargradient(spread:pad, x1:0 y1:0, x2:1 y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));}'
+        )
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

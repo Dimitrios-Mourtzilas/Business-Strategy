@@ -172,16 +172,6 @@ background-color:red;
     </item>
    </layout>
   </widget>
-  <widget class="QTimeEdit" name="timeEdit">
-   <property name="geometry">
-    <rect>
-     <x>790</x>
-     <y>10</y>
-     <width>118</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="logo_label">
    <property name="geometry">
     <rect>
@@ -195,6 +185,19 @@ background-color:red;
     <string notr="true">QLabel{
 	background-color: rgb(115, 210, 22);
 }</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>830</x>
+     <y>10</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
    </property>
    <property name="text">
     <string/>
