@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.LoginWindow import *
 from src.GUI.SettingsWindow import *
 import time
-from FileAnalysisWindow import FileAnalysis
+from src.GUI.FileAnalysisWindow import *
 from AboutWindow import *
 class Ui_Form(object):
     def setupUi(self, Form,connection):

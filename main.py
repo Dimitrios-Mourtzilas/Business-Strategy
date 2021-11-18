@@ -24,6 +24,7 @@ from src.Model.User import *
 from src.Model.Company import *
 from src.Model.Employee import *
 from src.GUI.LoginWindow import *
+from src.GUI.MainWindow import *
 def main():
 
     app = QApplication(sys.argv)
