@@ -12,11 +12,19 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from datetime import date
 import time
+<<<<<<< HEAD
 class FileAnalysis(object):
     def setupUi(self, FileAnalysis):
         FileAnalysis.setObjectName("Form")
         FileAnalysis.setFixedSize(761, 511)
         self.frame = QtWidgets.QFrame(FileAnalysis)
+=======
+class Ui_Analysis(object):
+    def setupUi(self, Settings):
+        Settings.setObjectName("Settings")
+        Settings.setFixedSize(761, 511)
+        self.frame = QtWidgets.QFrame(Settings)
+>>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -86,8 +94,13 @@ class FileAnalysis(object):
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.open_file_button.clicked.connect(self.openFileDialog)
+<<<<<<< HEAD
         self.retranslateUi(FileAnalysis)
         QtCore.QMetaObject.connectSlotsByName(FileAnalysis)
+=======
+        self.retranslateUi(Settings)
+        QtCore.QMetaObject.connectSlotsByName(Settings)
+>>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
         self.file_name_text.setEnabled(False)
         self.file_size_text.setEnabled(False)
         self.date_added_text.setEnabled(False)
@@ -165,15 +178,20 @@ class FileAnalysis(object):
         self.start_analysis_button.setText(_translate("Form", "Start analysis"))
         self.file_details_label.setText(_translate("Form", "File details"))
     
+<<<<<<< HEAD
     def runUi(self,Form):
         Form.show()
+=======
+    def runUi(self,Settings):
+        Settings.show()
+>>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    Settings = QtWidgets.QWidget()
+    ui = Ui_Analysis()
+    ui.setupUi(Settings)
+    Settings.show()
     sys.exit(app.exec_())

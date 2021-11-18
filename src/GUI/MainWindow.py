@@ -15,7 +15,7 @@ import time
 from src.GUI.FileAnalysisWindow import *
 from src.GUI.AboutWindow import Ui_About
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form,connection):
         Form.setObjectName("Form")
         Form.resize(914, 591)
         Form.setFixedSize(Form.width(),Form.height())
@@ -86,7 +86,8 @@ class Ui_Form(object):
         self.log_out_button.clicked.connect(Form.close)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
-        self.settings_button.clicked.connect(self.openSettings)
+        self.callableOpenSettings = lambda: self.openSettings(connection)
+        self.settings_button.clicked.connect(self.callableOpenSettings)
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
@@ -101,15 +102,24 @@ class Ui_Form(object):
         
     def openFileAnalysisWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.file_analysis_win = FileAnalysis()
+        self.file_analysis_win = Ui_Analysis()
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
+<<<<<<< HEAD
     def openSettings(self,user):
         self.window = QtWidgets.QMainWindow()
         self.settingsWindow = Ui_Settings()
         self.settingsWindow.setupUi(self.window,user)
+=======
+    def openSettings(self,connection):
+        self.window = QtWidgets.QMainWindow()
+        self.settingsWindow = SettingsWindow()
+        self.settingsWindow.setupUi(self.window,connection)
+>>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
         self.settingsWindow.runUi(self.window)
+    
+    
 
         
     def retranslateUi(self, Form):
