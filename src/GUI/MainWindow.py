@@ -13,7 +13,7 @@ from src.GUI.LoginWindow import *
 from src.GUI.SettingsWindow import *
 import time
 from src.GUI.FileAnalysisWindow import *
-from AboutWindow import *
+from src.GUI.AboutWindow import Ui_About
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -49,8 +49,8 @@ class Ui_Form(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.home_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.home_button.setStyleSheet("QPushButton:hover {\n"
-"background-color:red;\n"
-"}")
+        "background-color:red;\n"
+        "}")
         self.home_button.setObjectName("home_button")
         self.horizontalLayout.addWidget(self.home_button)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -75,7 +75,7 @@ class Ui_Form(object):
         self.logo_label.setObjectName("logo_label")
         self.logo_icon = QtGui.QPixmap('images/app_logo.png')
         self.logo_label.setPixmap(self.logo_icon)
-        self.logo_label.move(320, 150)
+        self.logo_label.move(350, 200)
         self.user_label = QtWidgets.QLabel(Form)
         self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
         self.user_label.setAutoFillBackground(False)
@@ -90,11 +90,12 @@ class Ui_Form(object):
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
-        self.about_button.clicked.connect(self.openAboutWindow)
+        self.openSettingsLambda = lambda:self.openSettings(user)
+        self.about_button.clicked.connect(self.openSettingsLambda)
     
     def openAboutWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.about_window = AboutWindow()
+        self.about_window = Ui_About()
         self.about_window.setupUi(self.window)
         self.about_window.runUi(self.window)
         
@@ -104,10 +105,10 @@ class Ui_Form(object):
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
-    def openSettings(self):
+    def openSettings(self,user):
         self.window = QtWidgets.QMainWindow()
-        self.settingsWindow = SettingsWindow()
-        self.settingsWindow.setupUi(self.window)
+        self.settingsWindow = Ui_Settings()
+        self.settingsWindow.setupUi(self.window,user)
         self.settingsWindow.runUi(self.window)
 
         
