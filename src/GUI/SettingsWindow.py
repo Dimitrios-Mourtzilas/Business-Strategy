@@ -78,7 +78,7 @@ class SettingsWindow(object):
         self.delete_account_label = QtWidgets.QLabel(Form)
         self.delete_account_label.setGeometry(QtCore.QRect(60, 270, 111, 17))
         self.delete_account_label.setObjectName("delete_account_label")
-        self.delete_account_button.clicked.connect(self.deleteAccount)
+        # self.delete_account_button.clicked.connect(self.deleteAccount)
         self.horizontalLayoutWidget_4 = QtWidgets.QWidget(Form)
         self.horizontalLayoutWidget_4.setGeometry(QtCore.QRect(230, 410, 251, 80))
         self.horizontalLayoutWidget_4.setObjectName("horizontalLayoutWidget_4")

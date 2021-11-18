@@ -101,7 +101,7 @@ class Ui_Form(object):
         
     def openFileAnalysisWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.file_analysis_win = FileAnalysis()
+        self.file_analysis_win = Ui_Analysis()
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
