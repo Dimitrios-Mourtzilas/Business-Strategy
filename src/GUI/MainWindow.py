@@ -14,12 +14,13 @@ from src.GUI.SettingsWindow import *
 import time
 from src.GUI.FileAnalysisWindow import *
 from src.GUI.AboutWindow import Ui_About
-class Ui_Form(object):
-    def setupUi(self, Form,connection):
-        Form.setObjectName("Form")
-        Form.resize(914, 591)
-        Form.setFixedSize(Form.width(),Form.height())
-        self.user_menu = QtWidgets.QFrame(Form)
+from src.GUI.DataVisualisation import *
+class MainWindow(object):
+    def setupUi(self,MainWin):
+        MainWin.setObjectName("Form")
+        MainWin.resize(914, 591)
+        MainWin.setFixedSize(MainWin.width(),MainWin.height())
+        self.user_menu = QtWidgets.QFrame(MainWin)
         self.user_menu.setGeometry(QtCore.QRect(50, 210, 160, 281))
         self.user_menu.setStyleSheet("")
         self.user_menu.setObjectName("user_menu")
@@ -42,7 +43,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.log_out_button)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem3)
-        self.horizontalFrame = QtWidgets.QFrame(Form)
+        self.horizontalFrame = QtWidgets.QFrame(MainWin)
         self.horizontalFrame.setGeometry(QtCore.QRect(220, 100, 491, 81))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
@@ -66,33 +67,34 @@ class Ui_Form(object):
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
-        self.timeEdit = QtWidgets.QTimeEdit(Form)
+        self.timeEdit = QtWidgets.QTimeEdit(MainWin)
         self.timeEdit.setGeometry(QtCore.QRect(790, 10, 118, 26))
         self.timeEdit.setObjectName("timeEdit")
-        self.logo_label = QtWidgets.QLabel(Form)
+        self.logo_label = QtWidgets.QLabel(MainWin)
         self.logo_label.setGeometry(QtCore.QRect(240, 190, 521, 291))
         self.logo_label.setText("")
         self.logo_label.setObjectName("logo_label")
         self.logo_icon = QtGui.QPixmap('images/app_logo.png')
         self.logo_label.setPixmap(self.logo_icon)
         self.logo_label.move(350, 200)
-        self.user_label = QtWidgets.QLabel(Form)
+        self.user_label = QtWidgets.QLabel(MainWin)
         self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
         self.user_label.setAutoFillBackground(False)
         self.user_label.setStyleSheet("")
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
         self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
-        self.log_out_button.clicked.connect(Form.close)
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
-        self.callableOpenSettings = lambda: self.openSettings(connection)
-        self.settings_button.clicked.connect(self.callableOpenSettings)
+        self.log_out_button.clicked.connect(MainWin.close)
+        self.retranslateUi(MainWin)
+        QtCore.QMetaObject.connectSlotsByName(MainWin)
+        
+        self.settings_button.clicked.connect(self.openSettings)
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
         self.openSettingsLambda = lambda:self.openSettings(user)
         self.about_button.clicked.connect(self.openSettingsLambda)
+        self.data_vis_button.clicked.connect(self.openVisualisation)
     
     def openAboutWindow(self):
         self.window = QtWidgets.QMainWindow()
@@ -102,22 +104,27 @@ class Ui_Form(object):
         
     def openFileAnalysisWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.file_analysis_win = FileAnalysis()
+        self.file_analysis_win = Ui_FileAnalysis()
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
     def openSettings(self,user):
         self.window = QtWidgets.QMainWindow()
         self.settingsWindow = Ui_Settings()
-        self.settingsWindow.setupUi(self.window,user)
+        self.settingsWindow.setupUi(self.window)
         self.settingsWindow.runUi(self.window)
     
+    def openVisualisation(self):
+        self.window = QtWidgets.QWidget()
+        self.vis_window = DataVisualisation()
+        self.vis_window.setupUi(self.window)
+        self.vis_window.runUi(self.window) 
     
 
         
-    def retranslateUi(self, Form):
+    def retranslateUi(self, MainWin):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        MainWin.setWindowTitle(_translate("Form", "Form"))
         self.account_button.setText(_translate("Form", "Account"))
         self.settings_button.setText(_translate("Form", "Settings"))
         self.log_out_button.setText(_translate("Form", "Log out"))
@@ -126,14 +133,14 @@ class Ui_Form(object):
         self.data_vis_button.setText(_translate("Form", "Data visualization"))
         self.about_button.setText(_translate("Form", "About"))
     
-    def runUi(self,Form):
-        Form.show()
+    def runUi(self,MainWin):
+        MainWin.show()
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    window = QtWidgets.QWidget()
+    ui_main_win = MainWindow()
+    ui_main_win.setupUi(window)
+    ui_main_win.runUi(window)
     sys.exit(app.exec_())

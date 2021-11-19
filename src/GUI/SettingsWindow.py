@@ -12,11 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.User import *
 from src.Model.Database import *
 class Ui_Settings(object):
-    def setupUi(self, Settings,user):
-        if not isinstance(user, User):
-            print("Not a User instance")
-            exit(1)
-        self.user = user
+    def setupUi(self, Settings):
         Settings.setObjectName("Settings")
         Settings.resize(729, 527)
         self.account_label = QtWidgets.QLabel(Settings)
@@ -86,27 +82,23 @@ class Ui_Settings(object):
         self.full_name_text.setEnabled(False)
         self.phone_number_text.setEnabled(False)
         self.email_address_text.setEnabled(False)
-        self.delete_account_button.clicked.connect(self.deleteAccount)
+        # self.delete_account_button.clicked.connect(self.deleteAccount)
         self.retranslateUi(Settings)
         QtCore.QMetaObject.connectSlotsByName(Settings)
-        self.data_instance = Database()
-        if not self.data_instance.establishConnection(self.user):
-            print("could not connect")
-            exit(1)
-    
+
         
 
     def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate
-        Settings.setWindowTitle(_translate("Form", "Settings"))
-        self.account_label.setText(_translate("Form", "Account "))
-        self.display_name_label.setText(_translate("Form", "Display name"))
-        self.full_name_label.setText(_translate("Form", "Full name"))
+        Settings.setWindowTitle(_translate("Form", "Settings"))       
         self.phone_number_label.setText(_translate("Form", "Phone number"))
         self.email_address_label.setText(_translate("Form", "Email address"))
         self.delete_account_info_label.setText(_translate("Form", "This action will delete all of your personal information. Are you sure? "))
         self.delete_account_button.setText(_translate("Form", "Delete anyway"))
         self.delete_account_label.setText(_translate("Form", "Delete account"))
+    
+    def runUi(self,Settings):
+        Settings.show()
 
 
 if __name__ == "__main__":

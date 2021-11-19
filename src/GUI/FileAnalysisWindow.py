@@ -13,13 +13,15 @@ import os
 import time
 from datetime import date
 from src.GUI.FIleProps import *
-class Ui_Form(object):
+class Ui_FileAnalysis(object):
 
     _flag = 0
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(789, 536)
-        self.frame = QtWidgets.QFrame(Form)
+    _completed = False
+    
+    def setupUi(self, FileAnalysis):
+        FileAnalysis.setObjectName("FileAnalysis")
+        FileAnalysis.resize(789, 536)
+        self.frame = QtWidgets.QFrame(FileAnalysis)
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -89,8 +91,8 @@ class Ui_Form(object):
         self.start_analysis_button.clicked.connect(self.fileAnalysis)
         
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(FileAnalysis)
+        QtCore.QMetaObject.connectSlotsByName(FileAnalysis)
 
     def buildInfoDialog(self):
         self._flag = 1
@@ -182,8 +184,15 @@ class Ui_Form(object):
                     time.sleep(1)
                     
         if self.progressBar.value() == 100:
-                self.analysisCompletionWindow()
-            
+            self.setCompleted(True)
+            self.analysisCompletionWindow()
+    
+    def setCompleted(self,completed=False):
+        self._completed = completed
+    
+    @staticmethod
+    def getCompleted(self):
+        return self._completed
     
     def noFileSelectedWindow(self):
         self.file_error_window = QtWidgets.QDialog()
@@ -215,9 +224,9 @@ class Ui_Form(object):
         FileAnalysis.show()
         
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, FileAnalysis):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        FileAnalysis.setWindowTitle(_translate("Form", "Form"))
         self.file_name_label.setText(_translate("Form", "File name"))
         self.file_size_label.setText(_translate("Form", "File size"))
         self.date_added_label.setText(_translate("Form", "Date added"))
@@ -229,8 +238,8 @@ class Ui_Form(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    FileAnalysis = QtWidgets.QWidget()
+    ui_file_analysis = Ui_FileAnalysis()
+    ui_file_analysis.setupUi(FileAnalysis)
+    FileAnalysis.show()
     sys.exit(app.exec_())
