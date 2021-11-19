@@ -16,7 +16,10 @@ class DecisionTree:
         pass
 
     def setReport(self,report):
-        if not isinstance(report,FinancialReport) and not report.__contains__('.xlsx'):
+        self.portable_formats = ['.xlsx','xltx']
+        self.file_extension = self.report.strip('.')
+        print(self.file_extension)
+        if not isinstance(report,FinancialReport):
             return
         self._report = report
 

@@ -26,7 +26,8 @@ from src.Model.Employee import *
 from src.GUI.LoginWindow import *
 from src.GUI.MainWindow import *
 def main():
-
+    
+    
     app = QApplication(sys.argv)
     login_window = LoginWindow()
     login_window.setupUi()

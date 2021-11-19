@@ -102,21 +102,14 @@ class Ui_Form(object):
         
     def openFileAnalysisWindow(self):
         self.window = QtWidgets.QMainWindow()
-        self.file_analysis_win = Ui_Analysis()
+        self.file_analysis_win = FileAnalysis()
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
-<<<<<<< HEAD
     def openSettings(self,user):
         self.window = QtWidgets.QMainWindow()
         self.settingsWindow = Ui_Settings()
         self.settingsWindow.setupUi(self.window,user)
-=======
-    def openSettings(self,connection):
-        self.window = QtWidgets.QMainWindow()
-        self.settingsWindow = SettingsWindow()
-        self.settingsWindow.setupUi(self.window,connection)
->>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
         self.settingsWindow.runUi(self.window)
     
     

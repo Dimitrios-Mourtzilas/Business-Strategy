@@ -10,21 +10,16 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
-from datetime import date
 import time
-<<<<<<< HEAD
-class FileAnalysis(object):
-    def setupUi(self, FileAnalysis):
-        FileAnalysis.setObjectName("Form")
-        FileAnalysis.setFixedSize(761, 511)
-        self.frame = QtWidgets.QFrame(FileAnalysis)
-=======
-class Ui_Analysis(object):
-    def setupUi(self, Settings):
-        Settings.setObjectName("Settings")
-        Settings.setFixedSize(761, 511)
-        self.frame = QtWidgets.QFrame(Settings)
->>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
+from datetime import date
+from src.GUI.FIleProps import *
+class Ui_Form(object):
+
+    _flag = 0
+    def setupUi(self, Form):
+        Form.setObjectName("Form")
+        Form.resize(789, 536)
+        self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -82,32 +77,77 @@ class Ui_Analysis(object):
         self.progressBar.setProperty("value", 24)
         self.progressBar.setObjectName("progressBar")
         self.verticalLayout.addWidget(self.progressBar)
-        self.file_details_label = QtWidgets.QLabel(self.frame)
-        self.file_details_label.setGeometry(QtCore.QRect(315, 20, 118, 28))
-        font = QtGui.QFont()
-        font.setPointSize(18)
-        self.file_details_label.setFont(font)
-        self.file_details_label.setObjectName("file_details_label")
-        self.line = QtWidgets.QFrame(self.frame)
-        self.line.setGeometry(QtCore.QRect(245, 50, 281, 20))
-        self.line.setFrameShape(QtWidgets.QFrame.HLine)
-        self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.line.setObjectName("line")
-        self.open_file_button.clicked.connect(self.openFileDialog)
-<<<<<<< HEAD
-        self.retranslateUi(FileAnalysis)
-        QtCore.QMetaObject.connectSlotsByName(FileAnalysis)
-=======
-        self.retranslateUi(Settings)
-        QtCore.QMetaObject.connectSlotsByName(Settings)
->>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
+        self.progressBar.setVisible(False)
         self.file_name_text.setEnabled(False)
         self.file_size_text.setEnabled(False)
         self.date_added_text.setEnabled(False)
+        self.import_file_button = QtWidgets.QPushButton("Import file")
+        self.horizontalLayout_3.layout().addWidget(self.import_file_button)
+        self.import_file_button.clicked.connect(self.buildInfoDialog)
+        self.open_file_button.clicked.connect(self.openFileDialog)
         self.cancel_button.clicked.connect(self.cancelFile)
         self.start_analysis_button.clicked.connect(self.fileAnalysis)
-        self.progressBar.setVisible(False)
         
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+
+    def buildInfoDialog(self):
+        self._flag = 1
+        if not self.checkFileProps():
+            self.openWrongFileFormatWindow()
+        elif not self.checkForEmptyFile():
+            self.info_window = QtWidgets.QDialog()
+            self.info_label = QtWidgets.QLabel('Your file was imported')
+            self.standard_btns = QtWidgets.QDialogButtonBox.Ok
+            self.info_window.setLayout(QtWidgets.QVBoxLayout())
+            self.btn_box = QtWidgets.QDialogButtonBox(self.standard_btns)
+            self.btn_box.accepted.connect(self.importFileProps)
+            self.info_window.layout().addWidget(self.info_label)
+            self.info_window.layout().addWidget(self.btn_box)
+            self.info_window.show()
+        else:
+            self.noFileSelectedWindow()
+
+
+    def importFileProps(self):
+        if not self.checkForEmptyFile():
+            self.info_window.hide()
+            self.info_window.layout().addWidget(self.info_label)
+
+        else:
+            self.noFileSelectedWindow()
+
+        self.win = QtWidgets.QWidget()
+        self.filePropsWin = Ui_FileProps()
+        self.filePropsWin.setupUi(self.win)
+        self.filePropsWin.runUi(self.win)
+
+    def checkForEmptyFile(self):
+        return self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__("")
+
+
+    def checkFileProps(self):
+        return self.file_name_text.text().__contains__('.xlsx') or self.file_name_text.text().__eq__("")
+       
+    
+    def openWrongFileFormatWindow(self):
+        if self.checkForEmptyFile():
+            self.noFileSelectedWindow()
+        else:
+            self.error_file_dialog = QtWidgets.QDialog()
+            self.error_file_label = QtWidgets.QLabel('The format of selected file is not supported by the system')
+            self.standard_btns = QtWidgets.QDialogButtonBox.Ok | QtWidgets.QDialogButtonBox.Cancel
+            self.button_box = QtWidgets.QDialogButtonBox(self.standard_btns)
+            self.verti_layout = QtWidgets.QVBoxLayout()
+            self.error_file_dialog.setLayout(self.verti_layout)
+            self.error_file_dialog.layout().addWidget(self.error_file_label)
+            self.button_box.accepted.connect(self.error_file_dialog.accept)
+            self.error_file_dialog.layout().addWidget(self.button_box)
+            self.error_file_dialog.show()
+            
+    
+
 
     def openFileDialog(self):
         self.fileDialog = QtWidgets.QFileDialog()
@@ -115,9 +155,10 @@ class Ui_Analysis(object):
         self.file_name_text.setText(self.file_name[0])
         self.file_size_text.setText(str(os.path.getsize(self.file_name[0]))+"bytes")
         self.date_added_text.setText(str(date.today()))
+    
 
     def cancelFile(self):
-        if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
+        if self.checkForEmptyFile():
             self.noFileSelectedWindow()
         else:
             self.file_name_text.setText("")
@@ -126,9 +167,12 @@ class Ui_Analysis(object):
 
     
     def fileAnalysis(self):
+
         if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
             print("No file selected")
             return
+        elif self._flag == 0:
+            print("Please first import your file")
         else:
             self.count =0 
             while self.count <100:
@@ -136,6 +180,7 @@ class Ui_Analysis(object):
                     self.progressBar.setValue(self.count+25)
                     self.count+=25
                     time.sleep(1)
+                    
         if self.progressBar.value() == 100:
                 self.analysisCompletionWindow()
             
@@ -165,6 +210,9 @@ class Ui_Analysis(object):
         self.warning_label.setStyleSheet('color:red')
         self.warning_window.setFixedSize(260, 100)
         self.warning_window.show()
+    
+    def runUi(sefl,FileAnalysis):
+        FileAnalysis.show()
         
 
     def retranslateUi(self, Form):
@@ -176,22 +224,13 @@ class Ui_Analysis(object):
         self.open_file_button.setText(_translate("Form", "Open file"))
         self.cancel_button.setText(_translate("Form", "Cancel"))
         self.start_analysis_button.setText(_translate("Form", "Start analysis"))
-        self.file_details_label.setText(_translate("Form", "File details"))
-    
-<<<<<<< HEAD
-    def runUi(self,Form):
-        Form.show()
-=======
-    def runUi(self,Settings):
-        Settings.show()
->>>>>>> 68234c7f9c643f64e53286d59db8730c30354010
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Settings = QtWidgets.QWidget()
-    ui = Ui_Analysis()
-    ui.setupUi(Settings)
-    Settings.show()
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
     sys.exit(app.exec_())
