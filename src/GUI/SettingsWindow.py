@@ -82,11 +82,21 @@ class Ui_Settings(object):
         self.full_name_text.setEnabled(False)
         self.phone_number_text.setEnabled(False)
         self.email_address_text.setEnabled(False)
-        # self.delete_account_button.clicked.connect(self.deleteAccount)
+        self.delete_account_button.clicked.connect(self.deleteAccount)
         self.retranslateUi(Settings)
         QtCore.QMetaObject.connectSlotsByName(Settings)
 
         
+    def deleteAccount(self):
+        self.json_file = open("user_props.json","r")
+        self.attr = "user_name"
+        self.user_data = json.loads(self.json_file.read())
+        self.database = Database()
+        if not self.database.establishConnection(self.user_data['user_name'],self.user_data['user_password']):
+            print("Connection is no longer active")
+            return
+        else:
+            self.database.runRandomQuery("delete from user where "+ self.attr+ "=?",(self.user_data['user_name'],))
 
     def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate

@@ -16,7 +16,7 @@ from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
-
+from src.GUI.RegisterWindow import *
 class LoginWindow(QMainWindow):
 
     _count = 0
@@ -36,29 +36,32 @@ class LoginWindow(QMainWindow):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout.addWidget(self.label_2)
-        self.lineEdit = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit.setMaxLength(255)
-        self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout.addWidget(self.lineEdit)
+        self.user_name_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.user_name_label.setObjectName("user_nane_label")
+        self.verticalLayout.addWidget(self.user_name_label)
+        self.user_name_text = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.user_name_text.setMaxLength(255)
+        self.user_name_text.setObjectName("user_name_text")
+        self.verticalLayout.addWidget(self.user_name_text)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(self.verticalLayoutWidget)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.verticalLayoutWidget)
-        self.lineEdit_2.setMaxLength(255)
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.verticalLayout.addWidget(self.lineEdit_2)
+        self.password_label = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.password_label.setObjectName("password_label")
+        self.verticalLayout.addWidget(self.password_label)
+        self.password_text = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.password_text.setMaxLength(255)
+        self.password_text.setObjectName("password_text")
+        self.verticalLayout.addWidget(self.password_text)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem1)
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton.setText("Login Window")
-        self.pushButton.clicked.connect(self.connectToDB)
-        self.verticalLayout.addWidget(self.pushButton)
+        self.login_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.login_button.setObjectName("login_button")
+        self.login_button.setText("Login")
+        self.login_button.clicked.connect(self.connectToDB)
+        self.register_button = QtWidgets.QPushButton("Register new user")
+        self.register_button.clicked.connect(self.openRegisterWindow)
+        self.verticalLayout.addWidget(self.login_button)
+        self.verticalLayout.addWidget(self.register_button)
         self.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(self)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -74,6 +77,8 @@ class LoginWindow(QMainWindow):
         'border-radius:4px;'+
         '}'+
         ''+
+        'QMainWindow{'+
+        'background-color:#6CB4EE;}'
         'QPushButton:hover{'+
         'background-color:black;'+
         'color:white;}'+
@@ -81,32 +86,35 @@ class LoginWindow(QMainWindow):
         'QLabel{'+
         'font-family:verdana;'+
         'font-size:15px;}'+
-        ''+
-        'QMainWindow{'+
-        'background-color: qlineargradient(spread:pad, x1:0 y1:0, x2:1 y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));}'
-        )
+        '')
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "user name"))
-        self.label.setText(_translate("MainWindow", "user password"))
-        self.pushButton.setText(_translate("MainWindow", "Log in"))
+        self.user_name_label.setText(_translate("MainWindow", "user name"))
+        self.password_label.setText(_translate("MainWindow", "user password"))
+        self.login_button.setText(_translate("MainWindow", "Log in"))
 
-  
+    def openRegisterWindow(self):
+        self.window = QtWidgets.QWidget()
+        self.register_win = Ui_RegisterWindow()
+        self.register_win.setupUi(self.window)
+        self.register_win.runUi(self.window)
 
     def connectToDB(self):
         try:
-            self.user = User()
-            self.user.setUserName(self.lineEdit.text())
-            self.user.setUserPassword(self.lineEdit_2.text())
             self.database = Database()
-            if not self.database.establishConnection(self.user):
+            self.user = User()
+            self.user_props = self.user.getJson()
+            self.user_data = json.load(self.user_props)
+            if not self.database.establishConnection(self.user_data['user_name'],self.user_data['user_password']):
                 raise Error
+        
+            self.user_data.close()
             self.window = QMainWindow()
-            self.mainWindow = Ui_Form()
+            self.mainWindow = MainWindow()
             self.connection = self.database.getConnection()
-            self.mainWindow.setupUi(self.window,self.connection)
+            self.mainWindow.setupUi(self.window)
             self.mainWindow.runUi(self.window)
             self.close()
 

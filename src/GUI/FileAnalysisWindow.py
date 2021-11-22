@@ -13,6 +13,8 @@ import os
 import time
 from datetime import date
 from src.GUI.FIleProps import *
+import json
+# from src.GUI.DataVisualisation import *
 class Ui_FileAnalysis(object):
 
     _flag = 0
@@ -116,13 +118,21 @@ class Ui_FileAnalysis(object):
         if not self.checkForEmptyFile():
             self.info_window.hide()
             self.info_window.layout().addWidget(self.info_label)
-
+    
         else:
             self.noFileSelectedWindow()
 
+        self.json_file = open('file_props.json',"w+")
+        self.file_data = {'file_name':self.file_name_text.text(),
+        'file_size':self.file_size_text.text(),
+        'date_added':self.date_added_text.text()
+        }
+        json.dump(self.file_data,self.json_file)
+        self.json_file.close()
         self.win = QtWidgets.QWidget()
         self.filePropsWin = Ui_FileProps()
         self.filePropsWin.setupUi(self.win)
+        self.filePropsWin.setFileProps()
         self.filePropsWin.runUi(self.win)
 
     def checkForEmptyFile(self):

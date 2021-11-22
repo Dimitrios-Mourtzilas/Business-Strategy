@@ -81,6 +81,8 @@ class Ui_About(object):
         self.version_text.setText('1.0')
         self.creator_text.setText('Dimitrios Mourtzilas')
         self.year_created_text.setText('2021')
+        self.smaller_icon_logo = QtGui.QPixmap('images/app_smaller_logo.png')
+        self.smaller_icon.setPixmap(self.smaller_icon_logo)
         self.retranslateUi(About)
         QtCore.QMetaObject.connectSlotsByName(About)
 

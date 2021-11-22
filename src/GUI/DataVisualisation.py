@@ -11,6 +11,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.FileAnalysisWindow import Ui_FileAnalysis
 class DataVisualisation(object):
+
+    _prop = None
+
+
     def setupUi(self, DataVisualisation):
         DataVisualisation.setObjectName("DataVisualisation")
         DataVisualisation.resize(702, 507)
@@ -53,10 +57,20 @@ class DataVisualisation(object):
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
+        if  not Ui_FileAnalysis().getCompleted(Ui_FileAnalysis):
+            self.tree_label.setText("No view at this moment")
+            self.tree_label.setStyleSheet('QLabel{'+
+            'padding:157px;'+
+            'color:gray;}')
+        else:
+            self.tree_label.setText('Done!!')
 
         self.retranslateUi(DataVisualisation)
         QtCore.QMetaObject.connectSlotsByName(DataVisualisation)
 
+    def setProp(self,prop=None):
+        self._prop = prop
+        
     def retranslateUi(self, DataVisualisation):
         _translate = QtCore.QCoreApplication.translate
         DataVisualisation.setWindowTitle(_translate("Form", "Form"))
@@ -66,7 +80,6 @@ class DataVisualisation(object):
     def viewGeneratedTree(self):
         if not Ui_FileAnalysis.getCompleted(Ui_FileAnalysis):
             print('Analysis did not complete')
-        
     def runUi(self,FileAnalysis):
         FileAnalysis.show()
         

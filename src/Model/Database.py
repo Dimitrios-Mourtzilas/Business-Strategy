@@ -1,26 +1,26 @@
 import sqlite3
 from src.Model.File import File
-
 from src.Model.Product import Product
 from src.Model.User import *
 from hashlib import md5
+import json
+
 
 class Database:
     _con = None
     _cursor = None
-
+    _id = 0
     def __init__(self):
         self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
 
     
-    def establishConnection(self,user):
-        self.user = user
-        self.userName = self.user.getUserName()
-        self.userPassword = self.user.getUserPassword()
+    def establishConnection(self,user_name="",user_password=""):
+        self.user_name = user_name
+        self.user_password = user_password
         self.user_data = self._cursor.execute("select user_name, user_password from user").fetchall()
         for values in self.user_data:
-            if self.userName.__eq__(values[0]) and self.userPassword.__eq__(values[1]):
+            if self.user_name.__eq__(values[0]) and self.user_password.__eq__(values[1]):
                 return True
         return False
     
@@ -40,14 +40,25 @@ class Database:
             self._cursor.execute("""
             insert into employee(empId,empName,empSurname,empAge,empSalary,empEmail,empPhone)
             values(?,?,?,?,?,?,?)""", (values['empId'], values['empName'], values['empSurname'], values['empAge'],
-                                     values['empSalary'], values['empEmail'], values('empPhone')))
+                                     values['empSalary'], values['empEmail'], values['empPhone']))
 
 
         self._con.commit()
 
-    def runRandomQuery(self,query):
+    def runRandomQuery(self,query,param=None):
         self.query = query
-        self._cursor.execute(self.query)
+        try:
+            if param == None:
+                if not self._cursor.execute(self.query):
+                    raise Exception('Could not execute query')
+                print("Query sucesssflly exetued")
+            else:
+                if not self._cursor.execute(self.query,param):
+                    raise Exception('Could not execute query')
+                print("Query sucesssflly exetued")
+        except Exception as e:
+            print(e)
+            
 
     def saveCompany(self, company):
         if company is None:
@@ -92,7 +103,7 @@ class Database:
 
             self._con.commit()
     
-    def saveFiles(self,file):
+    def saveFile(self,file):
         if not isinstance(file,File):
             return
         self.file = file
@@ -108,5 +119,24 @@ class Database:
 
     def fetchUser(self):
         return self._cursor.execute('select *form user ').fetchone()
-
     
+    def saveUser(self,user):
+        if not isinstance(user, User):
+            return
+        self.user = user
+        self.user_data = json.load(self.user.getJson())
+        print(self.user_data)
+        self._cursor.execute('''
+        
+        insert into user
+        (user_id,first_name,last_name,user_name,user_password,phone_number,email_address)
+        values(?,?,?,?,?,?,?)
+        ''',(self.user_data['user_id'],self.user_data['first_name'],self.user_data['last_name'],self.user_data['user_name'],
+        self.user_data['user_password'],self.user_data['phone_number'],self.user_data['email_address']))
+
+        self._cursor.execute('commit;')
+        self.user_data['user_id'] +=1
+        
+    def closeConnection(self):
+        self._cursor.close()
+        self._con.close()

@@ -19,6 +19,7 @@ class MainWindow(object):
     def setupUi(self,MainWin):
         MainWin.setObjectName("Form")
         MainWin.resize(914, 591)
+        MainWin.setStyleSheet('*{background-color:#6CB4EE}')
         MainWin.setFixedSize(MainWin.width(),MainWin.height())
         self.user_menu = QtWidgets.QFrame(MainWin)
         self.user_menu.setGeometry(QtCore.QRect(50, 210, 160, 281))
@@ -61,9 +62,7 @@ class MainWindow(object):
         self.file_analysis_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.file_analysis_button.setObjectName("file_analysis_button")
         self.horizontalLayout.addWidget(self.file_analysis_button)
-        self.data_vis_button = QtWidgets.QPushButton(self.horizontalFrame)
-        self.data_vis_button.setObjectName("data_vis_button")
-        self.horizontalLayout.addWidget(self.data_vis_button)
+        # self.horizontalLayout.addWidget(self.data_vis_button)
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
@@ -92,9 +91,8 @@ class MainWindow(object):
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
-        self.openSettingsLambda = lambda:self.openSettings(user)
-        self.about_button.clicked.connect(self.openSettingsLambda)
-        self.data_vis_button.clicked.connect(self.openVisualisation)
+        self.about_button.clicked.connect(self.openAboutWindow)
+        # self.data_vis_button.clicked.connect(self.openVisualisation)
     
     def openAboutWindow(self):
         self.window = QtWidgets.QMainWindow()
@@ -113,13 +111,6 @@ class MainWindow(object):
         self.settingsWindow = Ui_Settings()
         self.settingsWindow.setupUi(self.window)
         self.settingsWindow.runUi(self.window)
-    
-    def openVisualisation(self):
-        self.window = QtWidgets.QWidget()
-        self.vis_window = DataVisualisation()
-        self.vis_window.setupUi(self.window)
-        self.vis_window.runUi(self.window) 
-    
 
         
     def retranslateUi(self, MainWin):
@@ -130,7 +121,7 @@ class MainWindow(object):
         self.log_out_button.setText(_translate("Form", "Log out"))
         self.home_button.setText(_translate("Form", "Home"))
         self.file_analysis_button.setText(_translate("Form", "File analysis"))
-        self.data_vis_button.setText(_translate("Form", "Data visualization"))
+        # self.data_vis_button.setText(_translate("Form", "Data visualization"))
         self.about_button.setText(_translate("Form", "About"))
     
     def runUi(self,MainWin):

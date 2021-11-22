@@ -27,7 +27,7 @@
      <widget class="QFrame" name="horizontalFrame">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QFrame" name="">
+        <widget class="QFrame" name="frame">
          <layout class="QHBoxLayout" name="horizontalLayout_5">
           <item>
            <widget class="QLabel" name="about_label">
@@ -67,7 +67,7 @@
        <item>
         <widget class="QLabel" name="version_text">
          <property name="text">
-          <string/>
+          <string>1.0</string>
          </property>
         </widget>
        </item>
@@ -87,7 +87,7 @@
        <item>
         <widget class="QLabel" name="creator_text">
          <property name="text">
-          <string/>
+          <string>Dimitrios Mourtzilas</string>
          </property>
         </widget>
        </item>
@@ -107,7 +107,7 @@
        <item>
         <widget class="QLabel" name="year_created_text">
          <property name="text">
-          <string/>
+          <string>2021</string>
          </property>
         </widget>
        </item>
