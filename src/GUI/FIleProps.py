@@ -68,13 +68,16 @@ class Ui_FileProps(object):
 
     def setFileProps(self):
 
-        self.json_file = open("file_props.json","r+")
-        self.file_data = json.load(self.json_file)
-        self.file_prop_name_label.setText("File name")
-        self.file_prop_name_text.setText(self.file_data['file_name'])
-        self.file_prop_size_text.setText(self.file_data['file_size'])
-        self.file_prop_date_added_text.setText(self.file_data['date_added'])
+        with open("file_props.json","r") as self.json_file:
+            self.file_data = json.load(self.json_file)
+            self.len = len(self.file_data) -1 
+            print(self.file_data[self.len]['file_name'])
+            self.file_prop_name_label.setText("File name")
+            self.file_prop_name_text.setText(self.file_data[self.len]['file_name'])
+            self.file_prop_size_text.setText(self.file_data[self.len]['file_size'])
+            self.file_prop_date_added_text.setText(self.file_data[self.len]['date_added'])
         self.json_file.close()
+
     def retranslateUi(self, FileProps):
         _translate = QtCore.QCoreApplication.translate
         FileProps.setWindowTitle(_translate("FileProps", "Form"))

@@ -1,15 +1,15 @@
 import sqlite3
-from src.Model.File import File
-from src.Model.Product import Product
-from src.Model.User import *
+from src.Model.File import *
+from src.Model.FinancialReport import *
+from src.Model.Company import *
 from hashlib import md5
 import json
-
 
 class Database:
     _con = None
     _cursor = None
-    _id = 0
+    _pos = 0
+
     def __init__(self):
         self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
@@ -27,24 +27,7 @@ class Database:
     def getConnection(self):
         return self
  
-    def fetchAllEmployees(self):
-        self._cursor.execute("select *from employee")
-        return self._cursor.fetchall()
-
-
-    def saveEmployee(self, employee):
-        if employee is None:
-            return
-        self.employee = employee
-        for values in self.employee.getJson():
-            self._cursor.execute("""
-            insert into employee(empId,empName,empSurname,empAge,empSalary,empEmail,empPhone)
-            values(?,?,?,?,?,?,?)""", (values['empId'], values['empName'], values['empSurname'], values['empAge'],
-                                     values['empSalary'], values['empEmail'], values['empPhone']))
-
-
-        self._con.commit()
-
+ 
     def runRandomQuery(self,query,param=None):
         self.query = query
         try:
@@ -59,33 +42,22 @@ class Database:
         except Exception as e:
             print(e)
             
+    
+    def fetchUsers(self):
+        return self._cursor.execute("select *from user").fetchall()
 
     def saveCompany(self, company):
-        if company is None:
+        if not isinstance(company,Company):
             return
+
         self.company = company
         for values in self.company.getJson():
             self._cursor.execute(
                 """
-                insert into company(company_id,company_name,company_city,country_code,year_founded,empId,clientId,supplierId,productId)
-                values(?,?,?,?,?,?,?,?,?)
+                insert into company(company_id,company_name,company_city,country_code,employees,year_founded)
+                values(?,?,?,?,?,?)
                 """
-                , (values['companyId'], values['companyName'], values['companyCity']+
-                   values['countryCode'], values['yearFounded'], values['empId'], values['clientId'],+
-                   values['supplierId'], values['productId']))
-        self._con.commit()
-
-    def saveProdcut(self,product):
-        if not isinstance(product,Product):
-            return
-        self.product = product
-        for values in self.product.getJsonData():
-            self._cursor.execute(
-                """
-                insert into product(productId, product_desc, product_price, products_sold)VALUES
-                (?,?,?,?)
-                """,( values['productId'], values['productDesc'],values['productPrice'], values['productsSold'])
-            )
+                ,)
         self._con.commit()
 
     def saveFinancialReport(self, financialReport):
@@ -104,15 +76,20 @@ class Database:
             self._con.commit()
     
     def saveFile(self,file):
-        if not isinstance(file,File):
-            return
-        self.file = file
-        for values in self.file.getJson():
+        try:
+            self.file = file
+            self.data = json.load(self.file.getJson())
+            self.len = len(self.data) -1 
+            print(self.data[self.len]['file_id'])
             self._cursor.execute("insert into files"+
-            "(file_nane,file_path,file_size,file_added)"+
-            "values(?,?,?,?)",(values['file_name'],values['file_size'],values['file_path'],values['date_added']))
-        self._cursor.commit()
-    
+                "(file_id,file_name,file_size,date_added)"+
+                "values(?,?,?,?)",(self.data[self.len]['file_id'],self.data[self.len]['file_name'],self.data[self.len]['file_size'],self.data[self.len]['date_added']))
+            self._cursor.execute("commit;")
+            return True
+        except Exception as e:
+            print(e)
+            return False
+        
     def fetchAllFiles(self):
         return self._cursor.execute("select *from files").fetchall()
 
@@ -120,23 +97,36 @@ class Database:
     def fetchUser(self):
         return self._cursor.execute('select *form user ').fetchone()
     
+    def setPos(self,pos):
+        self._pos +=pos
+    
+    def getPos(self):
+        return self._pos
+
     def saveUser(self,user):
         if not isinstance(user, User):
             return
         self.user = user
         self.user_data = json.load(self.user.getJson())
-        print(self.user_data)
         self._cursor.execute('''
-        
         insert into user
         (user_id,first_name,last_name,user_name,user_password,phone_number,email_address)
         values(?,?,?,?,?,?,?)
-        ''',(self.user_data['user_id'],self.user_data['first_name'],self.user_data['last_name'],self.user_data['user_name'],
-        self.user_data['user_password'],self.user_data['phone_number'],self.user_data['email_address']))
-
+        ''',(self.user_data[self.getPos()]['user_id'],self.user_data[self.getPos()]['first_name'],self.user_data[self.getPos()]['last_name'],self.user_data[self.getPos()]['user_name'],
+        self.user_data[self.getPos()]['user_password'],self.user_data[self.getPos()]['phone_number'],self.user_data[self.getPos()]['email_address']))
         self._cursor.execute('commit;')
-        self.user_data['user_id'] +=1
+        self.setPos(1)
         
+    def setPos(self,pos=0):
+        self._pos +=pos
+
+    def getPos(self):
+        return self._pos
+    
+    def deleteUser(self,user_id):
+        self._cursor.execute("delete from user where user_id =" + user_id)
+        self._cursor.execute("commit")
+
     def closeConnection(self):
         self._cursor.close()
         self._con.close()

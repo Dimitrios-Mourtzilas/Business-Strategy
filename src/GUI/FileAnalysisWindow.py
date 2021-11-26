@@ -14,6 +14,8 @@ import time
 from datetime import date
 from src.GUI.FIleProps import *
 import json
+from src.Model.File import *
+from src.Model.Database import *
 # from src.GUI.DataVisualisation import *
 class Ui_FileAnalysis(object):
 
@@ -87,7 +89,7 @@ class Ui_FileAnalysis(object):
         self.date_added_text.setEnabled(False)
         self.import_file_button = QtWidgets.QPushButton("Import file")
         self.horizontalLayout_3.layout().addWidget(self.import_file_button)
-        self.import_file_button.clicked.connect(self.buildInfoDialog)
+        self.import_file_button.clicked.connect(self.importFileProps)
         self.open_file_button.clicked.connect(self.openFileDialog)
         self.cancel_button.clicked.connect(self.cancelFile)
         self.start_analysis_button.clicked.connect(self.fileAnalysis)
@@ -96,51 +98,81 @@ class Ui_FileAnalysis(object):
         self.retranslateUi(FileAnalysis)
         QtCore.QMetaObject.connectSlotsByName(FileAnalysis)
 
-    def buildInfoDialog(self):
+    def importFileProps(self):
         self._flag = 1
         if not self.checkFileProps():
             self.openWrongFileFormatWindow()
         elif not self.checkForEmptyFile():
+            try:
+            
+               
+                self.file  = File()
+                self.file.setFileId()
+                self.file.setFileName(self.file_name_text.text())
+                self.file.setFileSize(self.file_size_text.text())
+                self.file.setDateAdded(self.date_added_text.text())
+                self.file.setJson()
+                self.database = Database()
+                self.count =0
+        
+                if self.database.saveFile(self.file):
+                    self.buildInfoDialog()            
+                else:
+                    print("File could not be imported")    
+        
+                self.database.closeConnection()   
+            
+            except Exception as e:
+                print(e)
+            
+              
+
+        else:
+            self.noFileSelectedWindow()
+
+
+
+    def buildInfoDialog(self):
+        if self.checkFileProps():
+
             self.info_window = QtWidgets.QDialog()
             self.info_label = QtWidgets.QLabel('Your file was imported')
             self.standard_btns = QtWidgets.QDialogButtonBox.Ok
             self.info_window.setLayout(QtWidgets.QVBoxLayout())
             self.btn_box = QtWidgets.QDialogButtonBox(self.standard_btns)
-            self.btn_box.accepted.connect(self.importFileProps)
+            self.btn_box.accepted.connect(self.openFilePropWindow)
             self.info_window.layout().addWidget(self.info_label)
             self.info_window.layout().addWidget(self.btn_box)
-            self.info_window.show()
-        else:
-            self.noFileSelectedWindow()
-
-
-    def importFileProps(self):
-        if not self.checkForEmptyFile():
-            self.info_window.hide()
-            self.info_window.layout().addWidget(self.info_label)
+            self.info_window.show()               
     
-        else:
+
+        elif self.checkForEmptyFile():
             self.noFileSelectedWindow()
 
-        self.json_file = open('file_props.json',"w+")
-        self.file_data = {'file_name':self.file_name_text.text(),
-        'file_size':self.file_size_text.text(),
-        'date_added':self.date_added_text.text()
-        }
-        json.dump(self.file_data,self.json_file)
-        self.json_file.close()
+
+
+        # self.win = QtWidgets.QWidget()
+        # self.filePropsWin = Ui_FileProps()
+        # self.filePropsWin.setupUi(self.win)
+        # self.filePropsWin.setFileProps()
+        # self.filePropsWin.runUi(self.win)
+
+ 
+    def openFilePropWindow(self):
+        self.info_window.hide()
         self.win = QtWidgets.QWidget()
         self.filePropsWin = Ui_FileProps()
         self.filePropsWin.setupUi(self.win)
         self.filePropsWin.setFileProps()
         self.filePropsWin.runUi(self.win)
 
+
     def checkForEmptyFile(self):
-        return self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__("")
+        return self.file_name_text.text().__eq__("") or self.file_size_text.text().__eq__("") or self.date_added_text.text().__eq__("")
 
 
     def checkFileProps(self):
-        return self.file_name_text.text().__contains__('.xlsx') or self.file_name_text.text().__eq__("")
+        return self.file_name_text.text().__contains__('.xlsx')
        
     
     def openWrongFileFormatWindow(self):
@@ -192,6 +224,7 @@ class Ui_FileAnalysis(object):
                     self.progressBar.setValue(self.count+25)
                     self.count+=25
                     time.sleep(1)
+        self._flag=0
                     
         if self.progressBar.value() == 100:
             self.setCompleted(True)

@@ -136,8 +136,14 @@ class Ui_RegisterWindow(object):
             self.database.saveUser(self.user)
             self.success_registrationDialog = QtWidgets.QDialog()
             self.btns = QtWidgets.QDialogButtonBox.Ok
+            self.v_layout = QtWidgets.QHBoxLayout()
+            self.success_registrationDialog.setLayout(self.v_layout)
+            self.success_label = QtWidgets.QLabel("User sucessfully registered")
             self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
             self.button_box.accepted.connect(self.openLoginWindow)
+            self.success_registrationDialog.layout().addWidget(self.success_label)
+            self.success_registrationDialog.layout().addWidget(self.button_box)
+            self.success_registrationDialog.show()
         except Exception as e:
             print(e)
         finally:

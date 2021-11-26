@@ -1,13 +1,15 @@
-import json
+import json,random
 class User:
-
+    
     _user_id = 0
+    _count= 0
     _user_name = ""
     _user_password =""
     _phone_number =""
     _email_address= ""
     _first_name =""
     _last_name=""
+
     def __init__(self):
         pass
 
@@ -32,26 +34,43 @@ class User:
         self._email_address = email_address
 
     def getJson(self):
-        self.json_file = open("user_props.json","r")
+        self.json_file = open("user_props.json","r+")
         return self.json_file
-    
+
     
     def setJson(self):
-        self.json_file = open("user_props.json","w+")
-        if self.json_file is None:
-            print("Could not open the file")
-            return
-        self.data = {'user_id':self.getUserId(),
-        'first_name':self.getFirstName(),
-        'last_name':self.getLastName(),
-        'user_name':self.getUserName(),
-        'user_password':self.getUserPassword(),
-        'phone_number':self.getUserPhoneNumber(),
-        'email_address':self.getUserEmailAddress()
-        }
-        json.dump(self.data, self.json_file)
-        self.json_file.close()
+        try:
+
+            self.json_file = open("user_props.json","r+")
+            if self.json_file is None:
+                print("Could not open the file")
+                raise FileNotFoundError("File not found")
+            self.data = json.load(self.json_file)
+            self.random_id = random.randint(6000,20000)
+            self.setUserId(self.random_id)
+            self.json_file.close()
+            self.user_data = {
+                'user_id':self.getUserId(),
+                'first_name':self.getFirstName(),
+                'last_name':self.getLastName(),
+                'user_name':self.getUserName(),
+                'user_password':self.getUserPassword(),
+                'phone_number':self.getUserPhoneNumber(),
+                'email_address':self.getUserEmailAddress()
+            }
+            self.data.append(self.user_data)
+            self.json_file = open("user_props.json","w+")
+            json.dump(self.data,self.json_file)
+            self.setUserId(1)
+        except FileNotFoundError as error:
+            print(error)
         
+        finally:
+            self.json_file.close()
+    
+    def setUserId(self,user_id):
+        self._user_id = user_id+1
+
     def getUserId(self):
         return self._user_id
     
