@@ -5,6 +5,9 @@ drop table user;
 
 select *from user;
 
+delete from user;
+
+
 select *from files;
 
 delete from files;

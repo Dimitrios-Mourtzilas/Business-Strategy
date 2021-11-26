@@ -34,11 +34,10 @@ class Database:
             if param == None:
                 if not self._cursor.execute(self.query):
                     raise Exception('Could not execute query')
-                print("Query sucesssflly exetued")
             else:
                 if not self._cursor.execute(self.query,param):
                     raise Exception('Could not execute query')
-                print("Query sucesssflly exetued")
+            self._cursor.execute("commit;")
         except Exception as e:
             print(e)
             

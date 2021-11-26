@@ -82,22 +82,44 @@ class Ui_Settings(object):
         self.full_name_text.setEnabled(False)
         self.phone_number_text.setEnabled(False)
         self.email_address_text.setEnabled(False)
-        self.delete_account_button.clicked.connect(self.deleteAccount)
+        self.callable = lambda:self.deleteAccount(Settings)
+        self.delete_account_button.clicked.connect(self.callable)
         self.retranslateUi(Settings)
         QtCore.QMetaObject.connectSlotsByName(Settings)
 
         
-    def deleteAccount(self):
-        self.json_file = open("user_props.json","r")
-        self.attr = "user_name"
-        self.user_data = json.loads(self.json_file.read())
+    def deleteAccount(self,Settings):
         self.database = Database()
-        if not self.database.establishConnection(self.user_data['user_name'],self.user_data['user_password']):
-            print("Connection is no longer active")
-            return
-        else:
-            self.database.runRandomQuery("delete from user where "+ self.attr+ "=?",(self.user_data['user_name'],))
+        with open("user_props.json","r") as self.json_file:
+            self.user_data = json.load(self.json_file)
 
+        self.json_file.close()
+        print(self.user_data[len(self.user_data)-1]['user_id'])
+        try:
+    
+            self.database.runRandomQuery("delete from user where user_id = ?",(self.user_data[len(self.user_data)-1]['user_id'],))
+            
+            self.deleteAccountWindow(Settings)    
+        except Exception as e:
+            print(e)
+        
+    
+    def closeWindow(self,Settings,window):
+        Settings.close()
+        window.close()
+        exit(0)
+    def deleteAccountWindow(self,Settings):
+        self.deleteWindow = QtWidgets.QDialog()
+        self.buttons = QtWidgets.QDialogButtonBox.Ok
+        self.deleteWindow.setLayout(QtWidgets.QVBoxLayout())
+        self.button_bx = QtWidgets.QDialogButtonBox(self.buttons)
+        self.deleteWindow_label = QtWidgets.QLabel("Account successfully deleted")
+        self.callableExit = lambda:self.closeWindow(Settings,self.deleteWindow)
+        self.button_bx.accepted.connect(self.callableExit)
+        self.deleteWindow.layout().addWidget(self.deleteWindow_label)
+        self.deleteWindow.layout().addWidget(self.button_bx)
+        self.deleteWindow.show()
+            
     def retranslateUi(self, Settings):
         _translate = QtCore.QCoreApplication.translate
         Settings.setWindowTitle(_translate("Form", "Settings"))       
@@ -117,5 +139,5 @@ if __name__ == "__main__":
     Settings = QtWidgets.QWidget()
     ui = Ui_Settings()
     ui.setupUi(Settings)
-    Settings.show()
+    ui.runUi(Settings)
     sys.exit(app.exec_())
