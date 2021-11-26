@@ -2,7 +2,6 @@ import json,random
 class User:
     
     _user_id = 0
-    _count= 0
     _user_name = ""
     _user_password =""
     _phone_number =""
@@ -41,14 +40,12 @@ class User:
     def setJson(self):
         try:
 
-            self.json_file = open("user_props.json","r+")
-            if self.json_file is None:
-                print("Could not open the file")
-                raise FileNotFoundError("File not found")
-            self.data = json.load(self.json_file)
-            self.random_id = random.randint(6000,20000)
-            self.setUserId(self.random_id)
+            with open("user_props.json","r") as self.json_file:
+            
+                self.data = json.load(self.json_file)
+                self.setUserId(random.random())
             self.json_file.close()
+
             self.user_data = {
                 'user_id':self.getUserId(),
                 'first_name':self.getFirstName(),
@@ -59,14 +56,14 @@ class User:
                 'email_address':self.getUserEmailAddress()
             }
             self.data.append(self.user_data)
-            self.json_file = open("user_props.json","w+")
-            json.dump(self.data,self.json_file)
-            self.setUserId(1)
+
+            with open("user_props.json","w") as self.json_file:
+                json.dump(self.data,self.json_file)
+
+            self.json_file.close()
         except FileNotFoundError as error:
             print(error)
         
-        finally:
-            self.json_file.close()
     
     def setUserId(self,user_id):
         self._user_id = user_id+1

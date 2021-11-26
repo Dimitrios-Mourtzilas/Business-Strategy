@@ -140,7 +140,7 @@ class Ui_RegisterWindow(object):
             self.success_registrationDialog.setLayout(self.v_layout)
             self.success_label = QtWidgets.QLabel("User sucessfully registered")
             self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
-            self.button_box.accepted.connect(self.openLoginWindow)
+            self.button_box.accepted.connect(self.success_registrationDialog.accept)
             self.success_registrationDialog.layout().addWidget(self.success_label)
             self.success_registrationDialog.layout().addWidget(self.button_box)
             self.success_registrationDialog.show()
@@ -150,10 +150,7 @@ class Ui_RegisterWindow(object):
             self.database.closeConnection()
             RegisterWindow.close()
 
-    def openLoginWindow(self):
-        self.loginWindow = LoginWindow()
-        self.loginWindow.setupUi()
-        self.loginWindow.runUi()
+
 
         
 

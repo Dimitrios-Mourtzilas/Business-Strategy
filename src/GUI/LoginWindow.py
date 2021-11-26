@@ -17,13 +17,13 @@ from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
 from src.GUI.RegisterWindow import *
-class LoginWindow(QMainWindow):
+class Ui_loginWindow(QMainWindow):
 
-    _count = 0
-    _LoginWindow = None
+
+    _valid_account = False
 
     def __init__(self, parent=None):
-        super(LoginWindow, self).__init__(parent)
+        super().__init__(parent)
 
     def setupUi(self):
         self.setObjectName("MainWindow")
@@ -101,35 +101,72 @@ class LoginWindow(QMainWindow):
         self.register_win.setupUi(self.window)
         self.register_win.runUi(self.window)
 
+    def setValidAccount(self,state=False):
+        self._valid_account = state
+    
+    def getValidAccount(self):
+        return self._valid_account
+    
+    def openUnknownUserWindow(self):
+        self.unknown_window = QtWidgets.QDialog()
+        self.buttons = QtWidgets.QDialogButtonBox.Ok
+        self.unknown_window.setLayout(QtWidgets.QVBoxLayout())
+        self.button_bx = QtWidgets.QDialogButtonBox(self.buttons)
+        self.unknown_label = QtWidgets.QLabel("No user exists in database. Please proceed with registration")
+        self.button_bx.accepted.connect(self.unknown_window.accept)
+        self.unknown_window.layout().addWidget(self.unknown_label)
+        self.unknown_window.layout().addWidget(self.button_bx)
+        self.unknown_window.show()
+
     def connectToDB(self):
         try:
             self.database = Database()
-            self.user = User()
-            self.user_props = self.user.getJson()
-            self.user_data = json.load(self.user_props)
-            if not self.database.establishConnection(self.user_data['user_name'],self.user_data['user_password']):
-                raise Error
-        
-            self.user_data.close()
-            self.window = QMainWindow()
-            self.mainWindow = MainWindow()
-            self.connection = self.database.getConnection()
-            self.mainWindow.setupUi(self.window)
-            self.mainWindow.runUi(self.window)
-            self.close()
+
+            self.user_name = self.user_name_text.text()
+            self.user_password = self.password_text.text()           
+            if  not self.database.establishConnection(self.user_name,self.user_password):
+                self.openWrongCredentialsWindow()
+
+            else:
+               
+                self.window = QMainWindow()
+                self.mainWindow = MainWindow()
+                self.connection = self.database.getConnection()
+                self.mainWindow.setupUi(self.window)
+                self.mainWindow.runUi(self.window)
+                self.close()
 
 
-        except Error:
-            if self.clicked(self._count):
-                self._count+=1
-                self.error_label = QLabel("Bad connection due to invalid credentials")
-                self.error_label.setStyleSheet("color:red")
-                self.verticalLayout.layout().addWidget(self.error_label)
+        except Exception as e:
+            print(e)
+            return
 
-  
+    
+    def openWrongCredentialsWindow(self):
+        self.wrong_cred = QtWidgets.QDialog()
+        self.buttons = QtWidgets.QDialogButtonBox.Ok
+        self.wrong_cred.setLayout(QtWidgets.QVBoxLayout())
+        self.button_bx = QtWidgets.QDialogButtonBox(self.buttons)
+        self.wrong_cred_label = QtWidgets.QLabel("Wrong credentials")
+        self.wrong_cred_label.setStyleSheet('color:red')
+        self.button_bx.accepted.connect(self.wrong_cred.accept)
+        self.wrong_cred.layout().addWidget(self.wrong_cred_label)
+        self.wrong_cred.layout().addWidget(self.button_bx)
+        self.wrong_cred.show()
 
     def clicked(self, count):
         return count == 0
     def runUi(self):
-        self.show()
+            self.show()
+            self.database = Database()
+            try:
+                self.user_data = self.database.fetchUsers()
+                if len(self.user_data) == 0:
+                    self.openUnknownUserWindow()
+            except Exception as e:
+                print(e)
+            
+            finally:
+                self.database.closeConnection()
+            
 

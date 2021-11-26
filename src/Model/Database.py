@@ -104,24 +104,25 @@ class Database:
         return self._pos
 
     def saveUser(self,user):
-        if not isinstance(user, User):
+        if user is None:
             return
         self.user = user
         self.user_data = json.load(self.user.getJson())
-        self._cursor.execute('''
-        insert into user
-        (user_id,first_name,last_name,user_name,user_password,phone_number,email_address)
-        values(?,?,?,?,?,?,?)
-        ''',(self.user_data[self.getPos()]['user_id'],self.user_data[self.getPos()]['first_name'],self.user_data[self.getPos()]['last_name'],self.user_data[self.getPos()]['user_name'],
-        self.user_data[self.getPos()]['user_password'],self.user_data[self.getPos()]['phone_number'],self.user_data[self.getPos()]['email_address']))
-        self._cursor.execute('commit;')
-        self.setPos(1)
-        
-    def setPos(self,pos=0):
-        self._pos +=pos
+        self.len = len(self.user_data) -1 
+        try:
+            self._cursor.execute('''
+            insert into user
+            (user_id,first_name,last_name,user_name,user_password,phone_number,email_address)
+            values(?,?,?,?,?,?,?)
+            ''',(self.user_data[self.len]['user_id'],self.user_data[self.len]['first_name'],self.user_data[self.len]['last_name'],
+            self.user_data[self.len]['user_name'],self.user_data[self.len]['user_password'],self.user_data[self.len]['phone_number'],self.user_data[self.len]['email_address']))
+            self._cursor.execute("commit;")
+            return True
 
-    def getPos(self):
-        return self._pos
+        except Exception as e:
+            print(e)
+            return False
+
     
     def deleteUser(self,user_id):
         self._cursor.execute("delete from user where user_id =" + user_id)

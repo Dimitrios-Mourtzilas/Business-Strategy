@@ -18,18 +18,15 @@ from src.GUI.LoginWindow import *
 # import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import QApplication
 import sys
-from src.Algorithm.DecisionTree import *
 from src.Model.Database import *
-from src.Model.User import *
-from src.Model.Company import *
-from src.Model.Employee import *
+
 from src.GUI.LoginWindow import *
 from src.GUI.MainWindow import *
 def main():
     
     
     app = QApplication(sys.argv)
-    login_window = LoginWindow()
+    login_window = Ui_loginWindow()
     login_window.setupUi()
     login_window.runUi()
     exit(app.exec_())

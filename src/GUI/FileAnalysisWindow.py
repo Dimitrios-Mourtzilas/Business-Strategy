@@ -259,7 +259,6 @@ class Ui_FileAnalysis(object):
         self.warning_label.setStyleSheet('color:green')
         self.warning_window.setLayout(self.verticallyout)
         self.warning_window.layout().addWidget(self.warning_label)
-        self.warning_label.setStyleSheet('color:red')
         self.warning_window.setFixedSize(260, 100)
         self.warning_window.show()
     
