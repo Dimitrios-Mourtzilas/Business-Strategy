@@ -10,6 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.FileAnalysisWindow import Ui_FileAnalysis
+from src.Model.Database import *
 class DataVisualisation(object):
 
     _prop = None
@@ -80,15 +81,28 @@ class DataVisualisation(object):
     def viewGeneratedTree(self):
         if not Ui_FileAnalysis.getCompleted(Ui_FileAnalysis):
             print('Analysis did not complete')
-    def runUi(self,FileAnalysis):
-        FileAnalysis.show()
-        
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    DataVis = QtWidgets.QWidget()
-    ui_data = DataVisualisation()
-    ui_data.setupUi(DataVis)
-    DataVis.show()
-    sys.exit(app.exec_())
+    def runUi(self,DataVisualisation):
+        DataVisualisation.show()
+        self.database = Database()
+        self.file_size = len(self.database.fetchAllFiles())
+        if self.file_size == 0:
+            self.openNoFileImportedWindow(DataVisualisation)
+            
+        
+    def openNoFileImportedWindow(self,DataVisualisation):
+        self.noFileWindow = QtWidgets.QDialog()
+        self.noFileLabel = QtWidgets.QLabel("No file exists in database. Please import file first")
+        self.accept_button = QtWidgets.QDialogButtonBox.Ok
+        self.btn_bx = QtWidgets.QDialogButtonBox(self.accept_button)
+        self.noFileWindow.setLayout(QtWidgets.QVBoxLayout())
+        self.noFileWindow.layout().addWidget(self.noFileLabel)
+        self.noFileWindow.layout().addWidget(self.btn_bx)
+        self.callableWindow = lambda:self.closeWindow(DataVisualisation, self.noFileWindow)
+        self.btn_bx.accepted.connect(self.callableWindow)
+        self.noFileWindow.show()
+        
+    def closeWindow(self,DataVisualisation,window):
+        window.close()
+        DataVisualisation.close()
+

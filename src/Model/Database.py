@@ -93,8 +93,8 @@ class Database:
         return self._cursor.execute("select *from files").fetchall()
 
 
-    def fetchUser(self):
-        return self._cursor.execute('select *form user ').fetchone()
+    def fetchUser(self,user_id):
+        return self._cursor.execute("select *from user where user_id = ?",(user_id,))
     
     def setPos(self,pos):
         self._pos +=pos

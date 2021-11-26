@@ -13,6 +13,8 @@ select *from files;
 delete from files;
 
 
+
+
 create table user(
     user_id int primary key,
     first_name varchar(20) not null,

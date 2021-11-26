@@ -87,6 +87,7 @@ class Ui_loginWindow(QMainWindow):
         'font-family:verdana;'+
         'font-size:15px;}'+
         '')
+        
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

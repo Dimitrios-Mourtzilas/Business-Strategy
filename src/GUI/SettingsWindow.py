@@ -27,10 +27,12 @@ class Ui_Settings(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.display_name_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.first_name_label = QtWidgets.QLabel("First name")
+        self.last_name_label = QtWidgets.QLabel("Last name")
+        self.display_name_label = QtWidgets.QLabel("Display name",self.horizontalLayoutWidget)
         self.display_name_label.setObjectName("display_name_label")
         self.horizontalLayout.addWidget(self.display_name_label)
-        self.full_name_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
+        self.full_name_label = QtWidgets.QLabel("Full name",self.horizontalLayoutWidget)
         self.full_name_label.setObjectName("full_name_label")
         self.horizontalLayout.addWidget(self.full_name_label)
         self.phone_number_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
@@ -85,7 +87,11 @@ class Ui_Settings(object):
         self.callable = lambda:self.deleteAccount(Settings)
         self.delete_account_button.clicked.connect(self.callable)
         self.retranslateUi(Settings)
+        with open("user_props.json","w") as self.json_file:
+            self.data = json.load(self.json_file)
+            self.display_name_text.setText()
         QtCore.QMetaObject.connectSlotsByName(Settings)
+
 
         
     def deleteAccount(self,Settings):
