@@ -77,6 +77,10 @@ class Ui_FileProps(object):
             self.file_prop_size_text.setText(self.file_data[self.len]['file_size'])
             self.file_prop_date_added_text.setText(self.file_data[self.len]['date_added'])
         self.json_file.close()
+    
+    
+    # def deleteFile(self):
+
 
     def retranslateUi(self, FileProps):
         _translate = QtCore.QCoreApplication.translate

@@ -131,7 +131,8 @@ class Ui_RegisterWindow(object):
         self.user.setUserPassword(self.user_password_text.text())
         self.user.setPhoneNumber(self.phone_number_text.text())
         self.user.setUserEmailAddress(self.email_address_text.text())
-        self.file = self.user.setJson()
+        self.user.setActiveAccount(False)
+
         try:
             self.database.saveUser(self.user)
             self.success_registrationDialog = QtWidgets.QDialog()

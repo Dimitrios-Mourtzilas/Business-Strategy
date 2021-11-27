@@ -12,6 +12,8 @@ select *from files;
 
 delete from files;
 
+alter table user
+add active_account boolean DEFAULT false;
 
 
 
@@ -24,3 +26,7 @@ create table user(
     phone_number varchar(15) not null,
     email_address varchar(25) DEFAULT ""
 );
+
+update  user
+set active_account = false
+where user_name = 'root';

@@ -17,6 +17,7 @@ from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
 from src.GUI.RegisterWindow import *
+from hashlib import md5
 class Ui_loginWindow(QMainWindow):
 
 
@@ -71,7 +72,6 @@ class Ui_loginWindow(QMainWindow):
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
         self.retranslateUi()
-        QtCore.QMetaObject.connectSlotsByName(self)
         self.setStyleSheet('QLineEdit{'+
         'border:1px groove black;'+
         'border-radius:4px;'+
@@ -87,6 +87,7 @@ class Ui_loginWindow(QMainWindow):
         'font-family:verdana;'+
         'font-size:15px;}'+
         '')
+        QtCore.QMetaObject.connectSlotsByName(self)
         
 
     def retranslateUi(self):
@@ -125,17 +126,26 @@ class Ui_loginWindow(QMainWindow):
 
             self.user_name = self.user_name_text.text()
             self.user_password = self.password_text.text()           
-            if  not self.database.establishConnection(self.user_name,self.user_password):
-                self.openWrongCredentialsWindow()
-
+            self.users = self.database.fetchUsers()
+            self.string = md5(self.password_text.text().encode())
+            self.hashed_value = self.string.hexdigest()
+            for user in self.users:
+                if not user[3].__eq__(self.user_name_text.text()) or not user[4].__eq__(self.hashed_value):
+                    print(user[4].__eq__(self.hashed_value))
+                    self.openWrongCredentialsWindow()
+                    self.database.closeConnection()
+                    break
             else:
-               
+
+                self.database.runRandomQuery("update  user set active_account = true where user_name = ? and user_password = ?"
+                ,(self.user_name_text.text(),self.hashed_value))        
+
                 self.window = QMainWindow()
                 self.mainWindow = MainWindow()
-                self.connection = self.database.getConnection()
                 self.mainWindow.setupUi(self.window)
                 self.mainWindow.runUi(self.window)
                 self.close()
+            
 
 
         except Exception as e:
@@ -155,8 +165,8 @@ class Ui_loginWindow(QMainWindow):
         self.wrong_cred.layout().addWidget(self.button_bx)
         self.wrong_cred.show()
 
-    def clicked(self, count):
-        return count == 0
+
+    
     def runUi(self):
             self.show()
             self.database = Database()

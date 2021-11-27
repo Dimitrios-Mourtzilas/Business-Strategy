@@ -87,9 +87,11 @@ class Ui_Settings(object):
         self.callable = lambda:self.deleteAccount(Settings)
         self.delete_account_button.clicked.connect(self.callable)
         self.retranslateUi(Settings)
-        with open("user_props.json","w") as self.json_file:
-            self.data = json.load(self.json_file)
-            self.display_name_text.setText()
+        # with open("user_props.json","r") as self.json_file:
+        #     self.data = json.load(self.json_file)
+        #     self.display_name_text.setText()
+
+        # self.json_file.close()
         QtCore.QMetaObject.connectSlotsByName(Settings)
 
 
@@ -102,9 +104,20 @@ class Ui_Settings(object):
         self.json_file.close()
         print(self.user_data[len(self.user_data)-1]['user_id'])
         try:
-    
-            self.database.runRandomQuery("delete from user where user_id = ?",(self.user_data[len(self.user_data)-1]['user_id'],))
-            
+
+            with open("user_props.json","r") as self.json_file:
+                self.data = json.load(self.json_file)
+            self.json_file.close()
+
+            for i in range(1,len(self.data)):
+                if self.data[i]['active_account'] == True:
+                      
+                    self.database.deleteUser("delete from user where user_id = ?",(self.user_data[i]['user_id'],))
+                    del self.data[i]
+
+                    break
+                        
+            self.json_file.close()
             self.deleteAccountWindow(Settings)    
         except Exception as e:
             print(e)
@@ -114,6 +127,7 @@ class Ui_Settings(object):
         Settings.close()
         window.close()
         exit(0)
+
     def deleteAccountWindow(self,Settings):
         self.deleteWindow = QtWidgets.QDialog()
         self.buttons = QtWidgets.QDialogButtonBox.Ok

@@ -85,10 +85,12 @@ class MainWindow(object):
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
         self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
-        self.log_out_button.clicked.connect(MainWin.close)
+        self.callableMainWindow = lambda:self.closeMainWindow(MainWin)
+        self.log_out_button.clicked.connect(self.callableMainWindow)
         self.retranslateUi(MainWin)
         QtCore.QMetaObject.connectSlotsByName(MainWin)
         
+    
         self.settings_button.clicked.connect(self.openSettings)
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
@@ -121,7 +123,21 @@ class MainWindow(object):
         self.ui_data.setupUi(self.dataVis)
         self.ui_data.runUi(self.dataVis)
 
+    def closeMainWindow(self,MainWin):
+        with open("user_props.json","r") as self.json_file:
+            self.data = json.load(self.json_file)
+        self.json_file.close()
 
+        with open("user_props.json","w") as self.json_file:
+            for i in range(1,len(self.data)):
+                if self.data[i]['active_account'] == True:
+                    self.data[i]['active_account'] = False
+
+                    json.dump(self.data[i],self.json_file)
+                    break
+        self.json_file.close()
+        MainWin.close()
+        
         
     def retranslateUi(self, MainWin):
         _translate = QtCore.QCoreApplication.translate

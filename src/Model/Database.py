@@ -23,10 +23,7 @@ class Database:
             if self.user_name.__eq__(values[0]) and self.user_password.__eq__(values[1]):
                 return True
         return False
-    
-    def getConnection(self):
-        return self
- 
+
  
     def runRandomQuery(self,query,param=None):
         self.query = query
@@ -91,6 +88,7 @@ class Database:
         
     def fetchAllFiles(self):
         return self._cursor.execute("select *from files").fetchall()
+        
 
 
     def fetchUser(self,user_id):
@@ -106,15 +104,15 @@ class Database:
         if user is None:
             return
         self.user = user
-        self.user_data = json.load(self.user.getJson())
-        self.len = len(self.user_data) -1 
         try:
+            self.hashed_value  = md5(self.user.getUserPassword().encode())
+            self.password_digest = self.hashed_value.hexdigest()
             self._cursor.execute('''
             insert into user
-            (user_id,first_name,last_name,user_name,user_password,phone_number,email_address)
-            values(?,?,?,?,?,?,?)
-            ''',(self.user_data[self.len]['user_id'],self.user_data[self.len]['first_name'],self.user_data[self.len]['last_name'],
-            self.user_data[self.len]['user_name'],self.user_data[self.len]['user_password'],self.user_data[self.len]['phone_number'],self.user_data[self.len]['email_address']))
+            (user_id,first_name,last_name,user_name,user_password,phone_number,email_address,active_account)
+            values(?,?,?,?,?,?,?,?)
+            ''',(self.user.getUserId(),self.user.getFirstName(),self.user.getLastName(),self.user.getUserName(),self.password_digest,
+            self.user.getUserPhoneNumber(),self.user.getUserEmailAddress(),self.user.getActiveAccount()))
             self._cursor.execute("commit;")
             return True
 
@@ -126,6 +124,15 @@ class Database:
     def deleteUser(self,user_id):
         self._cursor.execute("delete from user where user_id =" + user_id)
         self._cursor.execute("commit")
+        with open("user_props.json","w") as self.json_file:
+            self.data = json.load(self.json_file)
+            for usr in range(1,len(self.data)):
+                if self.data[usr]['user_id'] == user_id:
+                    del self.data[usr]
+                    break
+
+        self.json_file.close()
+
 
     def closeConnection(self):
         self._cursor.close()
