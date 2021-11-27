@@ -18,9 +18,11 @@ from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
 from src.GUI.RegisterWindow import *
 from hashlib import md5
+
+
 class Ui_loginWindow(QMainWindow):
 
-
+    _connected = False
     _valid_account = False
 
     def __init__(self, parent=None):
@@ -130,11 +132,13 @@ class Ui_loginWindow(QMainWindow):
             self.string = md5(self.password_text.text().encode())
             self.hashed_value = self.string.hexdigest()
             for user in self.users:
-                if not user[3].__eq__(self.user_name_text.text()) or not user[4].__eq__(self.hashed_value):
-                    print(user[4].__eq__(self.hashed_value))
+                if  user[3].__eq__(self.user_name_text.text()) and user[4].__eq__(self.hashed_value):
+                    self._connected= True
+                    break
+            if not self._connected:
                     self.openWrongCredentialsWindow()
                     self.database.closeConnection()
-                    break
+
             else:
 
                 self.database.runRandomQuery("update  user set active_account = true where user_name = ? and user_password = ?"
@@ -142,7 +146,7 @@ class Ui_loginWindow(QMainWindow):
 
                 self.window = QMainWindow()
                 self.mainWindow = MainWindow()
-                self.mainWindow.setupUi(self.window)
+                self.mainWindow.setupUi(self.window,self.password_text.text())
                 self.mainWindow.runUi(self.window)
                 self.close()
             

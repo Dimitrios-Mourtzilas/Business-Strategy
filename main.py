@@ -4,13 +4,11 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-from src.GUI.LoginWindow import *
-
 from PyQt5.QtWidgets import QApplication
 import sys
-
 from src.GUI.LoginWindow import *
 def main():
+    
     
     
     app = QApplication(sys.argv)

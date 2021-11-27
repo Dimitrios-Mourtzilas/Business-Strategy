@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.User import *
 from src.Model.Database import *
 class Ui_Settings(object):
-    def setupUi(self, Settings):
+    def setupUi(self, Settings,user_password):
         Settings.setObjectName("Settings")
         Settings.resize(729, 527)
         self.account_label = QtWidgets.QLabel(Settings)
@@ -84,43 +84,36 @@ class Ui_Settings(object):
         self.full_name_text.setEnabled(False)
         self.phone_number_text.setEnabled(False)
         self.email_address_text.setEnabled(False)
-        self.callable = lambda:self.deleteAccount(Settings)
+        self.callable = lambda:self.deleteAccount(Settings,user_password)
         self.delete_account_button.clicked.connect(self.callable)
         self.retranslateUi(Settings)
-        # with open("user_props.json","r") as self.json_file:
-        #     self.data = json.load(self.json_file)
-        #     self.display_name_text.setText()
-
-        # self.json_file.close()
+        self.database = Database()
+        self.users = self.database.fetchUsers()
+        self.hashed_string = md5(user_password.encode()).hexdigest()
+        for user in self.users:
+            if user[4].__eq__(self.hashed_string):
+                self.display_name_text.setText(user[3])
+                self.full_name_text.setText(user[1]+user[2])
+                self.phone_number_text.setText(user[5])
+                self.email_address_text.setText(user[6])
+                break
+        self.database.closeConnection()
         QtCore.QMetaObject.connectSlotsByName(Settings)
 
 
         
-    def deleteAccount(self,Settings):
+    def deleteAccount(self,Settings,user_password):
+        self.user = User
         self.database = Database()
-        with open("user_props.json","r") as self.json_file:
-            self.user_data = json.load(self.json_file)
+        self.users = self.database.fetchUsers()
+        self.value = md5(user_password.encode())
+        self.hashed  = self.value.hexdigest()
+        for user in self.users:
+            if user[4].__eq__(self.hashed):
+                self.database.runRandomQuery("delete from user where user_password= ?",(self.hashed,))
+                self.deleteAccountWindow(Settings)
+                break
 
-        self.json_file.close()
-        print(self.user_data[len(self.user_data)-1]['user_id'])
-        try:
-
-            with open("user_props.json","r") as self.json_file:
-                self.data = json.load(self.json_file)
-            self.json_file.close()
-
-            for i in range(1,len(self.data)):
-                if self.data[i]['active_account'] == True:
-                      
-                    self.database.deleteUser("delete from user where user_id = ?",(self.user_data[i]['user_id'],))
-                    del self.data[i]
-
-                    break
-                        
-            self.json_file.close()
-            self.deleteAccountWindow(Settings)    
-        except Exception as e:
-            print(e)
         
     
     def closeWindow(self,Settings,window):
@@ -153,11 +146,11 @@ class Ui_Settings(object):
         Settings.show()
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Settings = QtWidgets.QWidget()
-    ui = Ui_Settings()
-    ui.setupUi(Settings)
-    ui.runUi(Settings)
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     Settings = QtWidgets.QWidget()
+#     ui = Ui_Settings()
+#     ui.setupUi(Settings)
+#     ui.runUi(Settings)
+#     sys.exit(app.exec_())

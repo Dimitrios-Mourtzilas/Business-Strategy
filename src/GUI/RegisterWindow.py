@@ -14,6 +14,7 @@ from src.Model.User import *
 from src.GUI.LoginWindow import *
 
 class Ui_RegisterWindow(object):
+    
     def setupUi(self, RegisterWindow):
         RegisterWindow.setObjectName("RegisterWindow")
         RegisterWindow.resize(687, 579)
@@ -121,10 +122,23 @@ class Ui_RegisterWindow(object):
         self.register_button.clicked.connect(self.callableRegister)
         self.retranslateUi(RegisterWindow)
         QtCore.QMetaObject.connectSlotsByName(RegisterWindow)
-        
+
+    def openWarningDialog(self):
+        self.warning_dialog = QtWidgets.QDialog()
+        self.btns = QtWidgets.QDialogButtonBox.Ok
+        self.warning_dialog.setLayout(QtWidgets.QVBoxLayout())
+        self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
+        self.btn_bx.accepted.connect(self.warning_dialog.close)
+        self.wanring_label = QtWidgets.QLabel("Password already exists")
+        self.warning_dialog.layout().addWidget(self.wanring_label)
+        self.warning_dialog.layout().addWidget(self.btn_bx)
+        self.warning_dialog.show()
+
     def registerUser(self,RegisterWindow):
         self.database = Database()
         self.user = User()
+
+        self.user.setUserId()
         self.user.setFirstName(self.first_name_text.text())
         self.user.setLastName(self.last_name_text.text())
         self.user.setUserName(self.user_name_text.text())
@@ -134,23 +148,34 @@ class Ui_RegisterWindow(object):
         self.user.setActiveAccount(False)
 
         try:
-            self.database.saveUser(self.user)
-            self.success_registrationDialog = QtWidgets.QDialog()
-            self.btns = QtWidgets.QDialogButtonBox.Ok
-            self.v_layout = QtWidgets.QHBoxLayout()
-            self.success_registrationDialog.setLayout(self.v_layout)
-            self.success_label = QtWidgets.QLabel("User sucessfully registered")
-            self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
-            self.button_box.accepted.connect(self.success_registrationDialog.accept)
-            self.success_registrationDialog.layout().addWidget(self.success_label)
-            self.success_registrationDialog.layout().addWidget(self.button_box)
-            self.success_registrationDialog.show()
+            self.users = self.database.fetchUsers()
+            self.string = md5(self.user.getUserPassword().encode())
+            self.hashed = self.string.hexdigest()
+            self.correct=False
+            for user in self.users:
+                if user[4].__eq__(self.hashed):
+                    self.correct = True
+                    break
+            if self.correct == True:
+                self.openWarningDialog()
+            else:
+
+                self.database.saveUser(self.user)
+                self.success_registrationDialog = QtWidgets.QDialog()
+                self.btns = QtWidgets.QDialogButtonBox.Ok
+                self.v_layout = QtWidgets.QHBoxLayout()
+                self.success_registrationDialog.setLayout(self.v_layout)
+                self.success_label = QtWidgets.QLabel("User sucessfully registered")
+                self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
+                self.button_box.accepted.connect(self.success_registrationDialog.accept)
+                self.success_registrationDialog.layout().addWidget(self.success_label)
+                self.success_registrationDialog.layout().addWidget(self.button_box)
+                self.success_registrationDialog.show()
+                self.database.closeConnection()
+                RegisterWindow.close()
         except Exception as e:
             print(e)
-        finally:
-            self.database.closeConnection()
-            RegisterWindow.close()
-
+    
 
 
         

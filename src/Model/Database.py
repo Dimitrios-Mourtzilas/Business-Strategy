@@ -121,17 +121,7 @@ class Database:
             return False
 
     
-    def deleteUser(self,user_id):
-        self._cursor.execute("delete from user where user_id =" + user_id)
-        self._cursor.execute("commit")
-        with open("user_props.json","w") as self.json_file:
-            self.data = json.load(self.json_file)
-            for usr in range(1,len(self.data)):
-                if self.data[usr]['user_id'] == user_id:
-                    del self.data[usr]
-                    break
-
-        self.json_file.close()
+   
 
 
     def closeConnection(self):

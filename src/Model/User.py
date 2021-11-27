@@ -33,9 +33,9 @@ class User:
     def setUserEmailAddress(self,email_address=""):
         self._email_address = email_address
 
-    def getJson(self):
-        self.json_file = open("user_props.json","r+")
-        return self.json_file
+    # def getJson(self):
+    #     self.json_file = open("user_props.json","r+")
+    #     return self.json_file
 
     def setActiveAccount(self,account_state=False):
         self._active_account = account_state
@@ -72,8 +72,8 @@ class User:
     #         print(error)
         
     
-    def setUserId(self,user_id):
-        self._user_id = user_id+1
+    def setUserId(self):
+        self._user_id = random.random()
 
     def getUserId(self):
         return self._user_id

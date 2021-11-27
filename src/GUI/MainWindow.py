@@ -16,7 +16,7 @@ from src.GUI.FileAnalysisWindow import *
 from src.GUI.AboutWindow import Ui_About
 from src.GUI.DataVisualisation import *
 class MainWindow(object):
-    def setupUi(self,MainWin):
+    def setupUi(self,MainWin,user_password):
         MainWin.setObjectName("Form")
         MainWin.resize(914, 591)
         MainWin.setStyleSheet('*{background-color:#6CB4EE}')
@@ -90,8 +90,9 @@ class MainWindow(object):
         self.retranslateUi(MainWin)
         QtCore.QMetaObject.connectSlotsByName(MainWin)
         
-    
-        self.settings_button.clicked.connect(self.openSettings)
+        
+        self.callableSettings = lambda:self.openSettings(user_password)
+        self.settings_button.clicked.connect(self.callableSettings)
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
@@ -110,10 +111,11 @@ class MainWindow(object):
         self.file_analysis_win.setupUi(self.window)
         self.file_analysis_win.runUi(self.window)
     
-    def openSettings(self,user):
+    def openSettings(self,user_password):
+
         self.window = QtWidgets.QMainWindow()
         self.settingsWindow = Ui_Settings()
-        self.settingsWindow.setupUi(self.window)
+        self.settingsWindow.setupUi(self.window,user_password)
         self.settingsWindow.runUi(self.window)
     
     def openVisualisation(self):
@@ -124,18 +126,6 @@ class MainWindow(object):
         self.ui_data.runUi(self.dataVis)
 
     def closeMainWindow(self,MainWin):
-        with open("user_props.json","r") as self.json_file:
-            self.data = json.load(self.json_file)
-        self.json_file.close()
-
-        with open("user_props.json","w") as self.json_file:
-            for i in range(1,len(self.data)):
-                if self.data[i]['active_account'] == True:
-                    self.data[i]['active_account'] = False
-
-                    json.dump(self.data[i],self.json_file)
-                    break
-        self.json_file.close()
         MainWin.close()
         
         
