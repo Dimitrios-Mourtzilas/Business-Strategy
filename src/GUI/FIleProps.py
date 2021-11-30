@@ -15,6 +15,7 @@ class Ui_FileProps(object):
     def setupUi(self, FileProps):
         FileProps.setObjectName("FileProps")
         FileProps.resize(597, 433)
+        FileProps.setStyleSheet("*{background-color:#6CB4EE}")
         self.horizontalFrame = QtWidgets.QFrame(FileProps)
         self.horizontalFrame.setGeometry(QtCore.QRect(10, 90, 571, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
@@ -66,20 +67,11 @@ class Ui_FileProps(object):
         self.retranslateUi(FileProps)
         QtCore.QMetaObject.connectSlotsByName(FileProps)
 
-    def setFileProps(self):
-
-        with open("file_props.json","r") as self.json_file:
-            self.file_data = json.load(self.json_file)
-            self.len = len(self.file_data) -1 
-            print(self.file_data[self.len]['file_name'])
-            self.file_prop_name_label.setText("File name")
-            self.file_prop_name_text.setText(self.file_data[self.len]['file_name'])
-            self.file_prop_size_text.setText(self.file_data[self.len]['file_size'])
-            self.file_prop_date_added_text.setText(self.file_data[self.len]['date_added'])
-        self.json_file.close()
-    
-    
-    # def deleteFile(self):
+    def setFileProps(self,file):
+        self.file = file
+        self.file_prop_name_text.setText(self.file.getFileName())
+        self.file_prop_size_text.setText(str(self.file.getFileSize()))
+        self.file_prop_date_added_text.setText(self.file.getDateAdded())
 
 
     def retranslateUi(self, FileProps):
@@ -93,12 +85,3 @@ class Ui_FileProps(object):
     def runUi(self,FileProps):
         FileProps.show()
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    FileProps = QtWidgets.QWidget()
-    ui = Ui_FileProps()
-    ui.setupUi(FileProps)
-    FileProps.show()
-    sys.exit(app.exec_())

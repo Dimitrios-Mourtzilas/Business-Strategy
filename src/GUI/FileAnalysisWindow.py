@@ -16,15 +16,18 @@ from src.GUI.FIleProps import *
 import json
 from src.Model.File import *
 from src.Model.Database import *
-# from src.GUI.DataVisualisation import *
+from src.Algorithm.DecisionTree import *
 class Ui_FileAnalysis(object):
 
-    _flag = 0
+    _flag = False
     _completed = False
-    
-    def setupUi(self, FileAnalysis):
+    _pressed = False
+    _file = ""
+
+    def setupUi(self, FileAnalysis,algo):
         FileAnalysis.setObjectName("FileAnalysis")
         FileAnalysis.resize(789, 536)
+        FileAnalysis.setStyleSheet("*{background-color:#6CB4EE}")
         self.frame = QtWidgets.QFrame(FileAnalysis)
         self.frame.setGeometry(QtCore.QRect(10, 10, 761, 511))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -93,29 +96,31 @@ class Ui_FileAnalysis(object):
         self.open_file_button.clicked.connect(self.openFileDialog)
         self.cancel_button.clicked.connect(self.cancelFile)
         self.start_analysis_button.clicked.connect(self.fileAnalysis)
+        self.algo = algo
         
-
         self.retranslateUi(FileAnalysis)
         QtCore.QMetaObject.connectSlotsByName(FileAnalysis)
-
+    
+    
     def importFileProps(self):
-        self._flag = 1
+
         if not self.checkFileProps():
             self.openWrongFileFormatWindow()
         elif not self.checkForEmptyFile():
             try:
-            
-               
-                self.file  = File()
-                self.file.setFileId()
-                self.file.setFileName(self.file_name_text.text())
-                self.file.setFileSize(self.file_size_text.text())
-                self.file.setDateAdded(self.date_added_text.text())
-                self.file.setJson()
+
+
+                self._file  = File()
+                self._file.setFileId()
+                self._file.setFileName(self.file_name_text.text())
+                self._file.setFileSize(self.file_size_text.text())
+                self._file.setDateAdded(self.date_added_text.text())
+
                 self.database = Database()
                 self.count =0
-        
-                if self.database.saveFile(self.file):
+    
+                if self.database.saveFile(self._file):
+                    self.setFlag(True)
                     self.buildInfoDialog()            
                 else:
                     print("File could not be imported")    
@@ -150,20 +155,12 @@ class Ui_FileAnalysis(object):
             self.noFileSelectedWindow()
 
 
-
-        # self.win = QtWidgets.QWidget()
-        # self.filePropsWin = Ui_FileProps()
-        # self.filePropsWin.setupUi(self.win)
-        # self.filePropsWin.setFileProps()
-        # self.filePropsWin.runUi(self.win)
-
- 
     def openFilePropWindow(self):
         self.info_window.hide()
         self.win = QtWidgets.QWidget()
         self.filePropsWin = Ui_FileProps()
         self.filePropsWin.setupUi(self.win)
-        self.filePropsWin.setFileProps()
+        self.filePropsWin.setFileProps(self._file)
         self.filePropsWin.runUi(self.win)
 
 
@@ -199,7 +196,6 @@ class Ui_FileAnalysis(object):
         self.file_name_text.setText(self.file_name[0])
         self.file_size_text.setText(str(os.path.getsize(self.file_name[0]))+"bytes")
         self.date_added_text.setText(str(date.today()))
-    
 
     def cancelFile(self):
         if self.checkForEmptyFile():
@@ -210,33 +206,52 @@ class Ui_FileAnalysis(object):
             self.date_added_text.setText("")
 
     
-    def fileAnalysis(self):
+    def fileAnalysis(self,algo):
 
         if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
-            print("No file selected")
+            self.no_file_selected_window = QtWidgets.QDialog()
+            self.no_file_selected_label = QtWidgets.QLabel("No file was selected")
+            self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok)
+            self.btn_box.accepted.connect(self.no_file_selected_window.close)
+            self.no_file_selected_window.setLayout(QtWidgets.QVBoxLayout())
+            self.no_file_selected_window.layout().addWidget(self.no_file_selected_label)
+            self.no_file_selected_window.layout().addWidget(self.btn_box)
+            self.no_file_selected_window.show()
             return
-        elif self._flag == 0:
-            print("Please first import your file")
+
+        elif self.getFlag() == False:
+            self.file_not_imported = QtWidgets.QDialog()
+            self.file_no_imported_label = QtWidgets.QLabel("File was not imported")
+            self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok)
+            self.btn_box.accepted.connect(self.file_not_imported.close)
+            self.file_not_imported.setLayout(QtWidgets.QVBoxLayout())
+            self.file_not_imported.layout().addWidget(self.file_no_imported_label)
+            self.file_not_imported.layout().addWidget(self.btn_box)
+            self.file_not_imported.show()
         else:
-            self.count =0 
-            while self.count <100:
+
+            self.algo.setprops(self._file.getFileName())
+
+            while self.progressBar.value() <100:
                     self.progressBar.show()
-                    self.progressBar.setValue(self.count+25)
-                    self.count+=25
+                    self.progressBar.setValue(self.count+10)
+                    self.count+=10
                     time.sleep(1)
-        self._flag=0
+            
+            if  self.count == 100:
+            
+                self.algo.setCompleted(True)
+                self.analysisCompletionWindow()
+        self.setFlag(False)
                     
-        if self.progressBar.value() == 100:
-            self.setCompleted(True)
-            self.analysisCompletionWindow()
     
-    def setCompleted(self,completed=False):
-        self._completed = completed
+    def setFlag(self,flag_status):
+        self._flag = flag_status
     
-    @staticmethod
-    def getCompleted(self):
-        return self._completed
-    
+    def getFlag(self):
+        return self._flag
+
+
     def noFileSelectedWindow(self):
         self.file_error_window = QtWidgets.QDialog()
         self.file_error_window.setWindowTitle("File error window")
@@ -252,16 +267,24 @@ class Ui_FileAnalysis(object):
 
         
     def analysisCompletionWindow(self):
-        self.warning_window = QtWidgets.QWidget()
+
+        self.warning_window = QtWidgets.QDialog()
         self.warning_label = QtWidgets.QLabel("Analysis successfully completed",None)
         self.warning_window.move(self.verticalFrame.width(),self.verticalFrame.height())
         self.verticallyout = QtWidgets.QVBoxLayout()
         self.warning_label.setStyleSheet('color:green')
+        self.btns = QtWidgets.QDialogButtonBox.Ok
+        self.btn_box = QtWidgets.QDialogButtonBox(self.btns)
         self.warning_window.setLayout(self.verticallyout)
         self.warning_window.layout().addWidget(self.warning_label)
+        self.warning_window.layout().addWidget(self.btn_box)
+        # self.btn_box.accepted.connect(self.showAnalysisReport)
         self.warning_window.setFixedSize(260, 100)
         self.warning_window.show()
     
+    # def showAnalysisReport(self):
+
+
     def runUi(sefl,FileAnalysis):
         FileAnalysis.show()
         

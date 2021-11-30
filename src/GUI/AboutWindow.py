@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_About(object):
     def setupUi(self, About):
         About.setObjectName("About")
+        AboutWindow.setStyleSheet("*{background-color:#6CB4EE;}")
         About.setFixedSize(400, 300)
         self.verticalFrame = QtWidgets.QFrame(About)
         self.verticalFrame.setGeometry(QtCore.QRect(10, 10, 381, 281))

@@ -18,6 +18,7 @@ class Ui_RegisterWindow(object):
     def setupUi(self, RegisterWindow):
         RegisterWindow.setObjectName("RegisterWindow")
         RegisterWindow.resize(687, 579)
+        RegisterWindow.setStyleSheet("*{background-color:#6CB4EE;}")
         self.verticalFrame = QtWidgets.QFrame(RegisterWindow)
         self.verticalFrame.setGeometry(QtCore.QRect(40, 60, 611, 411))
         self.verticalFrame.setObjectName("verticalFrame")

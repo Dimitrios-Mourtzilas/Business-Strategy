@@ -31,13 +31,17 @@ class Database:
             if param == None:
                 if not self._cursor.execute(self.query):
                     raise Exception('Could not execute query')
+
             else:
                 if not self._cursor.execute(self.query,param):
                     raise Exception('Could not execute query')
             self._cursor.execute("commit;")
         except Exception as e:
             print(e)
-            
+        
+    
+        
+
     
     def fetchUsers(self):
         return self._cursor.execute("select *from user").fetchall()
@@ -74,12 +78,9 @@ class Database:
     def saveFile(self,file):
         try:
             self.file = file
-            self.data = json.load(self.file.getJson())
-            self.len = len(self.data) -1 
-            print(self.data[self.len]['file_id'])
             self._cursor.execute("insert into files"+
                 "(file_id,file_name,file_size,date_added)"+
-                "values(?,?,?,?)",(self.data[self.len]['file_id'],self.data[self.len]['file_name'],self.data[self.len]['file_size'],self.data[self.len]['date_added']))
+                "values(?,?,?,?)",(self.file.getFileId(),self.file.getFileName(),self.file.getFileSize(),self.file.getDateAdded()))
             self._cursor.execute("commit;")
             return True
         except Exception as e:

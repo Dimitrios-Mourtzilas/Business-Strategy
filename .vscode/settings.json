@@ -3,7 +3,7 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "Project",
+            "name": "Connection",
             "database": "${workspaceFolder:Business-Strategy}/business_model.db"
         }
     ],

@@ -14,6 +14,7 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(949, 691)
+        Form.setStyleSheet("*{background-color:#6CB4EE;}")
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(10, 10, 921, 671))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
