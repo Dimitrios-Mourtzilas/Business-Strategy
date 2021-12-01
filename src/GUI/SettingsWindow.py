@@ -15,7 +15,7 @@ class Ui_Settings(object):
     def setupUi(self, Settings,user_password):
         Settings.setObjectName("Settings")
         Settings.resize(729, 527)
-        RegisterWindow.setStyleSheet("*background-color:#6CB4EE;}")
+        Settings.setStyleSheet("*background-color:#6CB4EE;}")
         self.account_label = QtWidgets.QLabel(Settings)
         self.account_label.setGeometry(QtCore.QRect(60, 30, 91, 41))
         font = QtGui.QFont()
