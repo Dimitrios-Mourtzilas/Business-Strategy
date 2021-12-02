@@ -11,18 +11,18 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.User import *
 from src.Model.Database import *
-class Ui_Settings(object):
-    def setupUi(self, Settings,user_password):
-        Settings.setObjectName("Settings")
-        Settings.resize(729, 527)
-        Settings.setStyleSheet("*background-color:#6CB4EE;}")
-        self.account_label = QtWidgets.QLabel(Settings)
+
+class Ui_Settings(QtWidgets.QWidget):
+    def setupUi(self,user_password):
+        self.setObjectName("SettingsWindow")
+        self.resize(729, 527)
+        self.account_label = QtWidgets.QLabel(self)
         self.account_label.setGeometry(QtCore.QRect(60, 30, 91, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.account_label.setFont(font)
         self.account_label.setObjectName("account_label")
-        self.horizontalLayoutWidget = QtWidgets.QWidget(Settings)
+        self.horizontalLayoutWidget = QtWidgets.QWidget(self)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(60, 100, 601, 41))
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget)
@@ -42,7 +42,7 @@ class Ui_Settings(object):
         self.email_address_label = QtWidgets.QLabel(self.horizontalLayoutWidget)
         self.email_address_label.setObjectName("email_address_label")
         self.horizontalLayout.addWidget(self.email_address_label)
-        self.horizontalLayoutWidget_2 = QtWidgets.QWidget(Settings)
+        self.horizontalLayoutWidget_2 = QtWidgets.QWidget(self)
         self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(60, 150, 601, 80))
         self.horizontalLayoutWidget_2.setObjectName("horizontalLayoutWidget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_2)
@@ -60,7 +60,7 @@ class Ui_Settings(object):
         self.email_address_text = QtWidgets.QLineEdit(self.horizontalLayoutWidget_2)
         self.email_address_text.setObjectName("email_address_text")
         self.horizontalLayout_2.addWidget(self.email_address_text)
-        self.horizontalLayoutWidget_3 = QtWidgets.QWidget(Settings)
+        self.horizontalLayoutWidget_3 = QtWidgets.QWidget(self)
         self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(60, 300, 611, 71))
         self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_3)
@@ -78,18 +78,18 @@ class Ui_Settings(object):
         self.horizontalLayout_3.addWidget(self.delete_account_button)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
-        self.delete_account_label = QtWidgets.QLabel(Settings)
+        self.delete_account_label = QtWidgets.QLabel(self)
         self.delete_account_label.setGeometry(QtCore.QRect(60, 270, 111, 17))
         self.delete_account_label.setObjectName("delete_account_label")
         self.display_name_text.setEnabled(False)
         self.full_name_text.setEnabled(False)
         self.phone_number_text.setEnabled(False)
         self.email_address_text.setEnabled(False)
-        self.callable = lambda:self.deleteAccount(Settings,user_password)
+        self.callable = lambda:self.deleteAccount(user_password)
         self.delete_account_button.clicked.connect(self.callable)
-        self.retranslateUi(Settings)
+        self.retranslateUi()
         self.database = Database()
-        self.users = self.database.fetchUsers()
+        self.users = self.database.fetchAllUsers()
         self.hashed_string = md5(user_password.encode()).hexdigest()
         for user in self.users:
             if user[4].__eq__(self.hashed_string):
@@ -99,59 +99,65 @@ class Ui_Settings(object):
                 self.email_address_text.setText(user[6])
                 break
         self.database.closeConnection()
-        QtCore.QMetaObject.connectSlotsByName(Settings)
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet(
+  
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
+    
+        'QLineEdit{'+
+        'color:black;}'+
+        ''+
+        
+    
+        'QLabel{'+
+        'font-family:verdana;'+
+        'font-size:15px;}'+
+        ''
+        )
 
 
         
-    def deleteAccount(self,Settings,user_password):
+    def deleteAccount(self,user_password):
         self.user = User
         self.database = Database()
-        self.users = self.database.fetchUsers()
+        self.users = self.database.fetchAllUsers()
         self.value = md5(user_password.encode())
         self.hashed  = self.value.hexdigest()
         for user in self.users:
             if user[4].__eq__(self.hashed):
                 self.database.runRandomQuery("delete from user where user_password= ?",(self.hashed,))
-                self.deleteAccountWindow(Settings)
+                self.deleteAccountWindow()
                 break
 
         
     
-    def closeWindow(self,Settings,window):
-        Settings.close()
+    def closeWindow(self,window):
+        self.close()
         window.close()
         exit(0)
 
-    def deleteAccountWindow(self,Settings):
+    def deleteAccountWindow(self):
         self.deleteWindow = QtWidgets.QDialog()
         self.buttons = QtWidgets.QDialogButtonBox.Ok
         self.deleteWindow.setLayout(QtWidgets.QVBoxLayout())
         self.button_bx = QtWidgets.QDialogButtonBox(self.buttons)
         self.deleteWindow_label = QtWidgets.QLabel("Account successfully deleted")
-        self.callableExit = lambda:self.closeWindow(Settings,self.deleteWindow)
+        self.callableExit = lambda:self.closeWindow(self.deleteWindow)
         self.button_bx.accepted.connect(self.callableExit)
         self.deleteWindow.layout().addWidget(self.deleteWindow_label)
         self.deleteWindow.layout().addWidget(self.button_bx)
         self.deleteWindow.show()
             
-    def retranslateUi(self, Settings):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Settings.setWindowTitle(_translate("Form", "Settings"))       
-        self.phone_number_label.setText(_translate("Form", "Phone number"))
-        self.email_address_label.setText(_translate("Form", "Email address"))
-        self.delete_account_info_label.setText(_translate("Form", "This action will delete all of your personal information. Are you sure? "))
-        self.delete_account_button.setText(_translate("Form", "Delete anyway"))
-        self.delete_account_label.setText(_translate("Form", "Delete account"))
+        self.setWindowTitle(_translate("SettingsWindow", "Settings Window"))       
+        self.phone_number_label.setText(_translate("SettingsWindow", "Phone number"))
+        self.email_address_label.setText(_translate("SettingsWindow", "Email address"))
+        self.delete_account_info_label.setText(_translate("SettingsWindow", "This action will delete all of your personal information. Proceed?"))
+        self.delete_account_button.setText(_translate("SettingsWindow", "Delete anyway"))
+        self.delete_account_label.setText(_translate("SettingsWindow", "Delete account"))
     
-    def runUi(self,Settings):
-        Settings.show()
-
-
-# if __name__ == "__main__":
-#     import sys
-#     app = QtWidgets.QApplication(sys.argv)
-#     Settings = QtWidgets.QWidget()
-#     ui = Ui_Settings()
-#     ui.setupUi(Settings)
-#     ui.runUi(Settings)
-#     sys.exit(app.exec_())
+    def runUi(self):
+        self.show()

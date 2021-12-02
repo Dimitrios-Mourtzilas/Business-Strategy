@@ -1,7 +1,5 @@
 import sqlite3
 from src.Model.File import *
-from src.Model.FinancialReport import *
-from src.Model.Company import *
 from hashlib import md5
 import json
 
@@ -42,38 +40,7 @@ class Database:
     
         
 
-    
-    def fetchUsers(self):
-        return self._cursor.execute("select *from user").fetchall()
-
-    def saveCompany(self, company):
-        if not isinstance(company,Company):
-            return
-
-        self.company = company
-        for values in self.company.getJson():
-            self._cursor.execute(
-                """
-                insert into company(company_id,company_name,company_city,country_code,employees,year_founded)
-                values(?,?,?,?,?,?)
-                """
-                ,)
-        self._con.commit()
-
-    def saveFinancialReport(self, financialReport):
-        if financialReport is None:
-            return
-        else:
-            self.financialReport = financialReport
-            for values in self.financialReport.getJson():
-                self._cursor.execute(
-                    """
-                insert into financialReport(reportId,starting_period,ending_period,companyId,turn_over,fixed_costs,net_assets)
-                values(?,?,?,?,?,?,?)
-                """ , (values['report_id'], values['starting_period'], values['ending_period'],values['companyId'],
-                    values['product_sales'], values['turnover'], values['fixed_costs'], values['net_assets']))
-
-            self._con.commit()
+  
     
     def saveFile(self,file):
         try:
@@ -86,20 +53,8 @@ class Database:
         except Exception as e:
             print(e)
             return False
-        
-    def fetchAllFiles(self):
-        return self._cursor.execute("select *from files").fetchall()
-        
 
 
-    def fetchUser(self,user_id):
-        return self._cursor.execute("select *from user where user_id = ?",(user_id,))
-    
-    def setPos(self,pos):
-        self._pos +=pos
-    
-    def getPos(self):
-        return self._pos
 
     def saveUser(self,user):
         if user is None:
@@ -121,10 +76,32 @@ class Database:
             print(e)
             return False
 
+        
+    def fetchAllFiles(self):
+        return self._cursor.execute("select *from files").fetchall()
+    
+    def fetchFile(self,file_id):
+        return self._cursor.execute("select *from files where file_id = ?",(file_id,))
+
+    
+    def fetchUser(self,user_id):
+        return self._cursor.execute("select *from user where user_id = ?",(user_id,)).fetchone()
+    
+    def fetchAllUsers(self):
+        return self._cursor.execute("select *from user").fetchall()
+    
+    def setPos(self,pos):
+        self._pos +=pos
+    
+    def getPos(self):
+        return self._pos
     
    
 
-
     def closeConnection(self):
-        self._cursor.close()
-        self._con.close()
+        try:
+             self._cursor.close()
+             self._con.close()
+        
+        except Exception as e:
+            print(e)

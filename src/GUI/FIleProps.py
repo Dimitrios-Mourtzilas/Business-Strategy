@@ -11,12 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import json
 
-class Ui_FileProps(object):
-    def setupUi(self, FileProps):
-        FileProps.setObjectName("FileProps")
-        FileProps.resize(597, 433)
-        FileProps.setStyleSheet("*{background-color:#6CB4EE}")
-        self.horizontalFrame = QtWidgets.QFrame(FileProps)
+class Ui_FileProps(QtWidgets.QWidget):
+
+    def setupUi(self):
+        self.setObjectName("FilePropsWindow")
+        self.resize(597, 433)
+        self.horizontalFrame = QtWidgets.QFrame(self)
         self.horizontalFrame.setGeometry(QtCore.QRect(10, 90, 571, 80))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
@@ -28,7 +28,7 @@ class Ui_FileProps(object):
         self.file_prop_name_text.setText("")
         self.file_prop_name_text.setObjectName("file_prop_name_text")
         self.horizontalLayout.addWidget(self.file_prop_name_text)
-        self.horizontalFrame_2 = QtWidgets.QFrame(FileProps)
+        self.horizontalFrame_2 = QtWidgets.QFrame(self)
         self.horizontalFrame_2.setGeometry(QtCore.QRect(10, 210, 571, 80))
         self.horizontalFrame_2.setObjectName("horizontalFrame_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.horizontalFrame_2)
@@ -40,7 +40,7 @@ class Ui_FileProps(object):
         self.file_prop_size_text.setText("")
         self.file_prop_size_text.setObjectName("file_prop_size_text")
         self.horizontalLayout_2.addWidget(self.file_prop_size_text)
-        self.horizontalFrame_3 = QtWidgets.QFrame(FileProps)
+        self.horizontalFrame_3 = QtWidgets.QFrame(self)
         self.horizontalFrame_3.setGeometry(QtCore.QRect(10, 310, 571, 80))
         self.horizontalFrame_3.setObjectName("horizontalFrame_3")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.horizontalFrame_3)
@@ -52,20 +52,33 @@ class Ui_FileProps(object):
         self.file_prop_date_added_text.setText("")
         self.file_prop_date_added_text.setObjectName("file_prop_date_added_text")
         self.horizontalLayout_3.addWidget(self.file_prop_date_added_text)
-        self.line = QtWidgets.QFrame(FileProps)
+        self.line = QtWidgets.QFrame()
         self.line.setGeometry(QtCore.QRect(160, 60, 281, 20))
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.file_details_label = QtWidgets.QLabel(FileProps)
+        self.file_details_label = QtWidgets.QLabel()
         self.file_details_label.setGeometry(QtCore.QRect(230, 30, 118, 28))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.file_details_label.setFont(font)
         self.file_details_label.setObjectName("file_details_label")
 
-        self.retranslateUi(FileProps)
-        QtCore.QMetaObject.connectSlotsByName(FileProps)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet(
+        
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
+    
+
+        'QLabel{'+
+        'font-family:verdana;'+
+        'font-size:15px;}'+
+        ''
+        
+        )
 
     def setFileProps(self,file):
         self.file = file
@@ -74,14 +87,14 @@ class Ui_FileProps(object):
         self.file_prop_date_added_text.setText(self.file.getDateAdded())
 
 
-    def retranslateUi(self, FileProps):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        FileProps.setWindowTitle(_translate("FileProps", "Form"))
-        self.file_prop_name_label.setText(_translate("FileProps", "File name:"))
-        self.file_prop_size_label.setText(_translate("FileProps", "File size:"))
-        self.file_prop_date_added_label.setText(_translate("FileProps", "Date added:"))
-        self.file_details_label.setText(_translate("FileProps", "File details"))
+        self.setWindowTitle(_translate("FilePropsWindow", "File Properties Window"))
+        self.file_prop_name_label.setText(_translate("FilePropsWindow", "File name:"))
+        self.file_prop_size_label.setText(_translate("FilePropsWindow", "File size:"))
+        self.file_prop_date_added_label.setText(_translate("FilePropsWindow", "Date added:"))
+        self.file_details_label.setText(_translate("FilePropsWindow", "File details"))
     
-    def runUi(self,FileProps):
-        FileProps.show()
+    def runUi(self):
+        self.show()
 

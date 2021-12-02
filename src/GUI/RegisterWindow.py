@@ -11,15 +11,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.Model.Database import *
 from src.Model.User import *
-from src.GUI.LoginWindow import *
+from src.GUI.LoginWindow import*
 
-class Ui_RegisterWindow(object):
+
+class Ui_RegisterWindow(QtWidgets.QWidget):
     
-    def setupUi(self, RegisterWindow):
-        RegisterWindow.setObjectName("RegisterWindow")
-        RegisterWindow.resize(687, 579)
-        RegisterWindow.setStyleSheet("*{background-color:#6CB4EE;}")
-        self.verticalFrame = QtWidgets.QFrame(RegisterWindow)
+    def setupUi(self):
+        self.setObjectName("RegisterWindow")
+        self.setFixedSize(687, 579)
+        self.verticalFrame = QtWidgets.QFrame(self)
         self.verticalFrame.setGeometry(QtCore.QRect(40, 60, 611, 411))
         self.verticalFrame.setObjectName("verticalFrame")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame)
@@ -119,10 +119,36 @@ class Ui_RegisterWindow(object):
         self.register_button = QtWidgets.QPushButton(self.verticalFrame)
         self.register_button.setObjectName("register_button")
         self.verticalLayout.addWidget(self.register_button)
-        self.callableRegister = lambda:self.registerUser(RegisterWindow)
+        self.callableRegister = lambda:self.registerUser()
         self.register_button.clicked.connect(self.callableRegister)
-        self.retranslateUi(RegisterWindow)
-        QtCore.QMetaObject.connectSlotsByName(RegisterWindow)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet(
+
+
+  
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
+        
+        'QLineEdit{'+
+        'border:1px groove black;'+
+        'border-radius:4px;'+
+        '}'+
+        ''+
+
+
+        'QPushButton:hover{'+
+        'background-color:black;'+
+        'color:white;}'+
+        ''+
+
+        'QLabel{'+
+        'font-family:verdana;'+
+        'font-size:15px;}'+
+        ''
+
+        )
 
     def openWarningDialog(self):
         self.warning_dialog = QtWidgets.QDialog()
@@ -134,60 +160,98 @@ class Ui_RegisterWindow(object):
         self.warning_dialog.layout().addWidget(self.wanring_label)
         self.warning_dialog.layout().addWidget(self.btn_bx)
         self.warning_dialog.show()
+    
+    def checkForUserCredentials(self):
+        return self.first_name_text.text().__eq__("") or self.last_name_text.text().__eq__("") or self.user_name_text.text().__eq__("") or self.user_password_text.text().__eq__("") or self.phone_number_text.text().__eq__("") or self.email_address_text.text().__eq__("") 
 
-    def registerUser(self,RegisterWindow):
-        self.database = Database()
-        self.user = User()
-
-        self.user.setUserId()
-        self.user.setFirstName(self.first_name_text.text())
-        self.user.setLastName(self.last_name_text.text())
-        self.user.setUserName(self.user_name_text.text())
-        self.user.setUserPassword(self.user_password_text.text())
-        self.user.setPhoneNumber(self.phone_number_text.text())
-        self.user.setUserEmailAddress(self.email_address_text.text())
-        self.user.setActiveAccount(False)
-
-        try:
-            self.users = self.database.fetchUsers()
-            self.string = md5(self.user.getUserPassword().encode())
-            self.hashed = self.string.hexdigest()
-            self.correct=False
+    def registerUser(self):
+        if not self.checkForUserCredentials():
+            self.duplicate = False
+            self.database = Database()
+            self.hashed  = md5(self.user_password_text.text().encode())
+            self.users = self.database.fetchAllUsers()
             for user in self.users:
-                if user[4].__eq__(self.hashed):
-                    self.correct = True
+                if user[4].__eq__(self.hashed.hexdigest()):
+                    self.duplicate = True
                     break
-            if self.correct == True:
-                self.openWarningDialog()
+            if  self.duplicate == True:
+                self.openDuplicatePasswordWindow()
             else:
 
-                self.database.saveUser(self.user)
-                self.success_registrationDialog = QtWidgets.QDialog()
-                self.btns = QtWidgets.QDialogButtonBox.Ok
-                self.v_layout = QtWidgets.QHBoxLayout()
-                self.success_registrationDialog.setLayout(self.v_layout)
-                self.success_label = QtWidgets.QLabel("User sucessfully registered")
-                self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
-                self.button_box.accepted.connect(self.success_registrationDialog.accept)
-                self.success_registrationDialog.layout().addWidget(self.success_label)
-                self.success_registrationDialog.layout().addWidget(self.button_box)
-                self.success_registrationDialog.show()
-                self.database.closeConnection()
-                RegisterWindow.close()
-        except Exception as e:
-            print(e)
+                self.user = User()
+
+                self.user.setUserId()
+                self.user.setFirstName(self.first_name_text.text())
+                self.user.setLastName(self.last_name_text.text())
+                self.user.setUserName(self.user_name_text.text())
+                self.user.setUserPassword(self.user_password_text.text())
+                self.user.setPhoneNumber(self.phone_number_text.text())
+                self.user.setUserEmailAddress(self.email_address_text.text())
+                self.user.setActiveAccount(False)
+
+                try:
+                    self.users = self.database.fetchAllUsers()
+                    self.string = md5(self.user.getUserPassword().encode())
+                    self.hashed = self.string.hexdigest()
+                    self.correct=False
+                    for user in self.users:
+                        if user[4].__eq__(self.hashed):
+                            self.correct = True
+                            break
+                    if self.correct == True:
+                        self.openWarningDialog()
+                    else:
+
+                        self.database.saveUser(self.user)
+                        self.success_registrationDialog = QtWidgets.QDialog()
+                        self.btns = QtWidgets.QDialogButtonBox.Ok
+                        self.v_layout = QtWidgets.QHBoxLayout()
+                        self.success_registrationDialog.setLayout(self.v_layout)
+                        self.success_label = QtWidgets.QLabel("User sucessfully registered")
+                        self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
+                        self.button_box.accepted.connect(self.success_registrationDialog.accept)
+                        self.success_registrationDialog.layout().addWidget(self.success_label)
+                        self.success_registrationDialog.layout().addWidget(self.button_box)
+                        self.success_registrationDialog.show()
+                        self.database.closeConnection()
+                        self.close()
+                    
+                except Exception as e:
+                    print(e)
     
+        else:
 
+            self.unfilled_cred_window = QtWidgets.QDialog()
+            self.unfilled_cred_label = QtWidgets.QLabel("One or multiple fields are unfilled")
+            self.btns = QtWidgets.QDialogButtonBox.Cancel
+            self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
+            self.btn_bx.rejected.connect(self.dialog.close)
+            self.unfilled_cred_window.setLayout(QtWidgets.QVBoxLayout())
+            self.unfilled_cred_window.layout().addWidget(self.unfilled_cred_label)
+            self.unfilled_cred_window.layout().addWidget(self.btn_bx)
+            self.unfilled_cred_window.show()
 
+    
+    def openDuplicatePasswordWindow(self):
+        
+            self.dialog = QtWidgets.QDialog()
+            self.dialog_label = QtWidgets.QLabel("Password is already taken. Try a new one")
+            self.btns = QtWidgets.QDialogButtonBox.Cancel
+            self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
+            self.btn_bx.rejected.connect(self.dialog.close)
+            self.dialog.setLayout(QtWidgets.QVBoxLayout())
+            self.dialog.layout().addWidget(self.dialog_label)
+            self.dialog.layout().addWidget(self.btn_bx)
+            self.dialog.show()
         
 
-    def runUi(self,RegisterWindow):
-        RegisterWindow.show()
+    def runUi(self):
+        self.show()
 
         
-    def retranslateUi(self, RegisterWindow):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        RegisterWindow.setWindowTitle(_translate("RegisterWindow", "Form"))
+        self.setWindowTitle(_translate("RegisterWindow", "Register Window"))
         self.first_name_label.setText(_translate("RegisterWindow", "First name"))
         self.last_name_label.setText(_translate("RegisterWindow", "Last name"))
         self.user_name_label.setText(_translate("RegisterWindow", "Username"))

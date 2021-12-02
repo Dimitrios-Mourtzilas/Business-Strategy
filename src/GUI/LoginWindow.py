@@ -9,14 +9,14 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QLabel
-from src.GUI.MainWindow import *
+from PyQt5.QtWidgets import QLabel, QWidget
+from src.GUI.MainWindow import MainWindow
+from src.GUI.RegisterWindow import Ui_RegisterWindow
 from src.Model.Database import *
 from time import sleep
 from src.Model.User import *
 from sqlite3 import Error
 from PyQt5.QtWidgets import QMainWindow
-from src.GUI.RegisterWindow import *
 from hashlib import md5
 
 
@@ -39,6 +39,7 @@ class Ui_loginWindow(QMainWindow):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayoutWidget.move(270,157)
         self.user_name_label = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.user_name_label.setObjectName("user_nane_label")
         self.verticalLayout.addWidget(self.user_name_label)
@@ -74,36 +75,44 @@ class Ui_loginWindow(QMainWindow):
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
         self.retranslateUi()
-        self.setStyleSheet('QLineEdit{'+
+        self.setStyleSheet(
+        
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
+        
+        'QLineEdit{'+
         'border:1px groove black;'+
         'border-radius:4px;'+
         '}'+
         ''+
-        'QMainWindow{'+
-        'background-color:#6CB4EE;}'
+
+
         'QPushButton:hover{'+
         'background-color:black;'+
         'color:white;}'+
         ''+
+
         'QLabel{'+
         'font-family:verdana;'+
         'font-size:15px;}'+
-        '')
+        ''
+        
+        )
         QtCore.QMetaObject.connectSlotsByName(self)
         
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.user_name_label.setText(_translate("MainWindow", "user name"))
-        self.password_label.setText(_translate("MainWindow", "user password"))
+        self.setWindowTitle(_translate("LoginWindow", "Login Window"))
+        self.user_name_label.setText(_translate("MainWindow", "User name"))
+        self.password_label.setText(_translate("MainWindow", "User password"))
         self.login_button.setText(_translate("MainWindow", "Log in"))
 
     def openRegisterWindow(self):
-        self.window = QtWidgets.QWidget()
         self.register_win = Ui_RegisterWindow()
-        self.register_win.setupUi(self.window)
-        self.register_win.runUi(self.window)
+        self.register_win.setupUi()
+        self.register_win.runUi()
 
     def setValidAccount(self,state=False):
         self._valid_account = state
@@ -128,7 +137,7 @@ class Ui_loginWindow(QMainWindow):
 
             self.user_name = self.user_name_text.text()
             self.user_password = self.password_text.text()           
-            self.users = self.database.fetchUsers()
+            self.users = self.database.fetchAllUsers()
             self.string = md5(self.password_text.text().encode())
             self.hashed_value = self.string.hexdigest()
             for user in self.users:
@@ -144,10 +153,9 @@ class Ui_loginWindow(QMainWindow):
                 self.database.runRandomQuery("update  user set active_account = true where user_name = ? and user_password = ?"
                 ,(self.user_name_text.text(),self.hashed_value))        
 
-                self.window = QMainWindow()
                 self.mainWindow = MainWindow()
-                self.mainWindow.setupUi(self.window,self.password_text.text())
-                self.mainWindow.runUi(self.window)
+                self.mainWindow.setupUi(self.password_text.text())
+                self.mainWindow.runUi()
                 self.close()
             
 
@@ -159,12 +167,11 @@ class Ui_loginWindow(QMainWindow):
     
     def openWrongCredentialsWindow(self):
         self.wrong_cred = QtWidgets.QDialog()
-        self.buttons = QtWidgets.QDialogButtonBox.Ok
+        self.buttons = QtWidgets.QDialogButtonBox.Cancel
         self.wrong_cred.setLayout(QtWidgets.QVBoxLayout())
         self.button_bx = QtWidgets.QDialogButtonBox(self.buttons)
         self.wrong_cred_label = QtWidgets.QLabel("Wrong credentials")
-        self.wrong_cred_label.setStyleSheet('color:red')
-        self.button_bx.accepted.connect(self.wrong_cred.accept)
+        self.button_bx.rejected.connect(self.wrong_cred.reject)
         self.wrong_cred.layout().addWidget(self.wrong_cred_label)
         self.wrong_cred.layout().addWidget(self.button_bx)
         self.wrong_cred.show()
@@ -175,7 +182,7 @@ class Ui_loginWindow(QMainWindow):
             self.show()
             self.database = Database()
             try:
-                self.user_data = self.database.fetchUsers()
+                self.user_data = self.database.fetchAllUsers()
                 if len(self.user_data) == 0:
                     self.openUnknownUserWindow()
             except Exception as e:

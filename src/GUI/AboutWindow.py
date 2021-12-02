@@ -11,12 +11,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_About(object):
-    def setupUi(self, About):
-        About.setObjectName("About")
-        About.setStyleSheet("*{background-color:#6CB4EE;}")
-        About.setFixedSize(400, 300)
-        self.verticalFrame = QtWidgets.QFrame(About)
+class Ui_About(QtWidgets.QWidget):
+
+    def setupUi(self):
+        
+        self.setObjectName("AboutWindow")
+        self.setFixedSize(400, 300)
+        self.verticalFrame = QtWidgets.QFrame(self)
         self.verticalFrame.setGeometry(QtCore.QRect(10, 10, 381, 281))
         self.verticalFrame.setObjectName("verticalFrame")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalFrame)
@@ -84,26 +85,30 @@ class Ui_About(object):
         self.year_created_text.setText('2021')
         self.smaller_icon_logo = QtGui.QPixmap('images/app_smaller_logo.png')
         self.smaller_icon.setPixmap(self.smaller_icon_logo)
-        self.retranslateUi(About)
-        QtCore.QMetaObject.connectSlotsByName(About)
+        self.retranslateUi()
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet(
+        
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
 
-    def retranslateUi(self, About):
+        'QLabel{'+
+        'font-family:verdana;'+
+        'font-size:15px;}'+
+        ''
+        
+        )
+
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        About.setWindowTitle(_translate("About", "Form"))
-        self.about_label.setText(_translate("About", "About"))
-        self.version_label.setText(_translate("About", "Version"))
-        self.creator_label.setText(_translate("About", "Creator"))
-        self.year_created.setText(_translate("About", "Year created"))
+        self.setWindowTitle(_translate("AboutWindow", "About Window"))
+        self.about_label.setText(_translate("AboutWindow", "About"))
+        self.version_label.setText(_translate("AboutWindow", "Version"))
+        self.creator_label.setText(_translate("AboutWindow", "Creator"))
+        self.year_created.setText(_translate("AboutWindow", "Year created"))
     
-    def runUi(self,About):
-        About.show()
+    def runUi(self):
+        self.show()
 
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    About = QtWidgets.QWidget()
-    ui = Ui_About()
-    ui.setupUi(About)
-    About.show()
-    sys.exit(app.exec_())

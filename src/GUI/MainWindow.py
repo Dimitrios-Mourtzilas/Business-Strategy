@@ -16,16 +16,16 @@ from src.GUI.FileAnalysisWindow import *
 from src.GUI.AboutWindow import Ui_About
 from hashlib import md5
 from src.Algorithm.DecisionTree import *
+from PyQt5.QtWidgets import QWidget
 # from src.GUI.DataVisualisation import *
-class MainWindow(object):
+class MainWindow(QWidget):
 
 
-    def setupUi(self,MainWin,user_password):
-        MainWin.setObjectName("Form")
-        MainWin.setFixedSize(914, 591)
-        MainWin.setStyleSheet('*{background-color:#6CB4EE;}')
-        MainWin.setFixedSize(MainWin.width(),MainWin.height())
-        self.user_menu = QtWidgets.QFrame(MainWin)
+    def setupUi(self,user_password):
+        self.setObjectName("MainWindow")
+        self.setFixedSize(914, 591)
+        self.setFixedSize(self.width(),self.height())
+        self.user_menu = QtWidgets.QFrame(self)
         self.user_menu.setGeometry(QtCore.QRect(50, 210, 160, 281))
         self.user_menu.setStyleSheet("")
         self.user_menu.setObjectName("user_menu")
@@ -45,7 +45,7 @@ class MainWindow(object):
         self.verticalLayout.addWidget(self.log_out_button)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout.addItem(spacerItem3)
-        self.horizontalFrame = QtWidgets.QFrame(MainWin)
+        self.horizontalFrame = QtWidgets.QFrame(self)
         self.horizontalFrame.setGeometry(QtCore.QRect(220, 100, 491, 81))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
@@ -66,25 +66,38 @@ class MainWindow(object):
         self.about_button = QtWidgets.QPushButton(self.horizontalFrame)
         self.about_button.setObjectName("about_button")
         self.horizontalLayout.addWidget(self.about_button)
-        self.logo_label = QtWidgets.QLabel(MainWin)
+        self.logo_label = QtWidgets.QLabel(self)
         self.logo_label.setGeometry(QtCore.QRect(240, 190, 521, 291))
         self.logo_label.setText("")
         self.logo_label.setObjectName("logo_label")
         self.logo_icon = QtGui.QPixmap('images/app_logo.png')
         self.logo_label.setPixmap(self.logo_icon)
         self.logo_label.move(350, 200)
-        self.user_label = QtWidgets.QLabel(MainWin)
+        self.user_label = QtWidgets.QLabel(self)
         self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
         self.user_label.setAutoFillBackground(False)
         self.user_label.setStyleSheet("")
         self.user_label.setText("")
         self.user_label.setObjectName("user_label")
         self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
-        self.callableMainWindow = lambda:self.closeMainWindow(MainWin,user_password)
+        self.callableMainWindow = lambda:self.closeMainWindow(user_password)
         self.log_out_button.clicked.connect(self.callableMainWindow)
-        self.retranslateUi(MainWin)
+        self.retranslateUi()
         self.algo = Tree()
-        QtCore.QMetaObject.connectSlotsByName(MainWin)
+        QtCore.QMetaObject.connectSlotsByName(self)
+        self.setStyleSheet(
+
+           
+        'QWidget{'+
+        'background-color: #00ffff;}'+
+        ''+
+        
+        'QPushButton:hover{'+
+        'background-color:black;'+
+        'color:white;}'+
+        ''
+        )
+            
         
         
         self.callableSettings = lambda:self.openSettings(user_password)
@@ -97,23 +110,20 @@ class MainWindow(object):
     
     
     def openAboutWindow(self):
-        self.window = QtWidgets.QMainWindow()
         self.about_window = Ui_About()
-        self.about_window.setupUi(self.window)
-        self.about_window.runUi(self.window)
+        self.about_window.setupUi()
+        self.about_window.runUi()
         
     def openFileAnalysisWindow(self):
-        self.window = QtWidgets.QMainWindow()
         self.file_analysis_win = Ui_FileAnalysis()
-        self.file_analysis_win.setupUi(self.window,self.algo)
-        self.file_analysis_win.runUi(self.window)
+        self.file_analysis_win.setupUi(self.algo)
+        self.file_analysis_win.runUi()
     
     def openSettings(self,user_password):
 
-        self.window = QtWidgets.QMainWindow()
         self.settingsWindow = Ui_Settings()
-        self.settingsWindow.setupUi(self.window,user_password)
-        self.settingsWindow.runUi(self.window)
+        self.settingsWindow.setupUi(user_password)
+        self.settingsWindow.runUi()
     
     def openVisualisation(self):
         self.database = Database()
@@ -121,9 +131,9 @@ class MainWindow(object):
             self.file_warning_window = QtWidgets.QDialog()
             self.file_warning_label = QtWidgets.QLabel("No file present on database. Please import a file first")
             self.file_warning_window.setLayout(QtWidgets.QVBoxLayout())
-            self.btns = QtWidgets.QDialogButtonBox.Ok
+            self.btns = QtWidgets.QDialogButtonBox.Cancel
             self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
-            self.btn_bx.accepted.connect(self.file_warning_window.close)
+            self.btn_bx.rejected.connect(self.file_warning_window.close)
             self.file_warning_window.layout().addWidget(self.file_warning_label)
             self.file_warning_window.layout().addWidget(self.btn_bx)
             self.file_warning_window.show()
@@ -133,9 +143,9 @@ class MainWindow(object):
             self.file_not_analysed = QtWidgets.QDialog()
             self.file_not_analysed_label = QtWidgets.QLabel("File is not analysed. Please proceed with analysis first")
             self.file_not_analysed.setLayout(QtWidgets.QVBoxLayout())
-            self.btns = QtWidgets.QDialogButtonBox.Ok
+            self.btns = QtWidgets.QDialogButtonBox.Cancel
             self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
-            self.btn_bx.accepted.connect(self.file_not_analysed.close)
+            self.btn_bx.rejected.connect(self.file_not_analysed.close)
             self.file_not_analysed.layout().addWidget(self.file_not_analysed_label)
             self.file_not_analysed.layout().addWidget(self.btn_bx)
             self.file_not_analysed.show()
@@ -148,33 +158,25 @@ class MainWindow(object):
             self.plt.scatter(self.array[2],self.array[3],color="red")
             self.plt.show()
 
-    def closeMainWindow(self,MainWin,user_password):
+    def closeMainWindow(self,user_password):
         self.database = Database()
         self.string = md5(user_password.encode())
         self.hashed = self.string.hexdigest()
         self.database.runRandomQuery("update user set active_account = false where user_password = ?",(self.hashed,))
         self.database.closeConnection()
-        MainWin.close()
+        self.close()
         
         
-    def retranslateUi(self, MainWin):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        MainWin.setWindowTitle(_translate("Form", "Form"))
-        self.settings_button.setText(_translate("Form", "Settings"))
-        self.log_out_button.setText(_translate("Form", "Log out"))
-        self.home_button.setText(_translate("Form", "Home"))
-        self.file_analysis_button.setText(_translate("Form", "File analysis"))
-        self.data_vis_button.setText(_translate("Form", "Data visualization"))
-        self.about_button.setText(_translate("Form", "About"))
+        self.setWindowTitle(_translate("MainWindow", "Main Window"))
+        self.settings_button.setText(_translate("MainWindow", "Settings"))
+        self.log_out_button.setText(_translate("MainWindow", "Log out"))
+        self.home_button.setText(_translate("MainWindow", "Home"))
+        self.file_analysis_button.setText(_translate("MainWindow", "File analysis"))
+        self.data_vis_button.setText(_translate("MainWindow", "Data visualization"))
+        self.about_button.setText(_translate("MainWindow", "About"))
     
-    def runUi(self,MainWin):
-        MainWin.show()
+    def runUi(self):
+        self.show()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    window = QtWidgets.QWidget()
-    ui_main_win = MainWindow()
-    ui_main_win.setupUi(window)
-    ui_main_win.runUi(window)
-    sys.exit(app.exec_())

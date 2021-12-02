@@ -1,5 +1,4 @@
 
-
 from PyQt5.QtWidgets import QApplication
 import sys
 from src.GUI.LoginWindow import *

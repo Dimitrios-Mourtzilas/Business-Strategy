@@ -30,12 +30,26 @@ class Tree:
     
     
     def exportData(self):
-        self.dot_file = open("dot_tree.dot","w")
-        self.dot_file = export_graphviz(self._tree,out_file=self.dot_file)
-        
-        return [self.x_train,self.y_train,self.x_test,self.y_test]
+         self.dot_file = open("dot_tree.dot","w")
+         self.dot_file = export_graphviz(self._tree,out_file=self.dot_file)
+
+         import subprocess
+         try:
+            self.bash_script = "dot -Tpng dot_tree.dot -o dot_tree.png "
+            self.proc = subprocess.Popen(['bash', '-c', self.bash_script],stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            stdin=subprocess.PIPE)
+            stdout, stderr = self.proc.communicate()
+            if self.proc.returncode:
+
+                raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
+               
+            return [self.x_train,self.y_train,self.x_test,self.y_test]
 
 
+         except Exception as e:
+            print(e)
+            
+          
     def setCompleted(self,completed):
         self._completed = completed
     

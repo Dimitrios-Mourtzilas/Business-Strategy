@@ -15,11 +15,9 @@ class File:
         pass
     
     def setFileId(self):
-        self.nonce = ""
-        for i in range(0,40):
-            self.nonce+= random.choice(string.ascii_uppercase + string.digits)
-
-        self.hashed = md5(self.nonce.encode()) 
+        for i in  range(0,40):
+            self.string = random.choice(string.ascii_lowercase+ string.ascii_uppercase+ string.digits+str(random.randint(10,100000)))
+        self.hashed = md5(self.string.encode())
         self._file_id = self.hashed.hexdigest()
 
     def setFileName(self,fileName=""):
