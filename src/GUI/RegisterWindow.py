@@ -225,7 +225,7 @@ class Ui_RegisterWindow(QtWidgets.QWidget):
             self.unfilled_cred_label = QtWidgets.QLabel("One or multiple fields are unfilled")
             self.btns = QtWidgets.QDialogButtonBox.Cancel
             self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
-            self.btn_bx.rejected.connect(self.dialog.close)
+            self.btn_bx.rejected.connect(self.unfilled_cred_window.close)
             self.unfilled_cred_window.setLayout(QtWidgets.QVBoxLayout())
             self.unfilled_cred_window.layout().addWidget(self.unfilled_cred_label)
             self.unfilled_cred_window.layout().addWidget(self.btn_bx)
