@@ -19,6 +19,7 @@ class Tree:
     def setprops(self,file):
         self.file = file
         self.data = pandas.read_excel(self.file)
+
         self.X = numpy.array(self.data.iloc[3:23,1]).reshape(-1,1)
         self.y  = numpy.array(self.data.iloc[3:23,2]).reshape(-1,1)
         self._tree = DecisionTreeRegressor(splitter="best")

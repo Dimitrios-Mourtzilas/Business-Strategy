@@ -202,22 +202,40 @@ class Ui_RegisterWindow(QtWidgets.QWidget):
                         self.openWarningDialog()
                     else:
 
-                        self.database.saveUser(self.user)
-                        self.success_registrationDialog = QtWidgets.QDialog()
-                        self.btns = QtWidgets.QDialogButtonBox.Ok
-                        self.v_layout = QtWidgets.QHBoxLayout()
-                        self.success_registrationDialog.setLayout(self.v_layout)
-                        self.success_label = QtWidgets.QLabel("User sucessfully registered")
-                        self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
-                        self.button_box.accepted.connect(self.success_registrationDialog.accept)
-                        self.success_registrationDialog.layout().addWidget(self.success_label)
-                        self.success_registrationDialog.layout().addWidget(self.button_box)
-                        self.success_registrationDialog.show()
-                        self.database.closeConnection()
-                        self.close()
-                    
-                except Exception as e:
-                    print(e)
+                        if self.database.saveUser(self.user):
+                            self.success_registrationDialog = QtWidgets.QDialog()
+                            self.btns = QtWidgets.QDialogButtonBox.Ok
+                            self.v_layout = QtWidgets.QHBoxLayout()
+                            self.success_registrationDialog.setLayout(self.v_layout)
+                            self.success_label = QtWidgets.QLabel("User sucessfully registered")
+                            self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
+                            self.button_box.accepted.connect(self.success_registrationDialog.accept)
+                            self.success_registrationDialog.layout().addWidget(self.success_label)
+                            self.success_registrationDialog.layout().addWidget(self.button_box)
+                            self.success_registrationDialog.show()
+                            self.database.closeConnection()
+                            self.close()
+                        else:
+                            self.unkown_error_window = QtWidgets.QDialog()
+                            self.unkown_error_label  = QtWidgets.QLabel("Error occured in database. User could not be saved")
+                            self.btns = QtWidgets.QDialogButtonBox.Cancel
+                            self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
+                            self.unkown_error_window.setLayout(QtWidgets.QVBoxLayout())
+                            self.unkown_error_window.layout().addWidget(self.unkown_error_label)
+                            self.unkown_error_window.layout().addWidget(self.btn_bx)
+                            self.btn_bx.rejected.connect(self.unfilled_cred_window.reject)
+                            self.unkown_error_window.show()
+
+                except Exception:
+                            self.dialog_window = QtWidgets.QDialog()
+                            self.dialog_label  = QtWidgets.QLabel("Error occured in while fetching users from database")
+                            self.btns = QtWidgets.QDialogButtonBox.Cancel
+                            self.btn_bx = QtWidgets.QDialogButtonBox(self.btns)
+                            self.dialog_window.setLayout(QtWidgets.QVBoxLayout())
+                            self.dialog_window.layout().addWidget(self.dialog_label)
+                            self.dialog_window.layout().addWidget(self.btn_bx)
+                            self.btn_bx.rejected.connect(self.dialog_window.reject)
+                            self.dialog_window.show()
     
         else:
 

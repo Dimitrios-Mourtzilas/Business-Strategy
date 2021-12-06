@@ -58,7 +58,7 @@ class Database:
 
     def saveUser(self,user):
         if user is None:
-            return
+            return False
         self.user = user
         try:
             self.hashed_value  = md5(self.user.getUserPassword().encode())
@@ -72,8 +72,7 @@ class Database:
             self._cursor.execute("commit;")
             return True
 
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
 
         
