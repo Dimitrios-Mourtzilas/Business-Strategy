@@ -1,3 +1,4 @@
+from PyQt5 import QtWidgets
 from sklearn.tree import DecisionTreeRegressor
 import pandas
 from sklearn.metrics import r2_score
@@ -30,26 +31,46 @@ class Tree:
 
     
     
+    def getData(self):
+        return [self.x_train,self.y_train,self.x_test,self.y_test]
+
+
     def exportData(self):
          self.dot_file = open("dot_tree.dot","w")
          self.dot_file = export_graphviz(self._tree,out_file=self.dot_file)
 
+
          import subprocess
-         try:
-            self.bash_script = "dot -Tpng dot_tree.dot -o dot_tree.png "
-            self.proc = subprocess.Popen(['bash', '-c', self.bash_script],stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            stdin=subprocess.PIPE)
-            stdout, stderr = self.proc.communicate()
-            if self.proc.returncode:
+       
+         self.bash_script = "dot -Tpng dot_tree.dot -o dot_tree.png"
+         self.proc = subprocess.Popen(['bash', '-c', self.bash_script],stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+         stdin=subprocess.PIPE)
+         stdout, stderr = self.proc.communicate()
+         if self.proc.returncode:
 
-                raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
-               
-            return [self.x_train,self.y_train,self.x_test,self.y_test]
+             raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
+         else:
+                try:
+                    self.scirpt = "convert dot_tree.png -resize 680x950 dot_tree.png"
+                    self.proc = subprocess.Popen(['bash', '-c', self.scirpt],stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                    stdin=subprocess.PIPE)
+                    stdout, stderr = self.proc.communicate()
+                    if self.proc.returncode:
 
+                        raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
+                except Exception:
 
-         except Exception as e:
-            print(e)
-            
+                    self.dialog = QtWidgets.QDialog()
+                    self.btns = QtWidgets.QDialogButtonBox.Cancel
+                    self.dialog.setLayout(QtWidgets.QVBoxLayout())
+                    self.dialog_label = QtWidgets.QLabel("Tree could not be exported")
+                    self.btnbx = QtWidgets.QDialogButtonBox(self.btns)
+                    self.btnbx.rejected.connect(self.dialog.close)
+                    self.dialog.layout().addWidget(self.dialog_label)
+                    self.dialog.layout().addWidget(self.btnbx)
+                    self.dialog.show()
+        
+                
           
     def setCompleted(self,completed):
         self._completed = completed

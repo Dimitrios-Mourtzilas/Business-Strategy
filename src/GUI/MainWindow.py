@@ -152,7 +152,7 @@ class MainWindow(QWidget):
             self.database.closeConnection()
 
         else:
-            self.array = self.algo.exportData()
+            self.array = self.algo.getData()
             self.plt = plt
             self.plt.scatter(self.array[0],self.array[1],color="blue")
             self.plt.scatter(self.array[2],self.array[3],color="red")

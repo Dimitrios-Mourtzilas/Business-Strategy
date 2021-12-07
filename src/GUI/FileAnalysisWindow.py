@@ -18,6 +18,7 @@ from src.Model.File import *
 from src.Model.Database import *
 from src.Algorithm.DecisionTree import *
 import random
+from src.GUI.TreeWindow import *
 class Ui_FileAnalysis(QtWidgets.QWidget):
 
     _flag = False
@@ -304,14 +305,21 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         self.verticallyout = QtWidgets.QVBoxLayout()
         self.btns = QtWidgets.QDialogButtonBox.Ok
         self.btn_box = QtWidgets.QDialogButtonBox(self.btns)
-        self.btn_box.accepted.connect(self.completion_window.close)
+        self.callable = lambda:self.showGeneratedData(self.completion_window)
+        self.btn_box.accepted.connect(self.callable)
         self.completion_window.setLayout(self.verticallyout)
         self.completion_window.layout().addWidget(self.completion_label)
         self.completion_window.layout().addWidget(self.btn_box)
         self.completion_window.setFixedSize(260, 100)
         self.completion_window.show()
     
-
+    def showGeneratedData(self,window):
+        self.close()
+        window.close()
+        self.export = self.algo.exportData()
+        self.win = Ui_Tree()
+        self.win.setupUi()
+        self.win.runUi()
 
     def runUi(self):
         self.show()
