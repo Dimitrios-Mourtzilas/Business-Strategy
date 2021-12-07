@@ -17,7 +17,7 @@ from src.GUI.AboutWindow import Ui_About
 from hashlib import md5
 from src.Algorithm.DecisionTree import *
 from PyQt5.QtWidgets import QWidget
-# from src.GUI.DataVisualisation import *
+from datetime import date
 class MainWindow(QWidget):
 
 
@@ -70,19 +70,28 @@ class MainWindow(QWidget):
         self.logo_label.setGeometry(QtCore.QRect(240, 190, 521, 291))
         self.logo_label.setText("")
         self.logo_label.setObjectName("logo_label")
-        self.logo_icon = QtGui.QPixmap('images/app_logo.png')
+        self.logo_icon = QtGui.QPixmap('images/app_logo_v1.png')
         self.logo_label.setPixmap(self.logo_icon)
-        self.logo_label.move(350, 200)
-        self.user_label = QtWidgets.QLabel(self)
-        self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
-        self.user_label.setAutoFillBackground(False)
-        self.user_label.setStyleSheet("")
-        self.user_label.setText("")
-        self.user_label.setObjectName("user_label")
-        self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
+        self.logo_label.move(300, 200)
+        # self.user_label = QtWidgets.QLabel(self)
+        # self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
+        # self.user_label.setAutoFillBackground(False)
+        # self.user_label.setStyleSheet("")
+        # self.user_label.setText("")
+        # self.user_label.setObjectName("user_label")
+        # self.user_icon = QtGui.QPixmap('images/user_icon_logo.png')
         self.callableMainWindow = lambda:self.closeMainWindow(user_password)
         self.log_out_button.clicked.connect(self.callableMainWindow)
         self.retranslateUi()
+        self.date_hor_frame = QtWidgets.QFrame(self)
+        self.date_hor_frame.move(20,10)
+        self.date_time_layout = QtWidgets.QVBoxLayout(self.date_hor_frame)
+        self.date_label = QtWidgets.QLabel("Date")
+        self.date_label.setFont(QtGui.QFont("Verdana",18))
+        self.date = QtWidgets.QLabel(str(date.today()))
+        self.date_time_layout.addWidget(self.date_label)
+        self.date_time_layout.addWidget(self.date)
+
         self.algo = Tree()
         QtCore.QMetaObject.connectSlotsByName(self)
         self.setStyleSheet(
@@ -96,6 +105,8 @@ class MainWindow(QWidget):
         'background-color:9966cc;'+
         'color:white;}'+
         ''
+        'QLabel{'+
+        'color:#d8bfd8;}'
         )
             
         
