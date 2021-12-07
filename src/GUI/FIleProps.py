@@ -69,11 +69,12 @@ class Ui_FileProps(QtWidgets.QWidget):
         self.setStyleSheet(
         
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
     
 
         'QLabel{'+
+        'color: #d8bfd8;'+
         'font-family:verdana;'+
         'font-size:15px;}'+
         ''
