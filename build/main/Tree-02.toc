@@ -1,0 +1,10 @@
+('/home/dimitrios-mourtzilas/Desktop/Business-Strategy/build/main/locket-0.2.1-py3.9.egg',
+ None,
+ {'*.abi3.so',
+  '*.cpython-39-x86_64-linux-gnu.so',
+  '*.py',
+  '*.pyc',
+  '*.so',
+  'EGG-INFO'},
+ 'DATA',
+ [])
