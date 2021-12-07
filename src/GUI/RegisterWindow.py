@@ -128,22 +128,23 @@ class Ui_RegisterWindow(QtWidgets.QWidget):
 
   
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
         
         'QLineEdit{'+
-        'border:1px groove black;'+
+        'border:1px groove #fff0f5;'+
         'border-radius:4px;'+
+        'color:white;'
         '}'+
         ''+
 
 
         'QPushButton:hover{'+
-        'background-color:black;'+
         'color:white;}'+
         ''+
 
         'QLabel{'+
+        'color:#fff0f5;'+
         'font-family:verdana;'+
         'font-size:15px;}'+
         ''

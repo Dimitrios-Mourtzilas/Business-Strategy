@@ -78,23 +78,23 @@ class Ui_loginWindow(QMainWindow):
         self.setStyleSheet(
         
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
         
         'QLineEdit{'+
-        'border:1px groove black;'+
+        'border:1px groove #fff0f5;'+
         'border-radius:4px;'+
         '}'+
         ''+
 
 
         'QPushButton:hover{'+
-        'background-color:black;'+
         'color:white;}'+
         ''+
 
         'QLabel{'+
         'font-family:verdana;'+
+        'color:#fff0f5;'
         'font-size:15px;}'+
         ''
         

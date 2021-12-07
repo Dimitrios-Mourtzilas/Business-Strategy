@@ -89,11 +89,11 @@ class MainWindow(QWidget):
 
            
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
         
         'QPushButton:hover{'+
-        'background-color:black;'+
+        'background-color:9966cc;'+
         'color:white;}'+
         ''
         )

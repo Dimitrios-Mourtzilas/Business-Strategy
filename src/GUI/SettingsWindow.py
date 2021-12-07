@@ -103,15 +103,16 @@ class Ui_Settings(QtWidgets.QWidget):
         self.setStyleSheet(
   
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
     
         'QLineEdit{'+
-        'color:black;}'+
+        'color:#fff0f5;}'+
         ''+
         
     
         'QLabel{'+
+        'color:#fff0f5;'+
         'font-family:verdana;'+
         'font-size:15px;}'+
         ''

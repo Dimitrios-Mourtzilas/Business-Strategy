@@ -104,7 +104,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
 
   
         'QWidget{'+
-        'background-color: #00ffff;}'+
+        'background-color: #8a2be2;}'+
         ''+
         
         'QLineEdit{'+
