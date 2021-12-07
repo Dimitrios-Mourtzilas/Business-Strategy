@@ -84,6 +84,7 @@ class Ui_loginWindow(QMainWindow):
         'QLineEdit{'+
         'border:1px groove #fff0f5;'+
         'border-radius:4px;'+
+        'color:white;'+
         '}'+
         ''+
 
@@ -160,8 +161,7 @@ class Ui_loginWindow(QMainWindow):
             
 
 
-        except Exception as e:
-            print(e)
+        except Exception:
             return
 
     

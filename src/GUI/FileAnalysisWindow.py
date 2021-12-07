@@ -108,18 +108,18 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         ''+
         
         'QLineEdit{'+
-        'border:1px groove black;'+
+        'border:1px groove white;'+
         'border-radius:4px;'+
         '}'+
         ''+
 
 
         'QPushButton:hover{'+
-        'background-color:black;'+
         'color:white;}'+
         ''+
 
         'QLabel{'+
+        'color:#fff0f5'
         'font-family:verdana;'+
         'font-size:15px;}'+
         ''

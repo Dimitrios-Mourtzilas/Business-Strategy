@@ -8,7 +8,6 @@ from sklearn.tree import export_graphviz
 from matplotlib import pyplot as plt
 
 
-#For converting dot to png (dot -Tpng InputFile.dot -o OutputFile.png  for Graphviz)
 class Tree:
 
     def __init__(self):

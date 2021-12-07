@@ -102,7 +102,7 @@ class MainWindow(QWidget):
         ''+
         
         'QPushButton:hover{'+
-        'background-color:9966cc;'+
+        'background-color:#9966cc;'+
         'color:white;}'+
         ''
         'QLabel{'+
