@@ -107,7 +107,6 @@ class Ui_Form(object):
             self.success_label = QtWidgets.QLabel("File successfully removed",self.frame)
             self.success_label.setStyleSheet('color:green')
             self.success_label.move(self.file_name_label.width()-80, self.file_name_label.height()+13)
-            #Same issue, same code must be place with if statement above. Plus find a way to disappear text for a while
             self.success_label.show()
             
 

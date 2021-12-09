@@ -119,7 +119,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         ''+
 
         'QLabel{'+
-        'color:#fff0f5'
+        'color:#fff0f5;'+
         'font-family:verdana;'+
         'font-size:15px;}'+
         ''

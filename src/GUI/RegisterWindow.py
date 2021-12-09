@@ -210,12 +210,12 @@ class Ui_RegisterWindow(QtWidgets.QWidget):
                             self.success_registrationDialog.setLayout(self.v_layout)
                             self.success_label = QtWidgets.QLabel("User sucessfully registered")
                             self.button_box=  QtWidgets.QDialogButtonBox(self.btns)
-                            self.button_box.accepted.connect(self.success_registrationDialog.accept)
+                            self.callable = lambda:self.closeWindow(self.success_registrationDialog)
+                            self.button_box.accepted.connect(self.callable)
                             self.success_registrationDialog.layout().addWidget(self.success_label)
                             self.success_registrationDialog.layout().addWidget(self.button_box)
                             self.success_registrationDialog.show()
                             self.database.closeConnection()
-                            self.close()
                         else:
                             self.unkown_error_window = QtWidgets.QDialog()
                             self.unkown_error_label  = QtWidgets.QLabel("Error occured in database. User could not be saved")
@@ -263,6 +263,9 @@ class Ui_RegisterWindow(QtWidgets.QWidget):
             self.dialog.layout().addWidget(self.btn_bx)
             self.dialog.show()
         
+    def closeWindow(self,reg_dialog):
+        reg_dialog.close()
+        self.close()
 
     def runUi(self):
         self.show()
