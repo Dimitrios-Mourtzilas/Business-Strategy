@@ -110,7 +110,10 @@ class Ui_Settings(QtWidgets.QWidget):
         'color:#fff0f5;}'+
         ''+
         
-    
+        'QPushButton:hover{'+
+        'color:white;}'+
+        ''+
+        
         'QLabel{'+
         'color:#fff0f5;'+
         'font-family:verdana;'+

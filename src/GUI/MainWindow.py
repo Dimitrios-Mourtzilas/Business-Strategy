@@ -95,20 +95,20 @@ class MainWindow(QWidget):
 
         self.algo = Tree()
         QtCore.QMetaObject.connectSlotsByName(self)
-        # self.setStyleSheet(
+        self.setStyleSheet(
 
            
-        # 'QWidget{'+
-        # 'background-color: #8a2be2;}'+
-        # ''+
+        'QWidget{'+
+        'background-color: #8a2be2;}'+
+        ''+
         
-        # 'QPushButton:hover{'+
-        # 'background-color:#9966cc;'+
-        # 'color:white;}'+
-        # ''
-        # 'QLabel{'+
-        # 'color:#d8bfd8;}'
-        # )
+        'QPushButton:hover{'+
+        'background-color:#9966cc;'+
+        'color:white;}'+
+        ''
+        'QLabel{'+
+        'color:#d8bfd8;}'
+        )
             
         
         
