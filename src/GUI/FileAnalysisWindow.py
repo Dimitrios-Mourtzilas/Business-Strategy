@@ -17,7 +17,7 @@ import json
 from src.Model.File import *
 from src.Model.Database import *
 from src.Algorithm.DecisionTree import *
-import random
+import random,platform,os
 from src.GUI.TreeWindow import *
 class Ui_FileAnalysis(QtWidgets.QWidget):
 
@@ -237,45 +237,49 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
 
     
     def fileAnalysis(self,algo):
+        if platform.system() == "Windows":
+            self.command_result = os.system('cmd /c "where magick"')
+            if self.command_result == 1:
+                self.openNotInstalledProgram()
+            else:
+                if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
+                    self.no_file_selected_window = QtWidgets.QDialog()
+                    self.no_file_selected_label = QtWidgets.QLabel("No file was selected")
+                    self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
+                    self.btn_box.rejected.connect(self.no_file_selected_window.close)
+                    self.no_file_selected_window.setLayout(QtWidgets.QVBoxLayout())
+                    self.no_file_selected_window.layout().addWidget(self.no_file_selected_label)
+                    self.no_file_selected_window.layout().addWidget(self.btn_box)
+                    self.no_file_selected_window.show()
+                    return
 
-        if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
-            self.no_file_selected_window = QtWidgets.QDialog()
-            self.no_file_selected_label = QtWidgets.QLabel("No file was selected")
-            self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
-            self.btn_box.rejected.connect(self.no_file_selected_window.close)
-            self.no_file_selected_window.setLayout(QtWidgets.QVBoxLayout())
-            self.no_file_selected_window.layout().addWidget(self.no_file_selected_label)
-            self.no_file_selected_window.layout().addWidget(self.btn_box)
-            self.no_file_selected_window.show()
-            return
+                elif self.getFlag() == False:
+                    self.file_not_imported = QtWidgets.QDialog()
+                    self.file_no_imported_label = QtWidgets.QLabel("File was not imported")
+                    self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
+                    self.btn_box.rejected.connect(self.file_not_imported.close)
+                    self.file_not_imported.setLayout(QtWidgets.QVBoxLayout())
+                    self.file_not_imported.layout().addWidget(self.file_no_imported_label)
+                    self.file_not_imported.layout().addWidget(self.btn_box)
+                    self.file_not_imported.show()
+                else:
 
-        elif self.getFlag() == False:
-            self.file_not_imported = QtWidgets.QDialog()
-            self.file_no_imported_label = QtWidgets.QLabel("File was not imported")
-            self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
-            self.btn_box.rejected.connect(self.file_not_imported.close)
-            self.file_not_imported.setLayout(QtWidgets.QVBoxLayout())
-            self.file_not_imported.layout().addWidget(self.file_no_imported_label)
-            self.file_not_imported.layout().addWidget(self.btn_box)
-            self.file_not_imported.show()
-        else:
+                    self.algo.setprops(self._file.getFileName())
 
-            self.algo.setprops(self._file.getFileName())
-
-            while self.progressBar.value() <100:
-                    self.progressBar.show()
-                    self.progressBar.setValue(self.count+10)
-                    self.count+=10
-                    time.sleep(1)
-            
-            if  self.count == 100:
-            
-                self.algo.setCompleted(True)
-                self.analysisCompletionWindow()
-
-        self.setFlag(False)
+                    while self.progressBar.value() <100:
+                            self.progressBar.show()
+                            self.progressBar.setValue(self.count+10)
+                            self.count+=10
+                            time.sleep(1)
                     
-    
+                    if  self.count == 100:
+                    
+                        self.algo.setCompleted(True)
+                        self.analysisCompletionWindow()
+
+                self.setFlag(False)
+                            
+        
     def setFlag(self,flag_status):
         self._flag = flag_status
     
@@ -323,7 +327,17 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
 
     def runUi(self):
         self.show()
-        
+
+    def openNotInstalledProgram(self):
+        self.program_not_installed = QtWidgets.QDialog()
+        self.btns = QtWidgets.QDialogButtonBox.Cancel
+        self.btn_box = QtWidgets.QDialogButtonBox(self.btns)
+        self.program_not_installed.setLayout(QtWidgets.QVBoxLayout())
+        self.info_label = QtWidgets.QLabel("Image magick is not installed. Please proceed with installation")
+        self.program_not_installed.layout().addWidget(self.info_label)
+        self.program_not_installed.layout().addWidget(self.btn_box)
+        self.btn_box.rejected.connect(self.program_not_installed.close)
+        self.program_not_installed.show()  
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate

@@ -3,7 +3,7 @@ from sklearn.tree import DecisionTreeRegressor
 import pandas
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
-import numpy
+import numpy,os
 from sklearn.tree import export_graphviz
 from matplotlib import pyplot as plt
 
@@ -50,13 +50,8 @@ class Tree:
              raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
          else:
                 try:
-                    self.scirpt = "convert dot_tree.png -resize 680x950 dot_tree.png"
-                    self.proc = subprocess.Popen(['bash', '-c', self.scirpt],stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                    stdin=subprocess.PIPE)
-                    stdout, stderr = self.proc.communicate()
-                    if self.proc.returncode:
+                    os.system('cmd /c "magick.exe mogrify -resize 800x700 dot_tree.png"')
 
-                        raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
                 except Exception:
 
                     self.dialog = QtWidgets.QDialog()
