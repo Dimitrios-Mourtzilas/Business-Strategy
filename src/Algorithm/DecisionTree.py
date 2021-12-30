@@ -50,7 +50,7 @@ class Tree:
              raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
          else:
                 try:
-                    os.system('cmd /c "magick.exe mogrify -resize 800x700 dot_tree.png"')
+                    os.system('cmd /c "magick.exe mogrify -resize 600x500 dot_tree.png"')
 
                 except Exception:
 
