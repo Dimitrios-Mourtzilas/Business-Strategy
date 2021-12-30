@@ -84,7 +84,6 @@ class Ui_FileProps(QtWidgets.QWidget):
     def setFileProps(self,file):
         self.file = file
         self.file_prop_name_text.setText(os.path.basename(self.file.getFileName()))
-        self.file_prop_name_text.setText(self.file.getFileName())
         self.file_prop_size_text.setText(str(self.file.getFileSize()))
         self.file_prop_date_added_text.setText(self.file.getDateAdded())
 
