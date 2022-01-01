@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import json,os
+import os
 
 class Ui_FileProps(QtWidgets.QWidget):
 
