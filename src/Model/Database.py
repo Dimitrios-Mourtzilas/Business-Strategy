@@ -11,6 +11,25 @@ class Database:
     def __init__(self):
         self._con = sqlite3.connect("business_model.db")
         self._cursor = self._con.cursor()
+        self._cursor.executescript('''
+        create table if not exists user (
+        user_id int primary key not null,
+        first_name varchar(20) not null,
+        last_name varchar(20) not null,
+        user_name varchar(20) not null,
+        user_password varchar(255) not null,
+        phone_number varchar(15) not null,
+        email_address varchar(25) default '',
+        active_account boolean default  false);
+        
+        create table if not exists files(
+        file_id varchar(255) primary key not null,
+        file_name varchar(30) not null,
+        file_size int not null,
+        date_added date not null
+        );
+        ''')
+
 
     
     def establishConnection(self,user_name="",user_password=""):

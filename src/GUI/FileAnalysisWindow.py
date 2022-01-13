@@ -13,7 +13,6 @@ import os
 import time
 from datetime import date
 from src.GUI.FIleProps import *
-import json
 from src.Model.File import *
 from src.Model.Database import *
 from src.Algorithm.DecisionTree import *

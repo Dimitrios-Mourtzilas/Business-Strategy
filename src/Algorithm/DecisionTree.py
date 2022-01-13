@@ -2,7 +2,6 @@ import platform
 from PyQt5 import QtWidgets
 from sklearn.tree import DecisionTreeRegressor
 import pandas
-from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
 import numpy,os
 from sklearn.tree import export_graphviz
