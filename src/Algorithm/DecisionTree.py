@@ -1,3 +1,4 @@
+import platform
 from PyQt5 import QtWidgets
 from sklearn.tree import DecisionTreeRegressor
 import pandas
@@ -50,7 +51,10 @@ class Tree:
              raise Exception(self.proc.returncode, stdout, stderr, self.bash_script)
          else:
                 try:
-                    os.system('cmd /c "magick.exe mogrify -resize 600x500 dot_tree.png"')
+                    if platform.system() == "Windows":
+                        os.system('cmd /c "magick.exe mogrify -resize 600x500 dot_tree.png"')
+                    else:
+                        os.system("convert dot_tree.png -resize 600x500 dot_tree.png")
 
                 except Exception:
 

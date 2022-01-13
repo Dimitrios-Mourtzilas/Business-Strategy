@@ -278,6 +278,49 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
                         self.analysisCompletionWindow()
 
                 self.setFlag(False)
+        else:
+            self.command = os.system("which dot")
+            if self.command == 256:
+                self.openNotInstalledProgram()
+            else:
+                 if self.file_name_text.text().__eq__("") or self.file_name_text.text().__eq__("") or self.date_added_text.text().__eq__(""):
+                    self.no_file_selected_window = QtWidgets.QDialog()
+                    self.no_file_selected_label = QtWidgets.QLabel("No file was selected")
+                    self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
+                    self.btn_box.rejected.connect(self.no_file_selected_window.close)
+                    self.no_file_selected_window.setLayout(QtWidgets.QVBoxLayout())
+                    self.no_file_selected_window.layout().addWidget(self.no_file_selected_label)
+                    self.no_file_selected_window.layout().addWidget(self.btn_box)
+                    self.no_file_selected_window.show()
+                    return
+
+                 elif self.getFlag() == False:
+                    self.file_not_imported = QtWidgets.QDialog()
+                    self.file_no_imported_label = QtWidgets.QLabel("File was not imported")
+                    self.btn_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Cancel)
+                    self.btn_box.rejected.connect(self.file_not_imported.close)
+                    self.file_not_imported.setLayout(QtWidgets.QVBoxLayout())
+                    self.file_not_imported.layout().addWidget(self.file_no_imported_label)
+                    self.file_not_imported.layout().addWidget(self.btn_box)
+                    self.file_not_imported.show()
+                 else:
+
+                    self.algo.setprops(self._file.getFileName())
+
+                    while self.progressBar.value() <100:
+                            self.progressBar.show()
+                            self.progressBar.setValue(self.count+10)
+                            self.count+=10
+                            time.sleep(1)
+                    
+                    if  self.count == 100:
+                    
+                        self.algo.setCompleted(True)
+                        self.analysisCompletionWindow()
+
+                 self.setFlag(False)
+
+
                             
         
     def setFlag(self,flag_status):
@@ -333,7 +376,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         self.btns = QtWidgets.QDialogButtonBox.Cancel
         self.btn_box = QtWidgets.QDialogButtonBox(self.btns)
         self.program_not_installed.setLayout(QtWidgets.QVBoxLayout())
-        self.info_label = QtWidgets.QLabel("Image magick is not installed. Please proceed with installation")
+        self.info_label = QtWidgets.QLabel("Image magick or Graphviz is not installed. Please proceed with installation")
         self.program_not_installed.layout().addWidget(self.info_label)
         self.program_not_installed.layout().addWidget(self.btn_box)
         self.btn_box.rejected.connect(self.program_not_installed.close)
