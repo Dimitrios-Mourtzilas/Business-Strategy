@@ -153,7 +153,15 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
                     self.setFlag(True)
                     self.buildInfoDialog()            
                 else:
-                    print("File could not be imported")    
+                    self.error_file_window = QtWidgets.QDialog()
+                    self.error_file_label = QtWidgets.QLabel('File could not be imported. Please try again.')
+                    self.standard_btns = QtWidgets.QDialogButtonBox.Cancel
+                    self.info_window.setLayout(QtWidgets.QVBoxLayout())
+                    self.btn_box = QtWidgets.QDialogButtonBox(self.standard_btns)
+                    self.btn_box.rejected.connect(self.error_file_window.close)
+                    self.error_file_window.layout().addWidget(self.error_file_label)
+                    self.error_file_window.layout().addWidget(self.btn_box)
+                    self.error_file_window.show()   
         
                 self.database.closeConnection()   
             
