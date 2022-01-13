@@ -156,7 +156,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
                     self.error_file_window = QtWidgets.QDialog()
                     self.error_file_label = QtWidgets.QLabel('File could not be imported. Please try again.')
                     self.standard_btns = QtWidgets.QDialogButtonBox.Cancel
-                    self.info_window.setLayout(QtWidgets.QVBoxLayout())
+                    self.error_file_window.setLayout(QtWidgets.QVBoxLayout())
                     self.btn_box = QtWidgets.QDialogButtonBox(self.standard_btns)
                     self.btn_box.rejected.connect(self.error_file_window.close)
                     self.error_file_window.layout().addWidget(self.error_file_label)
@@ -246,7 +246,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
     
     def fileAnalysis(self,algo):
         if platform.system() == "Windows":
-            self.command_result = os.system('cmd /c "where magick"')
+            self.command_result = os.system('cmd /c "where magick && where dot"')
             if self.command_result == 1:
                 self.openNotInstalledProgram()
             else:
@@ -321,7 +321,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
                             self.count+=10
                             time.sleep(1)
                     
-                    if  self.count == 100:
+                    if self.count == 100:
                     
                         self.algo.setCompleted(True)
                         self.analysisCompletionWindow()
