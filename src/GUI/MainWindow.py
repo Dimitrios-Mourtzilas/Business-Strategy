@@ -11,7 +11,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from src.GUI.LoginWindow import *
 from src.GUI.SettingsWindow import *
-import time
 from src.GUI.FileAnalysisWindow import *
 from src.GUI.AboutWindow import Ui_About
 from hashlib import md5
@@ -70,17 +69,10 @@ class MainWindow(QWidget):
         self.logo_label.setGeometry(QtCore.QRect(240, 190, 521, 291))
         self.logo_label.setText("")
         self.logo_label.setObjectName("logo_label")
-        
-        self.logo_icon = QtGui.QPixmap('images/app_logo_v1.png')
+        self.logo_icon = QtGui.QPixmap(os.path.join(os.path.relpath("images/app_logo_v1.png")))
         self.logo_label.setPixmap(self.logo_icon)
         self.logo_label.move(300, 200)
-        # self.user_label = QtWidgets.QLabel(self)
-        # self.user_label.setGeometry(QtCore.QRect(80, 100, 91, 81))
-        # self.user_label.setText("")
-        # self.user_label.setObjectName("user_label")
-        # self.user_icon = QtGui.QPixmap('images/Webp.net-resizeimage-removebg-preview.png')
-        # self.user_label.move(60,120)
-        # self.user_label.setPixmap(self.user_icon)
+
         self.callableMainWindow = lambda:self.closeMainWindow(user_password)
         self.log_out_button.clicked.connect(self.callableMainWindow)
         self.retranslateUi()

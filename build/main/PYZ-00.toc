@@ -908,6 +908,14 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\__init__.py',
    'PYMODULE'),
+  ('packaging.specifiers',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\specifiers.py',
+   'PYMODULE'),
+  ('packaging.__about__',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\__about__.py',
+   'PYMODULE'),
   ('packaging.markers',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\markers.py',
@@ -956,85 +964,69 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pyparsing\\util.py',
    'PYMODULE'),
-  ('packaging._musllinux',
+  ('packaging.utils',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\_musllinux.py',
-   'PYMODULE'),
-  ('packaging.requirements',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\requirements.py',
-   'PYMODULE'),
-  ('packaging.specifiers',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\specifiers.py',
-   'PYMODULE'),
-  ('packaging.tags',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\tags.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\utils.py',
    'PYMODULE'),
   ('packaging.version',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\version.py',
    'PYMODULE'),
+  ('packaging._manylinux',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\_manylinux.py',
+   'PYMODULE'),
   ('packaging',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\__init__.py',
    'PYMODULE'),
-  ('packaging.utils',
+  ('packaging.tags',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\utils.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\tags.py',
    'PYMODULE'),
-  ('packaging._manylinux',
+  ('packaging.requirements',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\_manylinux.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\requirements.py',
    'PYMODULE'),
   ('packaging._structures',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\_structures.py',
    'PYMODULE'),
-  ('packaging.__about__',
+  ('packaging._musllinux',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\__about__.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.__about__',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\__about__.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\__init__.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.utils',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\utils.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.requirements',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\requirements.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging._musllinux',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\_musllinux.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.version',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\version.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.tags',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\tags.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\packaging\\_musllinux.py',
    'PYMODULE'),
   ('pkg_resources._vendor.appdirs',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\appdirs.py',
    'PYMODULE'),
-  ('pkg_resources._vendor.packaging.markers',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\markers.py',
-   'PYMODULE'),
   ('pkg_resources._vendor.packaging._manylinux',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\_manylinux.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.__about__',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\__about__.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.version',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\version.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\__init__.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.requirements',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\requirements.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.specifiers',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\specifiers.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging._musllinux',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\_musllinux.py',
    'PYMODULE'),
   ('pkg_resources._vendor',
    'C:\\Users\\Nikolaos '
@@ -1048,13 +1040,21 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\AppData\\Local\\Programs\\Python\\Python39-32\\lib\\uuid.py',
    'PYMODULE'),
+  ('pkg_resources._vendor.packaging.utils',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\utils.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.markers',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\markers.py',
+   'PYMODULE'),
+  ('pkg_resources._vendor.packaging.tags',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\tags.py',
+   'PYMODULE'),
   ('pkg_resources._vendor.packaging._structures',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\_structures.py',
-   'PYMODULE'),
-  ('pkg_resources._vendor.packaging.specifiers',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\pkg_resources\\_vendor\\packaging\\specifiers.py',
    'PYMODULE'),
   ('pkg_resources.extern',
    'C:\\Users\\Nikolaos '
@@ -1144,121 +1144,41 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\Image.py',
    'PYMODULE'),
-  ('PIL.FitsStubImagePlugin',
+  ('PIL.ImImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FitsStubImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImImagePlugin.py',
    'PYMODULE'),
   ('PIL.ImageFile',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImageFile.py',
    'PYMODULE'),
-  ('PIL.SgiImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\SgiImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.WebPImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\WebPImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.PixarImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PixarImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.IptcImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IptcImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.IcoImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IcoImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.IcnsImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IcnsImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.features',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\features.py',
-   'PYMODULE'),
-  ('PIL.PcdImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PcdImagePlugin.py',
-   'PYMODULE'),
   ('PIL.MspImagePlugin',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MspImagePlugin.py',
    'PYMODULE'),
-  ('PIL.TgaImagePlugin',
+  ('PIL.MpegImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\TgaImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.MpoImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MpoImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.ImtImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImtImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.XVThumbImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XVThumbImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.BufrStubImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\BufrStubImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.DcxImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\DcxImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.GbrImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\GbrImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.DdsImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\DdsImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.ImImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.McIdasImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\McIdasImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MpegImagePlugin.py',
    'PYMODULE'),
   ('PIL.FpxImagePlugin',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FpxImagePlugin.py',
    'PYMODULE'),
-  ('PIL.BlpImagePlugin',
+  ('PIL.BufrStubImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\BlpImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\BufrStubImagePlugin.py',
    'PYMODULE'),
-  ('PIL.GribStubImagePlugin',
+  ('PIL.TgaImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\GribStubImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\TgaImagePlugin.py',
    'PYMODULE'),
-  ('PIL.CurImagePlugin',
+  ('PIL.PcdImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\CurImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PcdImagePlugin.py',
    'PYMODULE'),
-  ('PIL.EpsImagePlugin',
+  ('PIL.IptcImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\EpsImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.FliImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FliImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.XpmImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XpmImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.FtexImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FtexImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IptcImagePlugin.py',
    'PYMODULE'),
   ('PIL.SpiderImagePlugin',
    'C:\\Users\\Nikolaos '
@@ -1268,21 +1188,113 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImageTk.py',
    'PYMODULE'),
-  ('PIL.SunImagePlugin',
+  ('PIL.DdsImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\SunImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\DdsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.Jpeg2KImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\Jpeg2KImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PalmImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PalmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XbmImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XbmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.GbrImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\GbrImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PixarImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PixarImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.BlpImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\BlpImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.GribStubImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\GribStubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.ImtImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImtImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.IcnsImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IcnsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.features',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\features.py',
+   'PYMODULE'),
+  ('PIL.IcoImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\IcoImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FtexImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FtexImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SgiImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\SgiImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FliImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FliImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.WebPImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\WebPImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.FitsStubImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\FitsStubImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.WmfImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\WmfImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.McIdasImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\McIdasImagePlugin.py',
    'PYMODULE'),
   ('PIL.MicImagePlugin',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MicImagePlugin.py',
    'PYMODULE'),
+  ('PIL.EpsImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\EpsImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XVThumbImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XVThumbImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PcxImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PcxImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.PsdImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PsdImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.XpmImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XpmImagePlugin.py',
+   'PYMODULE'),
+  ('PIL.SunImagePlugin',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\SunImagePlugin.py',
+   'PYMODULE'),
   ('PIL.Hdf5StubImagePlugin',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\Hdf5StubImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.MpegImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MpegImagePlugin.py',
    'PYMODULE'),
   ('PIL.PdfImagePlugin',
    'C:\\Users\\Nikolaos '
@@ -1296,29 +1308,17 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\ImageSequence.py',
    'PYMODULE'),
-  ('PIL.WmfImagePlugin',
+  ('PIL.MpoImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\WmfImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\MpoImagePlugin.py',
    'PYMODULE'),
-  ('PIL.Jpeg2KImagePlugin',
+  ('PIL.CurImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\Jpeg2KImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\CurImagePlugin.py',
    'PYMODULE'),
-  ('PIL.PalmImagePlugin',
+  ('PIL.DcxImagePlugin',
    'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PalmImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.PcxImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PcxImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.PsdImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\PsdImagePlugin.py',
-   'PYMODULE'),
-  ('PIL.XbmImagePlugin',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\XbmImagePlugin.py',
+   'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\PIL\\DcxImagePlugin.py',
    'PYMODULE'),
   ('PIL.TiffImagePlugin',
    'C:\\Users\\Nikolaos '
@@ -7005,6 +7005,10 @@
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\.virtualenvs\\Business-Strategy-OF9OjZMl\\lib\\site-packages\\sklearn\\neighbors\\_distance_metric.py',
    'PYMODULE'),
+  ('_py_abc',
+   'C:\\Users\\Nikolaos '
+   'Mourtzilas\\AppData\\Local\\Programs\\Python\\Python39-32\\lib\\_py_abc.py',
+   'PYMODULE'),
   ('tracemalloc',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\AppData\\Local\\Programs\\Python\\Python39-32\\lib\\tracemalloc.py',
@@ -7012,10 +7016,6 @@
   ('stringprep',
    'C:\\Users\\Nikolaos '
    'Mourtzilas\\AppData\\Local\\Programs\\Python\\Python39-32\\lib\\stringprep.py',
-   'PYMODULE'),
-  ('_py_abc',
-   'C:\\Users\\Nikolaos '
-   'Mourtzilas\\AppData\\Local\\Programs\\Python\\Python39-32\\lib\\_py_abc.py',
    'PYMODULE'),
   ('src.GUI.LoginWindow',
    'C:\\Users\\Nikolaos '
