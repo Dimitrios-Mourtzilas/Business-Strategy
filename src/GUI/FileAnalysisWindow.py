@@ -109,6 +109,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         'QLineEdit{'+
         'border:1px groove white;'+
         'border-radius:4px;'+
+        'color:white'+
         '}'+
         ''+
 
@@ -138,7 +139,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
 
 
                 self._file  = File()
-                self._file.setFileName(self.file_name_text.text())
+                self._file.setFileName(os.path.basename(self.file_name_text.text()))
                 self._file.setFileSize(self.file_size_text.text())
                 self._file.setDateAdded(self.date_added_text.text())
                 self._file.setFileId()
