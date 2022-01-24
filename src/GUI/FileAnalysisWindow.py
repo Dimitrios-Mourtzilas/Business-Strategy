@@ -246,7 +246,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
     
     def fileAnalysis(self,algo):
         if platform.system() == "Windows":
-            self.command_result = os.system('cmd /c "where magick && where dot"')
+            self.command_result = os.system('cmd /c "where magick"')
             if self.command_result == 1:
                 self.openNotInstalledProgram()
             else:
