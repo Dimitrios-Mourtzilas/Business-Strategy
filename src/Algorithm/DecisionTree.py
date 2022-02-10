@@ -23,7 +23,7 @@ class Tree:
         self.X = numpy.array(self.data.iloc[3:23,1]).reshape(-1,1)
         self.y  = numpy.array(self.data.iloc[3:23,2]).reshape(-1,1)
         self._tree = DecisionTreeRegressor(splitter="best")
-        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.X,self.y)
+        self.x_train,self.x_test,self.y_train,self.y_test = train_test_split(self.X,self.y,test_size=.2)
         self._tree.fit(self.x_train,self.y_train)
         self.y_pred = self._tree.predict(self.x_test)
         self.setCompleted(True)
