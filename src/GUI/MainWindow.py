@@ -17,13 +17,14 @@ from hashlib import md5
 from src.Algorithm.DecisionTree import *
 from PyQt5.QtWidgets import QWidget
 from datetime import date
+
+
 class MainWindow(QWidget):
 
-
-    def setupUi(self,user_password):
+    def setupUi(self, user_password):
         self.setObjectName("MainWindow")
         self.setFixedSize(914, 591)
-        self.setFixedSize(self.width(),self.height())
+        self.setFixedSize(self.width(), self.height())
         self.user_menu = QtWidgets.QFrame(self)
         self.user_menu.setGeometry(QtCore.QRect(50, 210, 160, 281))
         self.user_menu.setStyleSheet("")
@@ -69,18 +70,34 @@ class MainWindow(QWidget):
         self.logo_label.setGeometry(QtCore.QRect(240, 190, 521, 291))
         self.logo_label.setText("")
         self.logo_label.setObjectName("logo_label")
-        self.logo_icon = QtGui.QPixmap(os.path.join(os.path.relpath("images/app_logo_v1.png")))
+        self.image_path=""
+        if platform.system() == "Windows":
+            self.image_path = os.path.abspath(os.getcwd())
+            if self.image_path.__contains__("dist"):
+                self.image_path = "../images/app_logo_v1.png"
+            elif self.image_path.__contains__("Program Files") and self.image_path.__contains__("Business-Strategy"):
+                self.image_path = "app_logo_v1.png"
+
+            else:
+                self.image_path = "images/app_logo_v1.png"
+        else:
+            self.image_path = os.path.abspath(os.getcwd())
+            self.image_path = "images/app_logo_v1.png"
+
+
+        self.image_path = os.getcwd() + "/"+self.image_path 
+        self.image_path = self.image_path.replace("\\","/")
+        self.logo_icon = QtGui.QPixmap(self.image_path)
         self.logo_label.setPixmap(self.logo_icon)
         self.logo_label.move(300, 200)
-
-        self.callableMainWindow = lambda:self.closeMainWindow(user_password)
+        self.callableMainWindow = lambda: self.closeMainWindow(user_password)
         self.log_out_button.clicked.connect(self.callableMainWindow)
         self.retranslateUi()
         self.date_hor_frame = QtWidgets.QFrame(self)
-        self.date_hor_frame.move(800,10)
+        self.date_hor_frame.move(800, 10)
         self.date_time_layout = QtWidgets.QVBoxLayout(self.date_hor_frame)
         self.date_label = QtWidgets.QLabel("Date")
-        self.date_label.setFont(QtGui.QFont("Verdana",18))
+        self.date_label.setFont(QtGui.QFont("Verdana", 18))
         self.date = QtWidgets.QLabel(str(date.today()))
         self.date_time_layout.addWidget(self.date_label)
         self.date_time_layout.addWidget(self.date)
@@ -89,49 +106,45 @@ class MainWindow(QWidget):
         QtCore.QMetaObject.connectSlotsByName(self)
         self.setStyleSheet(
 
-           
-        'QWidget{'+
-        'background-color: #8a2be2;}'+
-        ''+
-        
-        'QPushButton:hover{'+
-        'background-color:#9966cc;'+
-        'color:white;}'+
-        ''
-        'QLabel{'+
-        'color:#d8bfd8;}'
+            'QWidget{' +
+            'background-color: #8a2be2;}' +
+            '' +
+
+            'QPushButton:hover{' +
+            'background-color:#9966cc;' +
+            'color:white;}' +
+            ''
+            'QLabel{' +
+            'color:#d8bfd8;}'
         )
-            
-        
-        
-        self.callableSettings = lambda:self.openSettings(user_password)
+
+        self.callableSettings = lambda: self.openSettings(user_password)
         self.settings_button.clicked.connect(self.callableSettings)
         self.time_label = QtWidgets.QLabel()
         self.time_label.setText("")
         self.file_analysis_button.clicked.connect(self.openFileAnalysisWindow)
         self.about_button.clicked.connect(self.openAboutWindow)
         self.data_vis_button.clicked.connect(self.openVisualisation)
-    
-    
+
     def openAboutWindow(self):
         self.about_window = Ui_About()
         self.about_window.setupUi()
         self.about_window.runUi()
-        
+
     def openFileAnalysisWindow(self):
         self.file_analysis_win = Ui_FileAnalysis()
         self.file_analysis_win.setupUi(self.algo)
         self.file_analysis_win.runUi()
-    
-    def openSettings(self,user_password):
+
+    def openSettings(self, user_password):
 
         self.settingsWindow = Ui_Settings()
         self.settingsWindow.setupUi(user_password)
         self.settingsWindow.runUi()
-    
+
     def openVisualisation(self):
         self.database = Database()
-        if len(self.database.fetchAllFiles()) ==0:
+        if len(self.database.fetchAllFiles()) == 0:
             self.file_warning_window = QtWidgets.QDialog()
             self.file_warning_label = QtWidgets.QLabel("No file present on database. Please import a file first")
             self.file_warning_window.setLayout(QtWidgets.QVBoxLayout())
@@ -142,7 +155,7 @@ class MainWindow(QWidget):
             self.file_warning_window.layout().addWidget(self.btn_bx)
             self.file_warning_window.show()
             self.database.closeConnection()
-        
+
         elif not self.algo.isCompleted():
             self.file_not_analysed = QtWidgets.QDialog()
             self.file_not_analysed_label = QtWidgets.QLabel("File is not analysed. Please proceed with analysis first")
@@ -158,19 +171,18 @@ class MainWindow(QWidget):
         else:
             self.array = self.algo.getData()
             self.plt = plt
-            self.plt.scatter(self.array[0],self.array[1],color="blue")
-            self.plt.scatter(self.array[2],self.array[3],color="red")
+            self.plt.scatter(self.array[0], self.array[1], color="blue")
+            self.plt.scatter(self.array[2], self.array[3], color="red")
             self.plt.show()
 
-    def closeMainWindow(self,user_password):
+    def closeMainWindow(self, user_password):
         self.database = Database()
         self.string = md5(user_password.encode())
         self.hashed = self.string.hexdigest()
-        self.database.runRandomQuery("update user set active_account = false where user_password = ?",(self.hashed,))
+        self.database.runRandomQuery("update user set active_account = false where user_password = ?", (self.hashed,))
         self.database.closeConnection()
         self.close()
-        
-        
+
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
         self.setWindowTitle(_translate("MainWindow", "Main Window"))
@@ -180,7 +192,7 @@ class MainWindow(QWidget):
         self.file_analysis_button.setText(_translate("MainWindow", "File analysis"))
         self.data_vis_button.setText(_translate("MainWindow", "Data visualization"))
         self.about_button.setText(_translate("MainWindow", "About"))
-    
+
     def runUi(self):
         self.show()
 

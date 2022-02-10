@@ -139,7 +139,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
 
 
                 self._file  = File()
-                self._file.setFileName(os.path.basename(self.file_name_text.text()))
+                self._file.setFileName(self.file_name_text.text())
                 self._file.setFileSize(self.file_size_text.text())
                 self._file.setDateAdded(self.date_added_text.text())
                 self._file.setFileId()
@@ -165,8 +165,8 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
         
                 self.database.closeConnection()   
             
-            except Exception as e:
-                print(e)
+            except Exception:
+                return
             
               
 
@@ -244,7 +244,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
             self.date_added_text.setText("")
 
     
-    def fileAnalysis(self,algo):
+    def fileAnalysis(self):
         if platform.system() == "Windows":
             self.command_result = os.system('cmd /c "where magick"')
             if self.command_result == 1:
@@ -273,7 +273,7 @@ class Ui_FileAnalysis(QtWidgets.QWidget):
                 else:
 
                     self.algo.setprops(self._file.getFileName())
-
+            
                     while self.progressBar.value() <100:
                             self.progressBar.show()
                             self.progressBar.setValue(self.count+10)

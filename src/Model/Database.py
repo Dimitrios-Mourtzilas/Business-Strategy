@@ -1,7 +1,6 @@
 import sqlite3
 from src.Model.File import *
 from hashlib import md5
-import json
 
 class Database:
     _con = None
@@ -53,8 +52,8 @@ class Database:
                 if not self._cursor.execute(self.query,param):
                     raise Exception('Could not execute query')
             self._cursor.execute("commit;")
-        except Exception as e:
-            print(e)
+        except Exception:
+            return
         
     
         
@@ -69,8 +68,7 @@ class Database:
                 "values(?,?,?,?)",(self.file.getFileId(),self.file.getFileName(),self.file.getFileSize(),self.file.getDateAdded()))
             self._cursor.execute("commit;")
             return True
-        except Exception as e:
-            print(e)
+        except Exception:
             return False
 
 
@@ -121,5 +119,5 @@ class Database:
              self._cursor.close()
              self._con.close()
         
-        except Exception as e:
-            print(e)
+        except Exception:
+            return
